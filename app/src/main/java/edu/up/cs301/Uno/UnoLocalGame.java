@@ -16,8 +16,7 @@ public class UnoLocalGame extends LocalGame {
     /*
     Ctor called at begining of game that initializes the game state to a new game
      */
-    public UnoLocalGame()
-    {
+    public UnoLocalGame() {
         this.currentGameState = new UnoGameState();
     }
 
@@ -41,7 +40,24 @@ public class UnoLocalGame extends LocalGame {
         return false;
     }
 
+    public boolean placeCard(int playerID, Card toPlace) {
+        return false;
+    }
 
+    public boolean drawCard(int playerID) {
+        return false;
+    }
+
+    public boolean skipTurn(int playerID) {
+        return false;
+    }
+
+    public void quit() {
+    }
+
+    public boolean hasUno(int playerID) {
+        return false;
+    }
 
 
 }
