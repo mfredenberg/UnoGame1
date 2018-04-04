@@ -1,5 +1,7 @@
 package edu.up.cs301.Uno;
 
+import java.util.ArrayList;
+
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
 import edu.up.cs301.game.actionMsg.GameAction;
@@ -71,7 +73,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     public boolean hasUno(int playerID) {
-        return false;
+        return this.currentGameState.getPlayerHandSize(playerID) == 1;
     }
 
 
