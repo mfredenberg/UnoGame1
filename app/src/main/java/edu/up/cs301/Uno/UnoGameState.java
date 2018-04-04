@@ -275,6 +275,11 @@ public class UnoGameState extends GameState {
         return turn;
     }
 
+    public void setTurn(int turn)
+    {
+        this.turn = turn;
+    }
+
 
     public Deck getDiscardPile() {
         return discardPile;
