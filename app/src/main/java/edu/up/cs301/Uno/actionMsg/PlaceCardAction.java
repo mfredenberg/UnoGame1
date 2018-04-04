@@ -15,4 +15,8 @@ public class PlaceCardAction  extends GameAction {
         super(player);
         card = newCard;
     }
+
+    public Card getCard() {
+        return card;
+    }
 }

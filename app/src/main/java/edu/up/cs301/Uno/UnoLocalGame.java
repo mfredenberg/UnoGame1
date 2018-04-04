@@ -1,6 +1,7 @@
 package edu.up.cs301.Uno;
 
 import edu.up.cs301.Uno.actionMsg.HasUnoAction;
+import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
 import edu.up.cs301.Uno.actionMsg.SkipTurnAction;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
@@ -43,12 +44,23 @@ public class UnoLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
         if (action instanceof SkipTurnAction) {
-            skipTurn(this.currentGameState.getTurn());
+            boolean move = skipTurn(this.currentGameState.getTurn());
             this.currentGameState.setTurn(
                     (this.currentGameState.getTurn() + 1 % this.currentGameState.getNumPlayers()));
+            return move;
         } else if (action instanceof HasUnoAction) {
-
+            hasUno(0); // assumes human player is 0
+            return true;
         }
+        else if(action instanceof PlaceCardAction)
+        {
+            PlaceCardAction place = (PlaceCardAction)action;
+            boolean move = placeCard(this.currentGameState.getTurn(),place.getCard());
+            this.currentGameState.setTurn(
+                    (this.currentGameState.getTurn() + 1 % this.currentGameState.getNumPlayers()));
+            return move;
+        }
+        return false;
     }
 
     public boolean placeCard(int playerID, Card toPlace) {
@@ -66,7 +78,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     public boolean skipTurn(int playerID) {
-        Boolean draw = drawCard(playerID, 1);
+        boolean draw = drawCard(playerID, 1);
         if (draw) {
             this.currentGameState.setTurn((playerID + 1 % this.currentGameState.getNumPlayers()));
             return true;
