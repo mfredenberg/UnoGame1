@@ -21,14 +21,13 @@ public class Card {
     //12: draw2, 13: wild, 14: wild draw 4
     private Type type;
 
-    public Card(Color color, Type type)
+    public Card(Color color, Type initType)
     {
         this.color = color;
-        this.type = type;
+        this.type = initType;
     }
 
     //getters
-
     public Color getColor() {
         return color;
     }
