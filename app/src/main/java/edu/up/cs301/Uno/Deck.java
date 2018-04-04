@@ -51,10 +51,7 @@ public class Deck {
             }
 
         }
-        do {
             suffle();
-        }
-        while (this.deck.get(0).getType() != Type.WILD || this.deck.get(0).getType() != Type.WILDDRAW4);
 
 
     }

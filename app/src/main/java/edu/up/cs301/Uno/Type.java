@@ -20,5 +20,4 @@ public enum Type {
     WILD,
     REVERSE,
     WILDDRAW4;
-
 }
