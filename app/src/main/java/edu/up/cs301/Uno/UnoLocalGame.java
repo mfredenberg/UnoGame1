@@ -2,6 +2,7 @@ package edu.up.cs301.Uno;
 
 import edu.up.cs301.Uno.actionMsg.HasUnoAction;
 import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
+import edu.up.cs301.Uno.actionMsg.Quit;
 import edu.up.cs301.Uno.actionMsg.SkipTurnAction;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
@@ -59,6 +60,10 @@ public class UnoLocalGame extends LocalGame {
             this.currentGameState.setTurn(
                     (this.currentGameState.getTurn() + 1 % this.currentGameState.getNumPlayers()));
             return move;
+        }
+        else if(action instanceof Quit)
+        {
+            quit();
         }
         return false;
     }
