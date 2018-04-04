@@ -51,8 +51,8 @@ public class Deck {
             }
 
         }
-            suffle();
 
+            suffle();
 
     }
 
@@ -107,14 +107,23 @@ public class Deck {
         return deck.get(index);
     }
 
+    /*
+    * method gets a deck
+    */
     public ArrayList<Card> getDeck() {
         return deck;
     }
 
+    /*
+    * method gets deck size
+    */
     public int getDeckSize() {
         return deck.size();
     }
 
+    /*
+    * method gets a top card
+    */
     public Card getTopCard() {
         return deck.get(0);
     }
