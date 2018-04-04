@@ -91,7 +91,7 @@ public class UnoGameState extends GameState {
         //copying other players hand, filling the values in the master array with nulls
         for (int i = 1; i < masterGameState.getNumPlayers(); i++) {
             this.playerHands.add(new ArrayList<Card>());
-            for(int j = 0; j < masterGameState.getPlayerHandSize(playerID + i % masterGameState.getNumPlayers());j++) {
+            for (int j = 0; j < masterGameState.getPlayerHandSize(playerID + i % masterGameState.getNumPlayers()); j++) {
                 this.playerHands.get(playerID + i % masterGameState.getNumPlayers()).add(null);
             }
         }
@@ -266,8 +266,7 @@ public class UnoGameState extends GameState {
         return turn;
     }
 
-    public void setTurn(int turn)
-    {
+    public void setTurn(int turn) {
         this.turn = turn;
     }
 
@@ -287,8 +286,7 @@ public class UnoGameState extends GameState {
         return this.playerHands.get(playerID).size();
     }
 
-    public ArrayList<Card> getCurrentPlayerHand()
-    {
+    public ArrayList<Card> getCurrentPlayerHand() {
         return this.playerHands.get(this.turn);
     }
 

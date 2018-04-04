@@ -16,7 +16,7 @@ public class UnoLocalGame extends LocalGame {
     private UnoGameState currentGameState; // current state
 
     /*
-    Ctor called at begining of game that   initializes the game state to a new game
+    Ctor called at begining of game that initializes the game state to a new game
      */
     public UnoLocalGame() {
         this.currentGameState = new UnoGameState();
@@ -46,6 +46,64 @@ public class UnoLocalGame extends LocalGame {
     }
 
     public boolean placeCard(int playerID, Card toPlace) {
+
+        //Check if selected card is a wild card ​
+        if (toPlace.getType() == Type.WILD || toPlace.getType() == Type.WILDDRAW4) {
+
+            if (toPlace.getType() == Type.WILD) { ​//if card is wild
+
+                //Get new color from user ​
+
+                //place the card
+
+                return true; ​
+            } else if (toPlace.getType() == Type.WILDDRAW4) { // if card is a wild draw 4 card
+
+                //Get new color from user ​
+
+                //have the next player up draw 4 cards
+
+                //place card
+
+                return true; ​
+            }
+        }
+
+        // Check for all other card types or colors ​
+        if (toPlace.getType() == currentGameState.getDiscardPile().getCardAt(0).getType()
+                || toPlace.getColor() == currentGameState.getDiscardPile().getCardAt(0).getColor()) {
+
+            if (toPlace.getType() == Type.ZERO || toPlace.getType() == Type.ONE ||
+                    toPlace.getType() == Type.TWO || toPlace.getType() == Type.THREE ||
+                    toPlace.getType() == Type.FOUR || toPlace.getType() == Type.FIVE ||
+                    toPlace.getType() == Type.SIX || toPlace.getType() == Type.SEVEN ||
+                    toPlace.getType() == Type.EIGHT || toPlace.getType() == Type.NINE) {
+                //place the card ​
+                return true; ​
+            } else if (toPlace.getType() == Type.SKIP) { ​
+
+                //add turn to next player ​
+
+                //place card ​
+
+                return true; ​
+            } else if (toPlace.getType() == Type.REVERSE) {
+
+                //change game direction SetGameDirection(!gameDirection); ​
+
+                //place card
+
+                return true; ​
+            } else if (toPlace.getType() == Type.PLUS2) { ​
+
+                //next player draws 2 cards
+
+                //place card
+
+                return true; ​
+            }
+        }
+
         return false;
     }
 
@@ -61,7 +119,7 @@ public class UnoLocalGame extends LocalGame {
     public boolean skipTurn(int playerID) {
         Boolean draw = drawCard(playerID);
         if (draw) {
-            this.currentGameState.setTurn((playerID + 1 % this.currentGameState.getNumPlayers());
+            this.currentGameState.setTurn((playerID + 1 % this.currentGameState.getNumPlayers()));
             return true;
         }
         return false;
