@@ -13,6 +13,7 @@ public class UnoComputerPlayer extends GameComputerPlayer {
     public UnoComputerPlayer(String name){
         super(name);
     }
+
     @Override
     protected void receiveInfo(GameInfo info) {
 
