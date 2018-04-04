@@ -27,12 +27,15 @@ public class UnoLocalGame extends LocalGame {
 
     @Override
     protected boolean canMove(int playerIdx) {
-        return false;
+        return this.currentGameState.getTurn() == playerIdx;
     }
 
     @Override
     protected String checkIfGameOver() {
-        return null;
+        if (this.currentGameState.getCurrentPlayerHand().size() == 0) {
+            return "Player " + this.currentGameState.getTurn() + "has won";
+        }
+        return "";
     }
 
     @Override
@@ -45,7 +48,13 @@ public class UnoLocalGame extends LocalGame {
     }
 
     public boolean drawCard(int playerID) {
+        if (canMove(playerID))
+        {
+            this.currentGameState.getCurrentPlayerHand().add(this.currentGameState.getDrawPile().take());
+            return true
+        }
         return false;
+
     }
 
     public boolean skipTurn(int playerID) {
@@ -53,6 +62,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     public void quit() {
+        System.exit(0);
     }
 
     public boolean hasUno(int playerID) {
