@@ -27,10 +27,8 @@ public class UnoGameState extends GameState {
     //one master array list holds all the player names
     private ArrayList<String> playerNames;
 
-
     //current turn, starting at 0
     private int turn;
-
 
     // color of the center card
     private Color currentColor;
@@ -64,18 +62,14 @@ public class UnoGameState extends GameState {
             this.playerHands.get(1).add(this.drawPile.take());
         }
 
-
         //setting all of the integer-based info
         this.turn = 0;
-
 
         //setting game direction clockwise
         this.gameDirection = true;
 
-
         //moving the top card from drawPile to discardPile
         this.discardPile.put(drawPile.take());
-
 
     }
 
@@ -102,17 +96,14 @@ public class UnoGameState extends GameState {
             }
         }
 
-
         // copying the current players hand
         this.playerHands.add(playerID, (ArrayList<Card>) (masterGameState.getCurrentPlayerHand().clone()));
-
 
         //copying color
         this.currentColor = discardPile.getCardAt(0).getColor();
 
         //copying gameDirection
         this.gameDirection = masterGameState.gameDirection;
-
 
     }
 
@@ -279,7 +270,6 @@ public class UnoGameState extends GameState {
     {
         this.turn = turn;
     }
-
 
     public Deck getDiscardPile() {
         return discardPile;
