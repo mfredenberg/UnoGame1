@@ -34,6 +34,7 @@ public class UnoLocalGame extends LocalGame {
         return this.currentGameState.getTurn() == playerIdx;
     }
 
+
     @Override
     protected String checkIfGameOver() {
         if (this.currentGameState.getCurrentPlayerHand().size() == 0) {
@@ -42,6 +43,7 @@ public class UnoLocalGame extends LocalGame {
         return "";
     }
 
+    //Game action is passed in, action is taken based on which action it is
     @Override
     protected boolean makeMove(GameAction action) {
         if (action instanceof SkipTurnAction) {
@@ -71,7 +73,7 @@ public class UnoLocalGame extends LocalGame {
     public boolean placeCard(int playerID, Card toPlace) {
         return false;
     }
-
+    //helper method for drawing cards from the draw pile (used in skip turn and in the case of draw cards)
     public boolean drawCard(int playerID, int count) {
         if (canMove(playerID)) {
             for (int i = 0; i < count; i++)
@@ -82,6 +84,7 @@ public class UnoLocalGame extends LocalGame {
 
     }
 
+    //increments the turn and adds a card to the player's (player who skipped their turn) hand
     public boolean skipTurn(int playerID) {
         boolean draw = drawCard(playerID, 1);
         if (draw) {
@@ -91,11 +94,12 @@ public class UnoLocalGame extends LocalGame {
         return false;
 
     }
-
+    //quits the game
     public void quit() {
         System.exit(0);
     }
 
+    //returns true if current player has 1 card
     public boolean hasUno(int playerID) {
         return this.currentGameState.getPlayerHandSize(playerID) == 1;
     }
