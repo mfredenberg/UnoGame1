@@ -48,8 +48,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     public boolean drawCard(int playerID) {
-        if (canMove(playerID))
-        {
+        if (canMove(playerID)) {
             this.currentGameState.getCurrentPlayerHand().add(this.currentGameState.getDrawPile().take());
             return true;
         }
@@ -59,9 +58,12 @@ public class UnoLocalGame extends LocalGame {
 
     public boolean skipTurn(int playerID) {
         Boolean draw = drawCard(playerID);
-        if(draw){
+        if (draw) {
             this.currentGameState.setTurn((playerID + 1 % this.currentGameState.getNumPlayers());
+            return true;
         }
+        return false;
+
     }
 
     public void quit() {
