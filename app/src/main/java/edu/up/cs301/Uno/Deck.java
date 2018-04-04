@@ -8,12 +8,12 @@ import java.util.Random;
  * <p>
  * The deck class holds an arraylist of cards, and on
  * can create the full deck for the uno game, and
- * shuffle (suffle) them.
+ * shuffle (shuffle) them.
  *
  * @author Stelios Papoutsakis
  * @author Chris Fishback
  * @author Alli Jacobs
- * @author Mason Fredenzit clean  -d  -f ""berg
+ * @author Mason Fredenberg
  */
 
 public class Deck {
