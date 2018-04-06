@@ -1,0 +1,41 @@
+package edu.up.cs301.Uno;
+
+import junit.framework.TestCase;
+
+/**
+ * Created by chrisfishback on 4/4/18.
+ */
+public class UnoLocalGameTest extends TestCase {
+    public void testSendUpdatedStateTo() throws Exception {
+
+    }
+
+    public void testCanMove() throws Exception {
+
+    }
+
+    public void testCheckIfGameOver() throws Exception {
+
+    }
+
+    public void testMakeMove() throws Exception {
+
+    }
+
+    public void testPlaceCard() throws Exception {
+
+    }
+
+    public void testDrawCard() throws Exception {
+
+    }
+
+    public void testSkipTurn() throws Exception {
+
+    }
+
+    public void testHasUno() throws Exception {
+
+    }
+
+}

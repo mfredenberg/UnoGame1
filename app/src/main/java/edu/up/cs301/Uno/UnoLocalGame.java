@@ -47,29 +47,30 @@ public class UnoLocalGame extends LocalGame {
 
     public boolean placeCard(int playerID, Card toPlace) {
 
-        //Check if selected card is a wild card ​
+        //Check if selected card is awildcard
         if (toPlace.getType() == Type.WILD || toPlace.getType() == Type.WILDDRAW4) {
 
-            if (toPlace.getType() == Type.WILD) { ​//if card is wild
+            if (toPlace.getType() == Type.WILD) {//ifcardiswild
 
-                //Get new color from user ​
 
-                //place the card
+                //Getnewcolorfromuser
 
-                return true; ​
-            } else if (toPlace.getType() == Type.WILDDRAW4) { // if card is a wild draw 4 card
+                //placethecard
 
-                //Get new color from user ​
+                return true;
+            } else if (toPlace.getType() == Type.WILDDRAW4) {//ifcardisawilddraw4card
 
-                //have the next player up draw 4 cards
+                //Getnewcolorfromuser
 
-                //place card
+                //havethenextplayerupdraw4cards
 
-                return true; ​
+                //placecard
+
+                return true;
             }
         }
 
-        // Check for all other card types or colors ​
+        //Checkforallothercardtypesorcolors
         if (toPlace.getType() == currentGameState.getDiscardPile().getCardAt(0).getType()
                 || toPlace.getColor() == currentGameState.getDiscardPile().getCardAt(0).getColor()) {
 
@@ -78,27 +79,31 @@ public class UnoLocalGame extends LocalGame {
                     toPlace.getType() == Type.FOUR || toPlace.getType() == Type.FIVE ||
                     toPlace.getType() == Type.SIX || toPlace.getType() == Type.SEVEN ||
                     toPlace.getType() == Type.EIGHT || toPlace.getType() == Type.NINE) {
-                //place the card ​
-                return true; ​
-            } else if (toPlace.getType() == Type.SKIP) { ​
 
-                //add turn to next player ​
-                //place card ​
-                return true; ​
+                //placethecard
+                return true;
+            } else if (toPlace.getType() == Type.SKIP) {
+
+                //addturntonextplayer
+                //placecard
+                return true;
 
             } else if (toPlace.getType() == Type.REVERSE) {
-                //change game direction SetGameDirection(!gameDirection); ​
-                //place card
-                return true; ​
-            } else if (toPlace.getType() == Type.PLUS2) { ​
-                //next player draws 2 cards
-                //place card
-                return true;​
+                //changegamedirectionSetGameDirection(!gameDirection);
+                //placecard
+                return true;
+            } else if (toPlace.getType() == Type.PLUS2) {
+                //nextplayerdraws2cards
+                //placecard
+                return true;
             }
+
+            return false;
         }
 
-        return false;
+        return false;  //double check this!  -- Nux
     }
+
 
     public boolean drawCard(int playerID) {
         if (canMove(playerID)) {
