@@ -10,7 +10,7 @@ import edu.up.cs301.game.infoMsg.GameInfo;
  * Created by fredenbe20 on 3/27/2018.
  */
 
-public class UnoHumanPlayer extends GameHumanPlayer {
+public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     public UnoHumanPlayer(String name){
         super(name);
@@ -27,6 +27,13 @@ public class UnoHumanPlayer extends GameHumanPlayer {
 
     @Override
     public void receiveInfo(GameInfo info) {
+
+    }
+
+    public void onClick(View view) {
+
+        //button stuff
+
 
     }
 }

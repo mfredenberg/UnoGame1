@@ -21,6 +21,9 @@ public class Card {
     //12: draw2, 13: wild, 14: wild draw 4
     private Type type;
 
+    //1st is top, second is left, 3rd is bottom, 4th is right
+    private int[] coodinates = new int[4];
+
     public Card(Color color, Type initType)
     {
         this.color = color;
