@@ -14,12 +14,17 @@ public class UnoLocalGameTest extends TestCase {
         UnoGameState uno = new UnoGameState();
         UnoLocalGame local = new UnoLocalGame();
         assertTrue(local.canMove(uno.getTurn()));
-        uno.setTurn(uno.getTurn()+1);
+        uno.setNextTurn(1);
         assertFalse(local.canMove(uno.getTurn() - 1));
 
     }
 
     public void testCheckIfGameOver() throws Exception {
+        UnoGameState uno = new UnoGameState();
+        UnoLocalGame local = new UnoLocalGame();
+        uno.getCurrentPlayerHand().clear();
+        uno.getCurrentPlayerHand().add(new Card(null,null));
+        assertTrue(local.hasUno(uno.getTurn()));
 
     }
 

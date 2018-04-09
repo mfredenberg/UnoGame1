@@ -34,6 +34,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     @Override
+
     protected boolean canMove(int playerIdx) {
         return this.currentGameState.getTurn() == playerIdx;
     }
@@ -146,6 +147,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     public boolean hasUno(int playerID) {
+        this.currentGameState.setHasUno(playerID);
         return this.currentGameState.hasUno(playerID);
     }
 
