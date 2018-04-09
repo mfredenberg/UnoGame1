@@ -30,11 +30,16 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     @Override
     public void receiveInfo(GameInfo info) {
 
+
+
     }
 
     public void onClick(View view) {
 
-        //button stuff
+        //get which card is pressed
+
+        //if discard pile is pressed and the card can be
+        //placed, then place card and move on to next player
 
 
     }

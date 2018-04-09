@@ -33,12 +33,17 @@ public class UnoLocalGame extends LocalGame {
 
     }
 
+    /*
+    * checks if it's the players turn
+    */
     @Override
-
     protected boolean canMove(int playerIdx) {
         return this.currentGameState.getTurn() == playerIdx;
     }
 
+    /*
+    * checks if the game is over
+    */
     @Override
     protected String checkIfGameOver() {
         if (this.currentGameState.getCurrentPlayerHand().size() == 0) {
@@ -47,13 +52,15 @@ public class UnoLocalGame extends LocalGame {
         return "";
     }
 
+    /*
+    * checks which action to take
+    */
     @Override
     protected boolean makeMove(GameAction action) {
         if (action instanceof Quit) {
             quit();
         } else if (action instanceof SkipTurnAction) {
             return skipTurn(this.currentGameState.getTurn());
-
         } else if (action instanceof HasUnoAction) {
             return hasUno(this.currentGameState.getTurn());
         } else if (action instanceof PlaceCardAction) {
@@ -63,8 +70,17 @@ public class UnoLocalGame extends LocalGame {
         return false;
     }
 
+    /*
+    * checks to see if the card selected by the player can
+    * place it onto discard pile and places it
+    */
     public boolean placeCard(int playerID, Card toPlace) {
 
+        if(canMove(playerID)) {
+            return true;
+        }
+        return false;
+        /*
         //Check if selected card is awildcard
         if (toPlace.getType() == Type.WILD || toPlace.getType() == Type.WILDDRAW4) {
 
@@ -120,9 +136,12 @@ public class UnoLocalGame extends LocalGame {
         }
 
         return true;  //double check this!  -- Nux
+        */
     }
 
-
+    /*
+    * draws a card for the current player
+    */
     private boolean drawCard(int playerID) {
         if (canMove(playerID)) {
             this.currentGameState.getCurrentPlayerHand().add(this.currentGameState.getDrawPile().take());
@@ -132,6 +151,9 @@ public class UnoLocalGame extends LocalGame {
 
     }
 
+    /*
+    * skips turn for current player
+    */
     public boolean skipTurn(int playerID) {
         Boolean draw = drawCard(playerID);
         if (draw) {
@@ -142,10 +164,16 @@ public class UnoLocalGame extends LocalGame {
 
     }
 
+    /*
+    * quits system
+    */
     public void quit() {
         System.exit(0);
     }
 
+    /*
+    * checks if the player has uno
+    */
     public boolean hasUno(int playerID) {
         this.currentGameState.setHasUno(playerID);
         return this.currentGameState.hasUno(playerID);
