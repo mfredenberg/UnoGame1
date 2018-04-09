@@ -1,5 +1,6 @@
 package edu.up.cs301.Uno;
 
+import edu.up.cs301.Uno.actionMsg.SkipTurnAction;
 import edu.up.cs301.game.GameComputerPlayer;
 import edu.up.cs301.game.infoMsg.GameInfo;
 
@@ -16,6 +17,10 @@ public class UnoComputerPlayer extends GameComputerPlayer {
 
     @Override
     protected void receiveInfo(GameInfo info) {
+        if(info instanceof UnoGameState)
+        {
+            this.game.sendAction(new SkipTurnAction(this));
+        }
 
     }
 }

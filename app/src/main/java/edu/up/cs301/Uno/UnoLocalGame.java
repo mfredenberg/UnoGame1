@@ -28,6 +28,8 @@ public class UnoLocalGame extends LocalGame {
 
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
+        UnoGameState copy = new UnoGameState(this.currentGameState, this.currentGameState.getTurn());
+        p.sendInfo(copy);
 
     }
 
@@ -116,7 +118,7 @@ public class UnoLocalGame extends LocalGame {
             return false;
         }
 
-        return false;  //double check this!  -- Nux
+        return true;  //double check this!  -- Nux
     }
 
 
