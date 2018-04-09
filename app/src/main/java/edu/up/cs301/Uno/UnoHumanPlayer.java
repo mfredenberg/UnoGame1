@@ -1,5 +1,6 @@
 package edu.up.cs301.Uno;
 
+import android.view.DragEvent;
 import android.view.View;
 
 import edu.up.cs301.game.GameHumanPlayer;
@@ -10,9 +11,10 @@ import edu.up.cs301.game.infoMsg.GameInfo;
  * Created by fredenbe20 on 3/27/2018.
  */
 
-public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
+public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListener
+        , View.OnDragListener {
 
-    public UnoHumanPlayer(String name){
+    public UnoHumanPlayer(String name) {
         super(name);
     }
 
@@ -35,5 +37,9 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         //button stuff
 
 
+    }
+
+    public boolean onDrag(View view, DragEvent dragEvent) {
+        return false;
     }
 }
