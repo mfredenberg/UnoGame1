@@ -13,9 +13,10 @@ public class HasUnoAction extends GameAction {
      *
      * @param player the player who created the action
      */
-    private int playerID;
+
     public HasUnoAction(GamePlayer player) {
         super(player);
-        player.
+
+
     }
 }

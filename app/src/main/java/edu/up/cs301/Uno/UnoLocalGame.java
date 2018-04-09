@@ -3,6 +3,7 @@ package edu.up.cs301.Uno;
 import java.util.ArrayList;
 
 import edu.up.cs301.Uno.actionMsg.HasUnoAction;
+import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
 import edu.up.cs301.Uno.actionMsg.Quit;
 import edu.up.cs301.Uno.actionMsg.SkipTurnAction;
 import edu.up.cs301.game.GamePlayer;
@@ -45,19 +46,18 @@ public class UnoLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
-        if(action instanceof Quit)
-        {
+        if (action instanceof Quit) {
             quit();
-        }
-        else if(action instanceof SkipTurnAction)
-        {
-           return skipTurn(currentGameState.getTurn());
+        } else if (action instanceof SkipTurnAction) {
+            return skipTurn(this.currentGameState.getTurn());
 
+        } else if (action instanceof HasUnoAction) {
+            return hasUno(this.currentGameState.getTurn());
+        } else if (action instanceof PlaceCardAction) {
+            PlaceCardAction place = (PlaceCardAction) action;
+            return placeCard(this.currentGameState.getTurn(), place.getCard());
         }
-        else if(action instanceof HasUnoAction)
-        {
-            return hasUno()
-        }
+        return false;
     }
 
     public boolean placeCard(int playerID, Card toPlace) {
@@ -132,7 +132,7 @@ public class UnoLocalGame extends LocalGame {
     public boolean skipTurn(int playerID) {
         Boolean draw = drawCard(playerID);
         if (draw) {
-            this.currentGameState.setTurn((playerID + 1 % this.currentGameState.getNumPlayers()));
+            this.currentGameState.setNextTurn(1);
             return true;
         }
         return false;

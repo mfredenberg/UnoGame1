@@ -98,8 +98,8 @@ public class UnoGameState extends GameState {
 
         // copying the current players hand
         this.playerHands.add(playerID, new ArrayList<Card>());
-        for(Card card: masterGameState.getCurrentPlayerHand())
-            this.playerHands.get(playerID).add(new Card(card.getColor(),card.getType()));
+        for (Card card : masterGameState.getCurrentPlayerHand())
+            this.playerHands.get(playerID).add(new Card(card.getColor(), card.getType()));
 
         //copying color
         this.currentColor = discardPile.getCardAt(0).getColor();
@@ -146,117 +146,6 @@ public class UnoGameState extends GameState {
         return str;
     }
 
-    /*
-    * draws a card from the deck and puts it into the players hand
-    * @return true if player can draw a card
-    */
-//    public boolean drawCard(int playerId) {
-//        //return false if there are no cards to draw from
-//        if (this.drawPile.getDeckSize() < 1 || playerId != this.turn)
-//            return false;
-//
-//        //gets the player and adds a card to his/her hand
-//        this.currentPlayerHand.add(this.drawPile.take());
-//        switch (playerId) {
-//            case 0:
-//                player1NumCards++;
-//                break;
-//            case 1:
-//                player2NumCards++;
-//                break;
-//            case 2:
-//                player3NumCards++;
-//                break;
-//            case 3:
-//                player4NumCards++;
-//                break;
-//
-//        }
-//
-//
-//        return true;
-//    }
-
-
-    /* method places a card onto the discard pile
-    * @return true if player can place card
-//    */
-//    public boolean placeCard(int playerId, Card toPlace) {
-//
-//        if (playerId != this.turn || this.currentPlayerHand.size() == 0) return false;
-//
-//        //gets the player, removes the card,
-//        //and adds the card to the discard pile
-//        currentPlayerHand.remove(toPlace);
-//        discardPile.put(toPlace);
-//        switch (playerId) {
-//            case 0:
-//                player1NumCards--;
-//                break;
-//            case 1:
-//                player2NumCards--;
-//                break;
-//            case 2:
-//                player3NumCards--;
-//                break;
-//            case 3:
-//                player4NumCards--;
-//                break;
-//
-//        }
-//
-//
-//        return true;
-//    }
-//
-//    /*
-//    * method draws a card and moves turn on to the next player
-//    * @return true if skip turn is possible
-//    */
-//    public boolean skipTurn(int playerId) {
-//        if (playerId != this.turn) return false;
-//
-//        //draw a card
-//        drawCard(playerId);
-//
-//        //skip turn
-//        this.turn++;
-//
-//        return true;
-//    }
-//
-//    /*
-//    * method that quits game
-//    * @return true
-//    */
-//    public boolean quit(int playerId) {
-//        System.exit(0);
-//        return true;
-//    }
-//
-//    /*
-//    * method that is called to see if player has uno
-//    * @return true if player has uno, false otherwise
-//    */
-//    public boolean hasUno(int playerId) {
-//
-//        switch (playerId) {
-//            case 0: //master player
-//                if (this.player1NumCards == 1) return true;
-//                return false;
-//            case 1: //player2
-//                if (this.player2NumCards == 1) return true;
-//                return false;
-//            case 2: //player3
-//                if (this.player3NumCards == 1) return true;
-//                return false;
-//            case 3: //player4
-//                if (this.player4NumCards == 1) return true;
-//                return false;
-//        }
-//
-//        return false;
-//    }
 
     //getters and setters
 
@@ -268,8 +157,9 @@ public class UnoGameState extends GameState {
         return turn;
     }
 
-    public void setTurn(int turn) {
-        this.turn = turn;
+    public void setNextTurn(int numTurns) {
+
+        this.turn = (this.turn + numTurns % this.playerHands.size());
     }
 
     public Deck getDiscardPile() {
@@ -299,6 +189,13 @@ public class UnoGameState extends GameState {
     public String getPlayerNames(int playerID) {
         return this.playerNames.get(playerID);
     }
+
+    public ArrayList<Card> getPlayerHandAt(int index)
+    {
+        return this.playerHands.get(index);
+    }
+
+
 
 
 }
