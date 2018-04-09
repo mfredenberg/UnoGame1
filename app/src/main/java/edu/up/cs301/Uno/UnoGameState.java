@@ -164,7 +164,11 @@ public class UnoGameState extends GameState {
 
     public void setNextTurn(int numTurns) {
 
-        this.turn = (this.turn + numTurns % this.playerHands.size());
+        if (this.gameDirection)
+            this.turn = (this.turn + numTurns % this.playerHands.size());
+        else
+            this.turn = (this.turn - numTurns % this.playerHands.size());
+
     }
 
     public Deck getDiscardPile() {
