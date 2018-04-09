@@ -2,6 +2,9 @@ package edu.up.cs301.Uno;
 
 import java.util.ArrayList;
 
+import edu.up.cs301.Uno.actionMsg.HasUnoAction;
+import edu.up.cs301.Uno.actionMsg.Quit;
+import edu.up.cs301.Uno.actionMsg.SkipTurnAction;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
 import edu.up.cs301.game.actionMsg.GameAction;
@@ -42,7 +45,19 @@ public class UnoLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
-        return false;
+        if(action instanceof Quit)
+        {
+            quit();
+        }
+        else if(action instanceof SkipTurnAction)
+        {
+           return skipTurn(currentGameState.getTurn());
+
+        }
+        else if(action instanceof HasUnoAction)
+        {
+            return hasUno()
+        }
     }
 
     public boolean placeCard(int playerID, Card toPlace) {
@@ -105,7 +120,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
 
-    public boolean drawCard(int playerID) {
+    private boolean drawCard(int playerID) {
         if (canMove(playerID)) {
             this.currentGameState.getCurrentPlayerHand().add(this.currentGameState.getDrawPile().take());
             return true;

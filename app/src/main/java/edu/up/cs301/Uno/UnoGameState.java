@@ -97,7 +97,9 @@ public class UnoGameState extends GameState {
         }
 
         // copying the current players hand
-        this.playerHands.add(playerID, (ArrayList<Card>) (masterGameState.getCurrentPlayerHand().clone()));
+        this.playerHands.add(playerID, new ArrayList<Card>());
+        for(Card card: masterGameState.getCurrentPlayerHand())
+            this.playerHands.get(playerID).add(new Card(card.getColor(),card.getType()));
 
         //copying color
         this.currentColor = discardPile.getCardAt(0).getColor();

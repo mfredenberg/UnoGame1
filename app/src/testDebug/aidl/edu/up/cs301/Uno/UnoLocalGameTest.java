@@ -11,6 +11,11 @@ public class UnoLocalGameTest extends TestCase {
     }
 
     public void testCanMove() throws Exception {
+        UnoGameState uno = new UnoGameState();
+        UnoLocalGame local = new UnoLocalGame();
+        assertTrue(local.canMove(uno.getTurn()));
+        uno.setTurn(uno.getTurn()+1);
+        assertFalse(local.canMove(uno.getTurn() - 1));
 
     }
 
