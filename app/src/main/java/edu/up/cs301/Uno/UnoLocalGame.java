@@ -144,7 +144,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     public boolean hasUno(int playerID) {
-        return this.currentGameState.getPlayerHandSize(playerID) == 1;
+        return this.currentGameState.hasUno(playerID);
     }
 
 
