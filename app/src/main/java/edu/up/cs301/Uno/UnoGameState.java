@@ -175,6 +175,8 @@ public class UnoGameState extends GameState {
         return discardPile;
     }
 
+    public void setDiscardPile(Deck initDiscardPile) { this.discardPile.equals(initDiscardPile); }
+
     public Color getCurrentColor() {
         return currentColor;
     }

@@ -23,6 +23,8 @@ public class UnoLocalGameTest extends TestCase {
     public void testCheckIfGameOver() throws Exception {
         UnoGameState uno = new UnoGameState();
         UnoLocalGame local = new UnoLocalGame();
+
+        //check if an one-card hand returns true for if uno
         uno.getCurrentPlayerHand().clear();
         uno.getCurrentPlayerHand().add(new Card(null,null));
         assertTrue(local.hasUno(uno.getTurn()));

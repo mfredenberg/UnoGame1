@@ -70,6 +70,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         //if discard pile is pressed and the card can be
         //placed, then place card and move on to next player
 
+        //if skip button is pressed, move turn to next player
 
     }
 
