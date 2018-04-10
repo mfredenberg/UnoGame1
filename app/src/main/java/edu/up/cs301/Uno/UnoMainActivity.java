@@ -45,6 +45,7 @@ public class UnoMainActivity extends GameMainActivity {
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
         return defaultConfig;
 
+
     }
 
     @Override
