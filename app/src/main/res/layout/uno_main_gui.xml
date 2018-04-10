@@ -84,7 +84,8 @@
             android:textSize="30sp" />
     </LinearLayout>
 
-    <com.example.fredenbe20.uno.Uno.UnoGameView
+    <edu.up.cs301.Uno.UnoGameView
+        android:id="@+id/unoSurface"
         android:layout_width="match_parent"
         android:layout_height="1080dp" />
 
