@@ -42,7 +42,7 @@ public class UnoGameView extends SurfaceView {
     private void startUp() {
         setWillNotDraw(false);
         this.cardPics = new HashMap<String, Bitmap>();
-        intHash();
+        initHash();
     }
 
     @Override
@@ -74,7 +74,7 @@ public class UnoGameView extends SurfaceView {
     }
 
 
-    public void intHash() {
+    public void initHash() {
 
         Bitmap redZero = BitmapFactory.decodeResource(getResources(), R.drawable.red_zero);
         this.cardPics.put("" + Color.RED + Type.ZERO, redZero);
