@@ -3,30 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="C:\AndroidSDK\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
-        <dex dex="C:\Users\fredenbe20\Desktop\CounterGame-master\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-v4-18.0.0_bf6372499ab7d9c7586f81e3c8610d4c63b58b3f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\fredenbe20\Desktop\CounterGame-master\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="40654a9859c409ca9efba5c4b0b7c16a9e187bcb">
-        <dex dex="C:\Users\fredenbe20\Desktop\CounterGame-master\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_955c4aaa6a7528b811ae08516b2d0ffd664086e0\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\fredenbe20\Desktop\CounterGame-master\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="P:\CS\CS 301\UnoGame\UnoGame1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="C:\Users\fredenbe20\Desktop\CounterGame-master\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_fdb4c88b7ce29f3ff04c2d1e14402449c1ccd000\classes.dex" />
+        <dex dex="P:\CS\CS 301\UnoGame\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_4399b346ac034ad6e5df589dd5e1be63b737cdde\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="P:\CS\CS 301\UnoGame\UnoGame1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0a03f0e55830f94cb1a33e58e882543133964560">
+        <dex dex="P:\CS\CS 301\UnoGame\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_c43793454076dc9e7a0e5376b70bbce2d37db25d\classes.dex" />
     </item>
 
 </items>

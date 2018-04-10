@@ -14,7 +14,13 @@ public final class R {
         public static final int black=0x7f050000;
         public static final int blue=0x7f050001;
         public static final int green=0x7f050002;
-        public static final int red=0x7f050003;
+        public static final int grey=0x7f050003;
+        public static final int light_blue=0x7f050004;
+        public static final int light_green=0x7f050005;
+        public static final int light_red=0x7f050006;
+        public static final int light_yellow=0x7f050007;
+        public static final int red=0x7f050008;
+        public static final int yellow=0x7f050009;
     }
     public static final class dimen {
         public static final int config_horiz_margin=0x7f060000;
