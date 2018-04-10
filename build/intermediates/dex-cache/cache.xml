@@ -3,30 +3,30 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\steli\Google Drive\College_Soph_S2\CS 301\UnoGame1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="9950cf5d6f45612bac2f5810929f648065c0776b">
-        <dex dex="C:\Users\steli\Google Drive\College_Soph_S2\CS 301\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_f2b6ea946df5c68d120d72be7a1fb2373ab660a7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\steli\Google Drive\College_Soph_S2\CS 301\UnoGame1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\jacobsa20\StudioProjects\UnoGame1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="C:\Users\steli\Google Drive\College_Soph_S2\CS 301\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_9b6eb6332779e39d6b75482905f53c5581928ec3\classes.dex" />
+        <dex dex="C:\Users\jacobsa20\StudioProjects\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_18027b07bf967b7dedc5d834f89dc230710f6d73\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\steli\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\AndroidSDK\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
-        <dex dex="C:\Users\steli\Google Drive\College_Soph_S2\CS 301\UnoGame1\app\build\intermediates\pre-dexed\debug\support-v4-18.0.0_66cef17164d4a8f329cf9dd2fafa00193cd52cfa.jar" />
+        <dex dex="C:\Users\jacobsa20\StudioProjects\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-v4-18.0.0_bf6372499ab7d9c7586f81e3c8610d4c63b58b3f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jacobsa20\StudioProjects\UnoGame1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b06302f0d84183dfa00031f0be6923bf5e38367e">
+        <dex dex="C:\Users\jacobsa20\StudioProjects\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_084e016d258fec5c5354b3b7b0a61ef067cae318\classes.dex" />
     </item>
 
 </items>
