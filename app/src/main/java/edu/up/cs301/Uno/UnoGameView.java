@@ -48,14 +48,18 @@ public class UnoGameView extends SurfaceView {
     @Override
     public void onDraw(Canvas canvas) {
         if (this.handtoDraw != null) {
-            drawCard(canvas, this.topCard, getWidth() / 2, getHeight() / 2 - 300);
-            int width = getWidth() / 10;
+            drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 700);
+            int width = 30;
 
             for (int i = 0; i < this.handtoDraw.size(); i++) {
-                if (i < 10)
-                    drawCard(canvas, this.handtoDraw.get(i), width * (i + 1), (int) (getHeight() * .7));
-                else
-                    drawCard(canvas, this.handtoDraw.get(i), width * (i - 5), (int) (getHeight() * .5));
+                if (i == 8) width = 20;
+                if (i < 8) {
+                    drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * .5));
+                    width += 200;
+                } else {
+                    drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * .7));
+                    width += 200;
+                }
             }
 
         }
@@ -205,8 +209,7 @@ public class UnoGameView extends SurfaceView {
         this.topCard = topCard;
     }
 
-    public ArrayList<Card> getHumanplayerHand()
-    {
+    public ArrayList<Card> getHumanplayerHand() {
         return this.handtoDraw;
 
     }
