@@ -75,8 +75,32 @@ public class UnoGameView extends SurfaceView {
 
 
     public void intHash() {
+
+        Bitmap redZero = BitmapFactory.decodeResource(getResources(), R.drawable.red_zero);
+        this.cardPics.put("" + Color.RED + Type.ZERO, redZero);
+        Bitmap redOne = BitmapFactory.decodeResource(getResources(), R.drawable.red_one);
+        this.cardPics.put("" + Color.RED + Type.ONE, redOne);
+        Bitmap redTwo = BitmapFactory.decodeResource(getResources(), R.drawable.red_two);
+        this.cardPics.put("" + Color.RED + Type.TWO, redTwo);
+        Bitmap redThree = BitmapFactory.decodeResource(getResources(), R.drawable.red_three);
+        this.cardPics.put("" + Color.RED + Type.THREE, redThree);
+        Bitmap redFour = BitmapFactory.decodeResource(getResources(), R.drawable.red_four);
+        this.cardPics.put("" + Color.RED + Type.FOUR, redFour);
+        Bitmap redFive = BitmapFactory.decodeResource(getResources(), R.drawable.red_five);
+        this.cardPics.put("" + Color.RED + Type.FIVE, redFive);
+        Bitmap redRev = BitmapFactory.decodeResource(getResources(), R.drawable.red_reverse);
+        this.cardPics.put("" + Color.RED + Type.REVERSE, redRev);
+
         Bitmap blueRev = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
         this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
+        Bitmap blueOne = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
+        this.cardPics.put("" + Color.BLUE + Type.ONE, blueRev);
+        Bitmap blueTwo = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
+        this.cardPics.put("" + Color.BLUE + Type.TWO, blueRev);
+        Bitmap blueThree = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
+        this.cardPics.put("" + Color.BLUE + Type.THREE, blueRev);
+        Bitmap blueFour = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
+        this.cardPics.put("" + Color.BLUE + Type.FOUR, blueRev);
     }
 
     public void setHand(ArrayList<Card> hand) {
