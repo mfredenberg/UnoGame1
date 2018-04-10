@@ -79,6 +79,7 @@ public class UnoGameView extends SurfaceView {
     }
 
 
-
-
+    public void setTopCard(Card topCard) {
+        this.topCard = topCard;
+    }
 }

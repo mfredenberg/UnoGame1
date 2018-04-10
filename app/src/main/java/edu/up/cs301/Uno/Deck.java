@@ -52,7 +52,7 @@ public class Deck {
 
         }
 
-            suffle();
+            //suffle();
 
     }
 
@@ -92,12 +92,7 @@ public class Deck {
         return deck.remove(0);
     }
 
-    /*
-    * method gets a card at given index
-    */
-    public Card getCard(int index) {
-        return deck.get(index);
-    }
+
 
     /*
     * method gets a card at a given index <---- is a repeat of getCard,

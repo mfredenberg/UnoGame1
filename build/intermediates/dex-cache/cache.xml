@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="P:\CS\CS 301\UnoGame\UnoGame1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\steli\Google Drive\College_Soph_S2\CS 301\UnoGame1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="9950cf5d6f45612bac2f5810929f648065c0776b">
+        <dex dex="C:\Users\steli\Google Drive\College_Soph_S2\CS 301\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_f2b6ea946df5c68d120d72be7a1fb2373ab660a7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\steli\Google Drive\College_Soph_S2\CS 301\UnoGame1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="P:\CS\CS 301\UnoGame\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_4399b346ac034ad6e5df589dd5e1be63b737cdde\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="P:\CS\CS 301\UnoGame\UnoGame1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="0a03f0e55830f94cb1a33e58e882543133964560">
-        <dex dex="P:\CS\CS 301\UnoGame\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_c43793454076dc9e7a0e5376b70bbce2d37db25d\classes.dex" />
+        <dex dex="C:\Users\steli\Google Drive\College_Soph_S2\CS 301\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_9b6eb6332779e39d6b75482905f53c5581928ec3\classes.dex" />
     </item>
 
 </items>

@@ -1,13 +1,13 @@
 package edu.up.cs301.Uno;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.HashMap;
-
+import edu.up.cs301.Uno.actionMsg.HasUnoAction;
+import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
+import edu.up.cs301.Uno.actionMsg.Quit;
+import edu.up.cs301.Uno.actionMsg.SkipTurnAction;
 import edu.up.cs301.game.GameHumanPlayer;
 import edu.up.cs301.game.GameMainActivity;
 import edu.up.cs301.game.R;
@@ -18,7 +18,8 @@ import edu.up.cs301.game.infoMsg.GameInfo;
  * Created by fredenbe20 on 3/27/2018.
  */
 
-public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
+public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListener,
+        View.OnTouchListener {
 
     // the android activity that we are running
     private GameMainActivity myActivity;
@@ -47,6 +48,10 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.hasUnoButton = (Button) activity.findViewById(R.id.hasUnoButton);
         this.unoSurface = (UnoGameView) activity.findViewById(R.id.unoSurface);
 
+        this.quitButton.setOnClickListener(this);
+        this.hasUnoButton.setOnClickListener(this);
+        this.skipTurnButton.setOnClickListener(this);
+
 
     }
 
@@ -57,11 +62,24 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
     @Override
     public void receiveInfo(GameInfo info) {
+        if (info instanceof UnoGameState) {
+            UnoGameState state = (UnoGameState) info;
+            this.unoSurface.setHand(state.getCurrentPlayerHand());
+            this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
+            this.unoSurface.invalidate();
+        }
 
 
     }
 
     public void onClick(View view) {
+        if (view.getId() == R.id.quitButton) {
+            this.game.sendAction(new Quit(this));
+        } else if (view.getId() == R.id.hasUnoButton) {
+            this.game.sendAction(new HasUnoAction(this));
+        } else if (view.getId() == R.id.skipTurnButton) {
+            this.game.sendAction(new SkipTurnAction(this));
+        }
 
 
         //get which card is pressed
@@ -74,4 +92,13 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     }
 
 
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if(view.getId() == R.id.unoSurface)
+        {
+            this.game.sendAction(new PlaceCardAction(new Card(Color.RED,Type.ZERO),this));
+
+
+        }
+        return true;
+    }
 }
