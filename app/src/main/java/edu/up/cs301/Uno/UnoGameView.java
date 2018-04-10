@@ -47,30 +47,26 @@ public class UnoGameView extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas) {
+        if (this.handtoDraw != null) {
+            drawCard(canvas, this.topCard, getWidth() / 2, getHeight() / 2 - 300);
+            int width = getWidth() / 10;
 
-
-        int numCard = 1;
-
-        canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
-                (int) (getWidth() * .5), (int) (getHeight() * .3), null);
-
-        if (this.handtoDraw == null) return;
-        for (Card card : this.handtoDraw) {
-            if (numCard < 11) {
-
-                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
-                        (int) (getWidth() * (.1 * numCard) - 25), (int) (getHeight() * .7), null);
-
-            } else if (numCard > 10) {
-
-                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
-                        (int) (getWidth() * (.1 * numCard) - 25), (int) (getHeight() * .8), null);
-
+            for (int i = 0; i < this.handtoDraw.size(); i++) {
+                if (i < 10)
+                    drawCard(canvas, this.handtoDraw.get(i), width * (i+2), (int) (getHeight() * .7));
+                else
+                    drawCard(canvas, this.handtoDraw.get(i), width * (i - 5), (int) (getHeight() * .5));
             }
-            numCard++;
+
         }
 
 
+    }
+
+    public void drawCard(Canvas canvas, Card toDraw, int x, int y) {
+        Bitmap card = this.cardPics.get("" + toDraw.getColor() + toDraw.getType());
+        if (card != null)
+            canvas.drawBitmap(card, x, y, null);
     }
 
 
@@ -184,12 +180,16 @@ public class UnoGameView extends SurfaceView {
         Bitmap blueRev = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
         this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
 
+<<<<<<< Updated upstream
         //wild cards
         Bitmap wild = BitmapFactory.decodeResource(getResources(), R.drawable.wild);
         this.cardPics.put(""+ Type.WILD, wild);
         Bitmap wildDrawFour = BitmapFactory.decodeResource(getResources(), R.drawable.wild_draw_four);
         this.cardPics.put(""+ Type.WILD, wildDrawFour);
        // Bitmap nullCard=
+=======
+        // Bitmap nullCard=
+>>>>>>> Stashed changes
     }
 
     public void setHand(ArrayList<Card> hand) {
