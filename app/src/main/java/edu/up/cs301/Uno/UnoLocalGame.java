@@ -20,12 +20,15 @@ public class UnoLocalGame extends LocalGame {
     private UnoGameState currentGameState; // current state
 
     /*
-    Ctor called at begining of game that initializes the game state to a new game
+    *Ctor called at begining of game that initializes the game state to a new game
      */
     public UnoLocalGame() {
         this.currentGameState = new UnoGameState();
     }
 
+    /*
+    * method sends the new state of the game to the current player
+     */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         UnoGameState copy = new UnoGameState(this.currentGameState, this.currentGameState.getTurn());
@@ -34,7 +37,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    * checks if it's the players turn
+    * method checks if it's the players turn
     */
     @Override
     protected boolean canMove(int playerIdx) {
@@ -42,7 +45,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    * checks if the game is over
+    * method checks if the game is over
     */
     @Override
     protected String checkIfGameOver() {
@@ -53,10 +56,11 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    * checks which action to take
+    * method checks which action to take
     */
     @Override
     protected boolean makeMove(GameAction action) {
+
         if (action instanceof Quit) {
             quit();
         } else if (action instanceof SkipTurnAction) {
@@ -76,13 +80,21 @@ public class UnoLocalGame extends LocalGame {
     */
     public boolean placeCard(int playerID, Card toPlace) {
 
-        if (canMove(playerID)) {
+        boolean didPlace = false;
+
+        if (canMove(playerID)) { //check if the player can make a mover
             Card card = this.currentGameState.getCurrentPlayerHand().remove(0);
+
+            //place card on top of discard pile, and make it the next players turn
             this.currentGameState.getDiscardPile().put(card);
             this.currentGameState.setNextTurn(1);
-            return true;
+
+            //say that the placement happened
+            didPlace = true;
         }
-        return false;
+
+        return didPlace;
+
         /*
         //Check if selected card is awildcard
         if (toPlace.getType() == Type.WILD || toPlace.getType() == Type.WILDDRAW4) {
@@ -148,8 +160,11 @@ public class UnoLocalGame extends LocalGame {
     * draws a card for the current player
     */
     private boolean drawCard(int playerID) {
-        if (canMove(playerID)) {
+        if (canMove(playerID)) { //make sure it's the players turn
+
+            //take a card from the draw pile and put it on the players hand
             this.currentGameState.getCurrentPlayerHand().add(this.currentGameState.getDrawPile().take());
+
             return true;
         }
         return false;
@@ -157,12 +172,16 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    * skips turn for current player
+    * skips turn and draws a card for current player
     */
     public boolean skipTurn(int playerID) {
         boolean draw = drawCard(playerID);
-        if (draw) {
+
+        if (draw) { //if card is drawable
+
+            //make it the next turn
             this.currentGameState.setNextTurn(1);
+
             return true;
         }
         return false;
@@ -180,10 +199,9 @@ public class UnoLocalGame extends LocalGame {
     * checks if the player has uno
     */
     public boolean hasUno(int playerID) {
-        this.currentGameState.setHasUno(playerID);
         return this.currentGameState.hasUno(playerID);
     }
 
-
+    //getters and setters
     public UnoGameState getCurrentGameState(){return currentGameState;}
 }
