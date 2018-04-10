@@ -151,7 +151,8 @@ View.OnClickListener {
 			MessageBox.popUpMessage("Error in attempting to read game configuration file.",
 					this);
 		}
-		
+
+
 		if (this.config.isUserModifiable()) { // normal run: user has chance to modify configuration
 
 			// initialize and show the GUI that allows the user to specify the game's
@@ -167,7 +168,7 @@ View.OnClickListener {
 		}
 		else { // special run (during debugging?): use the given configuration, unmodified
 			String msg = launchGame(this.config);
-			if (msg != null) {
+			if(msg != null) {
 				// we have an error message
 				MessageBox.popUpMessage(msg, this);
 			}

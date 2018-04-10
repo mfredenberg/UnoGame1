@@ -39,11 +39,12 @@ public class UnoMainActivity extends GameMainActivity {
         });
 
 
-        GameConfig defaultConfig = new GameConfig(playerTypes, 1, 2, "Uno", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 1, 4, "Uno", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
         return defaultConfig;
+
 
     }
 
