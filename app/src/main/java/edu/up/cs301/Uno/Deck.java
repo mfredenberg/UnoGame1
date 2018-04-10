@@ -39,14 +39,16 @@ public class Deck {
     public void add108() {
         for (Color color : Color.values()) {
             for (Type type : Type.values()) {
-                if (type != Type.WILD || type != Type.WILDDRAW4) {
+                if (type != Type.WILD && type != Type.WILDDRAW4) {
                     this.deck.add(new Card(color, type));
                     if (type != Type.ZERO) {
                         this.deck.add(new Card(color, type));
                     }
 
                 }
-                this.deck.add(new Card(null, type));
+                else{
+                    this.deck.add(new Card(null, type));
+                }
 
             }
 
