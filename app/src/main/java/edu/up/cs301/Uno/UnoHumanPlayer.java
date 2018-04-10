@@ -1,5 +1,7 @@
 package edu.up.cs301.Uno;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +18,7 @@ import edu.up.cs301.game.infoMsg.GameInfo;
  * Created by fredenbe20 on 3/27/2018.
  */
 
-public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListener
-        , View.OnDragListener {
+public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
     // the android activity that we are running
     private GameMainActivity myActivity;
@@ -26,14 +27,14 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button hasUnoButton;
     private Button skipTurnButton;
     private UnoGameView unoSurface;
-    private HashMap<Color,Type> cardPics;
+    private HashMap<String, Bitmap> cardPics;
 
 
     public UnoHumanPlayer(String name) {
         super(name);
-        this.cardPics = new HashMap<Color, Type>();
+        this.cardPics = new HashMap<String, Bitmap>();
+        intHash();
     }
-
 
 
     public void setAsGui(GameMainActivity activity) {
@@ -42,10 +43,10 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
         /// sets gui to uno main gui
         this.myActivity.setContentView(R.layout.uno_main_gui);
-        this.quitButton = (Button)activity.findViewById(R.id.quitButton);
-        this.skipTurnButton = (Button)activity.findViewById(R.id.skipTurnButton);
-        this.hasUnoButton = (Button)activity.findViewById(R.id.hasUnoButton);
-        this.unoSurface = (UnoGameView)activity.findViewById(R.id.unoSurface);
+        this.quitButton = (Button) activity.findViewById(R.id.quitButton);
+        this.skipTurnButton = (Button) activity.findViewById(R.id.skipTurnButton);
+        this.hasUnoButton = (Button) activity.findViewById(R.id.hasUnoButton);
+        this.unoSurface = (UnoGameView) activity.findViewById(R.id.unoSurface);
 
 
     }
@@ -57,7 +58,6 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
     @Override
     public void receiveInfo(GameInfo info) {
-
 
 
     }
@@ -73,7 +73,9 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
     }
 
-    public boolean onDrag(View view, DragEvent dragEvent) {
-        return false;
+
+    public void intHash() {
+        Bitmap blueRev = BitmapFactory.decodeResource(this.myActivity.getResources(), R.drawable.blue_reverse);
+        this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
     }
 }
