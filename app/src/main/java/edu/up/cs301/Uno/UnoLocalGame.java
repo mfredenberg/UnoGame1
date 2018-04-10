@@ -78,6 +78,8 @@ public class UnoLocalGame extends LocalGame {
     public boolean placeCard(int playerID, Card toPlace) {
 
         if (canMove(playerID)) {
+            Card card = this.currentGameState.getCurrentPlayerHand().remove(0);
+            this.currentGameState.getDiscardPile().put(card);
             return true;
         }
         return false;

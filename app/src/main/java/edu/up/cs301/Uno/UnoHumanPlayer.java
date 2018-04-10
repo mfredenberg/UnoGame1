@@ -51,6 +51,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.quitButton.setOnClickListener(this);
         this.hasUnoButton.setOnClickListener(this);
         this.skipTurnButton.setOnClickListener(this);
+        this.unoSurface.setOnTouchListener(this);
 
 
     }
@@ -95,7 +96,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if(view.getId() == R.id.unoSurface)
         {
-            this.game.sendAction(new PlaceCardAction(new Card(Color.RED,Type.ZERO),this));
+            this.game.sendAction(new PlaceCardAction(this));
 
 
         }

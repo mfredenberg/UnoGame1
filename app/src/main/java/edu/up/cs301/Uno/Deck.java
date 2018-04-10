@@ -26,7 +26,7 @@ public class Deck {
     }
 
 
-// deep copy constructor
+    // deep copy constructor
     public Deck(Deck deck) {
         for (Card card : deck.getDeck()) {
             this.deck.add(new Card(card.getColor(), card.getType()));
@@ -39,20 +39,20 @@ public class Deck {
     public void add108() {
         for (Color color : Color.values()) {
             for (Type type : Type.values()) {
-                if (type != Type.WILD || type != Type.WILDDRAW4) {
+                if (type != Type.WILD && type != Type.WILDDRAW4) {
                     this.deck.add(new Card(color, type));
                     if (type != Type.ZERO) {
                         this.deck.add(new Card(color, type));
                     }
 
-                }
-                this.deck.add(new Card(null, type));
+                } else
+                    this.deck.add(new Card(null, type));
 
             }
 
         }
 
-            //suffle();
+        //suffle();
 
     }
 
@@ -91,7 +91,6 @@ public class Deck {
     public Card take() {
         return deck.remove(0);
     }
-
 
 
     /*
