@@ -85,6 +85,10 @@ public class UnoGameState extends GameState {
 
 
         this.playerHands = new ArrayList<ArrayList<Card>>();
+        this.hasUno = new ArrayList<Boolean>();
+        for (boolean hasUno : masterGameState.hasUno) {
+            this.hasUno.add(hasUno);
+        }
 
         // telling the game state whose turn it is
         this.turn = playerID;
@@ -175,7 +179,6 @@ public class UnoGameState extends GameState {
         return discardPile;
     }
 
-    public void setDiscardPile(Deck initDiscardPile) { this.discardPile.equals(initDiscardPile); }
 
     public Color getCurrentColor() {
         return currentColor;
