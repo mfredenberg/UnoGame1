@@ -20,8 +20,14 @@ public class UnoComputerPlayer extends GameComputerPlayer {
     protected void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState gameState = (UnoGameState) info;
-            if (gameState.getTurn() == 1)
+            if (gameState.getTurn() != 0) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 this.game.sendAction(new PlaceCardAction(this));
+            }
         }
 
     }

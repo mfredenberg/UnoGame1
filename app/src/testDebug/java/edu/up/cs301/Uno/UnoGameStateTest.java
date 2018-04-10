@@ -20,6 +20,12 @@ public class UnoGameStateTest {
     @Test
     public void getTurn() throws Exception {
 
+        UnoGameState state = new UnoGameState();
+        assertEquals(state.getTurn(), 0);
+        state.setNextTurn(1);
+        assertEquals(state.getTurn(), 1);
+        state.setNextTurn(1);
+        assertEquals(state.getTurn(), 0);
     }
 
     @Test

@@ -65,9 +65,16 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
-            this.unoSurface.setHand(state.getPlayerHandAt(0));
-            this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
-            this.unoSurface.invalidate();
+            if (state.getTurn() == 0) {
+                this.unoSurface.setHand(state.getPlayerHandAt(0));
+                this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
+                this.unoSurface.invalidate();
+            }
+            else if(state.getTurn() == 1)
+            {
+                this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
+                this.unoSurface.invalidate();
+            }
         }
 
 
@@ -94,9 +101,14 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
 
     public boolean onTouch(View view, MotionEvent motionEvent) {
+
         if (view.getId() == R.id.unoSurface) {
-            this.game.sendAction(new PlaceCardAction(this));
-            return true;
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    this.game.sendAction(new PlaceCardAction(this));
+                    return true;
+
+            }
 
         }
         return false;

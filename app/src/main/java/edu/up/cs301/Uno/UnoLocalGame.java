@@ -49,7 +49,7 @@ public class UnoLocalGame extends LocalGame {
         if (this.currentGameState.getCurrentPlayerHand().size() == 0) {
             return "Player " + this.currentGameState.getTurn() + "has won";
         }
-        return "";
+        return null;
     }
 
     /*
@@ -185,4 +185,5 @@ public class UnoLocalGame extends LocalGame {
     }
 
 
+    public UnoGameState getCurrentGameState(){return currentGameState;}
 }
