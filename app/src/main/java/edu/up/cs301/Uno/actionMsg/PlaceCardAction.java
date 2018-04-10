@@ -11,9 +11,9 @@ import edu.up.cs301.game.actionMsg.GameAction;
 public class PlaceCardAction  extends GameAction {
     private Card card;
 
-    public PlaceCardAction(Card newCard, GamePlayer player){
+    public PlaceCardAction(GamePlayer player){
         super(player);
-        card = newCard;
+        //card = newCard;
     }
 
     public Card getCard() {

@@ -57,18 +57,17 @@ public class UnoLocalGame extends LocalGame {
     */
     @Override
     protected boolean makeMove(GameAction action) {
+        if (action instanceof Quit) {
+            quit();
+        } else if (action instanceof SkipTurnAction) {
+            return skipTurn(this.currentGameState.getTurn());
+        } else if (action instanceof HasUnoAction) {
+            return hasUno(this.currentGameState.getTurn());
+        } else if (action instanceof PlaceCardAction) {
+            PlaceCardAction place = (PlaceCardAction) action;
+            return placeCard(this.currentGameState.getTurn(), place.getCard());
+        }
         return false;
-//        if (action instanceof Quit) {
-//            quit();
-//        } else if (action instanceof SkipTurnAction) {
-//            return skipTurn(this.currentGameState.getTurn());
-//        } else if (action instanceof HasUnoAction) {
-//            return hasUno(this.currentGameState.getTurn());
-//        } else if (action instanceof PlaceCardAction) {
-//            PlaceCardAction place = (PlaceCardAction) action;
-//            return placeCard(this.currentGameState.getTurn(), place.getCard());
-//        }
-//        return false;
     }
 
     /*
@@ -78,6 +77,8 @@ public class UnoLocalGame extends LocalGame {
     public boolean placeCard(int playerID, Card toPlace) {
 
         if (canMove(playerID)) {
+            Card card = this.currentGameState.getCurrentPlayerHand().remove(0);
+            this.currentGameState.getDiscardPile().put(card);
             return true;
         }
         return false;
@@ -158,7 +159,7 @@ public class UnoLocalGame extends LocalGame {
     * skips turn for current player
     */
     public boolean skipTurn(int playerID) {
-        Boolean draw = drawCard(playerID);
+        boolean draw = drawCard(playerID);
         if (draw) {
             this.currentGameState.setNextTurn(1);
             return true;
