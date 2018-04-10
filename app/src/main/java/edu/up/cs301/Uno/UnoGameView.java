@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class UnoGameView extends SurfaceView {
     private ArrayList<Card> handtoDraw;
     private Card topCard;
     private HashMap<String, Bitmap> cardPics;
+
     public UnoGameView(Context context) {
         super(context);
         startUp();
@@ -40,44 +42,44 @@ public class UnoGameView extends SurfaceView {
     private void startUp() {
         setWillNotDraw(false);
         this.cardPics = new HashMap<String, Bitmap>();
-        //intHash();
+        intHash();
     }
 
     @Override
     public void onDraw(Canvas canvas) {
 
-//        int numCard = 1;
-//
-//        canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
-//                (int) (getWidth() * .5), (int) (getHeight()*.5), null);
-//
-//        for(Card card:this.handtoDraw)
-//        {
-//            if(numCard < 11) {
-//
-//                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
-//                        (int) (getWidth() * (.1*numCard ) -25), (int) (getHeight()*.7), null);
-//
-//            }else if(numCard > 10) {
-//
-//                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
-//                        (int) (getWidth() * (.1*numCard ) -25), (int) (getHeight()*.8), null);
-//
-//            }
-//            numCard++;
-//        }
+
+        int numCard = 1;
+
+        canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
+                (int) (getWidth() * .5), (int) (getHeight() * .3), null);
+
+        if (this.handtoDraw == null) return;
+        for (Card card : this.handtoDraw) {
+            if (numCard < 11) {
+
+                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
+                        (int) (getWidth() * (.1 * numCard) - 25), (int) (getHeight() * .7), null);
+
+            } else if (numCard > 10) {
+
+                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
+                        (int) (getWidth() * (.1 * numCard) - 25), (int) (getHeight() * .8), null);
+
+            }
+            numCard++;
+        }
 
 
     }
 
 
-//    public void intHash() {
-//        Bitmap blueRev = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
-//        this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
-//    }
+    public void intHash() {
+        Bitmap blueRev = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
+        this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
+    }
 
-    public void setHand(ArrayList<Card> hand)
-    {
+    public void setHand(ArrayList<Card> hand) {
         this.handtoDraw = hand;
     }
 
