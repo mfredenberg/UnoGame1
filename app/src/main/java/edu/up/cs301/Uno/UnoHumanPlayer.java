@@ -45,7 +45,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.quitButton = (Button)activity.findViewById(R.id.quitButton);
         this.skipTurnButton = (Button)activity.findViewById(R.id.skipTurnButton);
         this.hasUnoButton = (Button)activity.findViewById(R.id.hasUnoButton);
-        this.unoSurface = (unoSurface)activity.findViewById(R.id.unoSurface);
+        this.unoSurface = (UnoGameView)activity.findViewById(R.id.unoSurface);
 
 
     }
