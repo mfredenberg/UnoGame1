@@ -31,9 +31,10 @@ public final class R {
         public static final int table_row_vert_pad=0x7f060005;
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int purple_delete_button=0x7f020002;
+        public static final int blue_reverse=0x7f020000;
+        public static final int ic_action_search=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int purple_delete_button=0x7f020003;
     }
     public static final class id {
         public static final int addPlayerButton=0x7f09000d;
@@ -43,7 +44,7 @@ public final class R {
         public static final int ipCodeLabel=0x7f090009;
         public static final int localGameTab=0x7f090003;
         public static final int localTabLayout=0x7f090004;
-        public static final int menu_settings=0x7f09001b;
+        public static final int menu_settings=0x7f09001c;
         public static final int playGameButton=0x7f090002;
         public static final int playerName=0x7f090017;
         public static final int playerNameEditText=0x7f09000f;
@@ -64,6 +65,7 @@ public final class R {
         public static final int tableHeadingRow=0x7f09000a;
         public static final int textView1=0x7f090008;
         public static final int textView2=0x7f09000e;
+        public static final int unoSurface=0x7f09001b;
     }
     public static final class layout {
         public static final int game_config_main=0x7f030000;

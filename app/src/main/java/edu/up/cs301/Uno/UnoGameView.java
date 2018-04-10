@@ -20,6 +20,7 @@ import edu.up.cs301.game.R;
 public class UnoGameView extends SurfaceView {
 
     private ArrayList<Card> handtoDraw;
+    private Card topCard;
     private HashMap<String, Bitmap> cardPics;
     public UnoGameView(Context context) {
         super(context);
@@ -44,10 +45,23 @@ public class UnoGameView extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas) {
+        int numCard = 1;
+
+        canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
+                (int) (getWidth() * .5), (int) (getHeight()*.5), null);
 
         for(Card card:this.handtoDraw)
         {
-            canvas.drawBitmap();
+            if(numCard < 11) {
+
+                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
+                        (int) (getWidth() * (.1*numCard ) -25), (int) (getHeight()*.7), null);
+
+            }else if(numCard > 10) {
+
+
+            }
+            numCard++;
         }
 
 

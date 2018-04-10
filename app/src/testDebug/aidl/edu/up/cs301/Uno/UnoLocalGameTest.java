@@ -10,7 +10,6 @@ public class UnoLocalGameTest extends TestCase {
 
     }
 
-
     public void testCanMove() throws Exception {
         UnoGameState uno = new UnoGameState();
         UnoLocalGame local = new UnoLocalGame();
