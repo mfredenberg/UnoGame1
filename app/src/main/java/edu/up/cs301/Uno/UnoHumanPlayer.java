@@ -29,14 +29,20 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button skipTurnButton;
     private UnoGameView unoSurface;
 
-
+    /*
+    *Ctor
+    *
+    * @param name
+    */
     public UnoHumanPlayer(String name) {
         super(name);
 
 
     }
 
-
+    /*
+    * method sets the gui for the human player
+    */
     public void setAsGui(GameMainActivity activity) {
 
         this.myActivity = activity;
@@ -61,6 +67,9 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         return myActivity.findViewById(R.id.unoSurface);
     }
 
+    /*
+    * receives the all necessary info about the game
+    */
     @Override
     public void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
@@ -80,6 +89,9 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
     }
 
+    /*
+    * method listens to the users button clicks and responds accordingly
+    */
     public void onClick(View view) {
         if (view.getId() == R.id.quitButton) {
             this.game.sendAction(new Quit(this));
@@ -99,10 +111,17 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
     }
 
-
+    /*
+    * method responds to a touch from the user
+    *
+    * @param View, MotionEvent
+    * @return boolean
+    */
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
         if (view.getId() == R.id.unoSurface) {
+
+            //if the motion of the user is a down press, then place a card
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     this.game.sendAction(new PlaceCardAction(this));
@@ -111,6 +130,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             }
 
         }
+
         return false;
     }
 }
