@@ -81,10 +81,11 @@ public class UnoGameState extends GameState {
     /*
     * this constructor is used to make a deep copy of the game state
     */
+
     public UnoGameState(UnoGameState masterGameState, int playerID) {
 
 
-        this.playerHands = new ArrayList<ArrayList<Card>>();
+        /*this.playerHands = new ArrayList<ArrayList<Card>>();
         this.hasUno = new ArrayList<Boolean>();
         for (boolean hasUno : masterGameState.hasUno) {
             this.hasUno.add(hasUno);
@@ -115,13 +116,13 @@ public class UnoGameState extends GameState {
 
         //copying gameDirection
         this.gameDirection = masterGameState.gameDirection;
-
+*/
     }
 
     /*
     * method converts all variables into strings
     */
-    @Override
+   /* @Override
     public String toString() {
         String str = "# cards in draw pile: " + drawPile.getDeckSize();
         str += "\n";
@@ -153,7 +154,7 @@ public class UnoGameState extends GameState {
 
 
         return str;
-    }
+    }*/
 
 
     //getters and setters

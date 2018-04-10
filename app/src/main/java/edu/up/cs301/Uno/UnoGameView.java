@@ -49,7 +49,7 @@ public class UnoGameView extends SurfaceView {
 
         canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
                 (int) (getWidth() * .5), (int) (getHeight()*.5), null);
-
+        if( this.handtoDraw == null) return;
         for(Card card:this.handtoDraw)
         {
             if(numCard < 11) {
