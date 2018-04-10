@@ -27,13 +27,12 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button hasUnoButton;
     private Button skipTurnButton;
     private UnoGameView unoSurface;
-    private HashMap<String, Bitmap> cardPics;
 
 
     public UnoHumanPlayer(String name) {
         super(name);
-        this.cardPics = new HashMap<String, Bitmap>();
-        intHash();
+
+
     }
 
 
@@ -75,8 +74,4 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     }
 
 
-    public void intHash() {
-        Bitmap blueRev = BitmapFactory.decodeResource(this.myActivity.getResources(), R.drawable.blue_reverse);
-        this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
-    }
 }
