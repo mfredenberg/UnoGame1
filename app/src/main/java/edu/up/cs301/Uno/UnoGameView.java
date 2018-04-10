@@ -53,7 +53,7 @@ public class UnoGameView extends SurfaceView {
 
             for (int i = 0; i < this.handtoDraw.size(); i++) {
                 if (i < 10)
-                    drawCard(canvas, this.handtoDraw.get(i), width * (i+1), (int) (getHeight() * .7));
+                    drawCard(canvas, this.handtoDraw.get(i), width * (i + 1), (int) (getHeight() * .7));
                 else
                     drawCard(canvas, this.handtoDraw.get(i), width * (i - 5), (int) (getHeight() * .5));
             }
@@ -64,7 +64,11 @@ public class UnoGameView extends SurfaceView {
     }
 
     public void drawCard(Canvas canvas, Card toDraw, int x, int y) {
-        Bitmap card = this.cardPics.get("" + toDraw.getColor() + toDraw.getType());
+        Bitmap card;
+        if (toDraw.getColor() == null)
+            card = this.cardPics.get("" + toDraw.getType());
+        else
+            card = this.cardPics.get("" + toDraw.getColor() + toDraw.getType());
         if (card != null)
             canvas.drawBitmap(card, x, y, null);
     }
@@ -183,10 +187,10 @@ public class UnoGameView extends SurfaceView {
 
         //wild cards
         Bitmap wild = BitmapFactory.decodeResource(getResources(), R.drawable.wild);
-        this.cardPics.put(""+ Type.WILD, wild);
+        this.cardPics.put("" + Type.WILD, wild);
         Bitmap wildDrawFour = BitmapFactory.decodeResource(getResources(), R.drawable.wild_draw_four);
-        this.cardPics.put(""+ Type.WILD, wildDrawFour);
-       // Bitmap nullCard=
+        this.cardPics.put("" + Type.WILDDRAW4, wildDrawFour);
+        // Bitmap nullCard=
 
         // Bitmap nullCard=
 
@@ -199,5 +203,11 @@ public class UnoGameView extends SurfaceView {
 
     public void setTopCard(Card topCard) {
         this.topCard = topCard;
+    }
+
+    public ArrayList<Card> getHumanplayerHand()
+    {
+        return this.handtoDraw;
+
     }
 }

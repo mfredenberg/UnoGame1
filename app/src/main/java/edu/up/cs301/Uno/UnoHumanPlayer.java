@@ -1,8 +1,12 @@
 package edu.up.cs301.Uno;
 
+import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import edu.up.cs301.Uno.actionMsg.HasUnoAction;
 import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
@@ -28,6 +32,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button hasUnoButton;
     private Button skipTurnButton;
     private UnoGameView unoSurface;
+    private TextView playerName;
 
     /*
     *Ctor
@@ -53,11 +58,14 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.skipTurnButton = (Button) activity.findViewById(R.id.skipTurnButton);
         this.hasUnoButton = (Button) activity.findViewById(R.id.hasUnoButton);
         this.unoSurface = (UnoGameView) activity.findViewById(R.id.unoSurface);
+        this.playerName = (TextView) activity.findViewById(R.id.playerName);
 
         this.quitButton.setOnClickListener(this);
         this.hasUnoButton.setOnClickListener(this);
         this.skipTurnButton.setOnClickListener(this);
         this.unoSurface.setOnTouchListener(this);
+        this.playerName.setText(this.playerName.getText()+ "\n" + this.name);
+
 
 
     }
@@ -78,9 +86,10 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.unoSurface.setHand(state.getPlayerHandAt(0));
                 this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
                 this.unoSurface.invalidate();
-            }
-            else if(state.getTurn() == 1)
-            {
+            } else if (state.getTurn() == 1) {
+                ArrayList<Card> humanHand = this.unoSurface.getHumanplayerHand();
+                if (state.getPlayerHandSize(0) != humanHand.size())
+                    humanHand.remove(0);
                 this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
                 this.unoSurface.invalidate();
             }

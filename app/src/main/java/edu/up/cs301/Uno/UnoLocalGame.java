@@ -50,7 +50,7 @@ public class UnoLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         if (this.currentGameState.getCurrentPlayerHand().size() == 0) {
-            return "Player " + this.currentGameState.getTurn() + "has won";
+            return "Player " + this.currentGameState.getTurn() + " has won";
         }
         return null;
     }
