@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:orientation="horizontal"
+        android:soundEffectsEnabled="false">
+
+        <TextView
+            android:id="@+id/playerName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@color/light_red"
+            android:soundEffectsEnabled="false"
+            android:text="Player Name:"
+            android:textColor="@color/red"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/skipTurnButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tab_height"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@color/light_green"
+            android:fadingEdge="horizontal|vertical"
+            android:soundEffectsEnabled="false"
+            android:text="Skip Turn"
+            android:textColor="@color/green"
+            android:textColorHighlight="@android:color/background_light"
+            android:textColorHint="@android:color/holo_green_light"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/hasUnoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tab_height"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@color/light_yellow"
+            android:fadingEdge="horizontal|vertical"
+            android:soundEffectsEnabled="false"
+            android:text="UNO!"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/quitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tab_height"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@color/light_blue"
+            android:fadingEdge="horizontal|vertical"
+            android:soundEffectsEnabled="false"
+            android:text="Quit"
+            android:textColor="@color/blue"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <edu.up.cs301.Uno.UnoGameView
+        android:id="@+id/unoSurface"
+        android:layout_width="match_parent"
+        android:layout_height="1080dp" />
+
+</android.widget.LinearLayout>
