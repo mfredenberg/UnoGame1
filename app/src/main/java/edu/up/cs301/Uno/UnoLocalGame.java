@@ -28,8 +28,8 @@ public class UnoLocalGame extends LocalGame {
 
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
-        UnoGameState copy = new UnoGameState(this.currentGameState,this.currentGameState.getTurn());
-       p.sendInfo(copy);
+        UnoGameState copy = new UnoGameState(this.currentGameState, this.currentGameState.getTurn());
+        p.sendInfo(copy);
 
     }
 

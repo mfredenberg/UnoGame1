@@ -81,11 +81,10 @@ public class UnoGameState extends GameState {
     /*
     * this constructor is used to make a deep copy of the game state
     */
-
     public UnoGameState(UnoGameState masterGameState, int playerID) {
 
 
-        /*this.playerHands = new ArrayList<ArrayList<Card>>();
+        this.playerHands = new ArrayList<ArrayList<Card>>();
         this.hasUno = new ArrayList<Boolean>();
         for (boolean hasUnoBool : masterGameState.hasUno) {
             this.hasUno.add(hasUnoBool);
@@ -121,45 +120,45 @@ public class UnoGameState extends GameState {
 
         //copying gameDirection
         this.gameDirection = masterGameState.gameDirection;
-*/
+
     }
 
     /*
     * method converts all variables into strings
     */
-   /* @Override
-    public String toString() {
-        String str = "# cards in draw pile: " + drawPile.getDeckSize();
-        str += "\n";
-
-        str += "Player1 #cards: " + this.playerHands.get(0).size();
-        str += "\n";
-
-        str += "Player2 #cards: " + this.playerHands.get(1).size();
-        str += "\n";
-
-
-        str += "current player: " + this.turn;
-        str += "\n";
-        str += "card Val: ";
-        for (Card card : this.playerHands.get(this.turn)) {
-            str += " " + card.getType() + " " + card.getColor();
-        }
-        str += "\n";
-
-        str += "Top card in discard pile: " + this.getDiscardPile().take().getType() + " " + this.getDiscardPile().take().getColor();
-        str += "\n";
-        str += "Game direction: " + this.gameDirection;
-        str += "\n";
-        str += "Current color: " + this.currentColor;
-
-        str += "\n";
-        str += "\n";
-        str += "\n";
-
-
-        return str;
-    }*/
+    //@Override
+//    public String toString() {
+//        String str = "# cards in draw pile: " + drawPile.getDeckSize();
+//        str += "\n";
+//
+//        str += "Player1 #cards: " + this.playerHands.get(0).size();
+//        str += "\n";
+//
+//        str += "Player2 #cards: " + this.playerHands.get(1).size();
+//        str += "\n";
+//
+//
+//        str += "current player: " + this.turn;
+//        str += "\n";
+//        str += "card Val: ";
+//        for (Card card : this.playerHands.get(this.turn)) {
+//            str += " " + card.getType() + " " + card.getColor();
+//        }
+//        str += "\n";
+//
+//        str += "Top card in discard pile: " + this.getDiscardPile().take().getType() + " " + this.getDiscardPile().take().getColor();
+//        str += "\n";
+//        str += "Game direction: " + this.gameDirection;
+//        str += "\n";
+//        str += "Current color: " + this.currentColor;
+//
+//        str += "\n";
+//        str += "\n";
+//        str += "\n";
+//
+//
+//        return str;
+//    }
 
 
     //getters and setters
