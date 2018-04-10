@@ -86,8 +86,8 @@ public class UnoGameState extends GameState {
 
         this.playerHands = new ArrayList<ArrayList<Card>>();
         this.hasUno = new ArrayList<Boolean>();
-        for (boolean hasUno : masterGameState.hasUno) {
-            this.hasUno.add(hasUno);
+        for (boolean unoNew: masterGameState.hasUno) {
+            this.hasUno.add(unoNew);
         }
 
         // telling the game state whose turn it is
@@ -98,7 +98,7 @@ public class UnoGameState extends GameState {
         this.discardPile = new Deck(masterGameState.getDiscardPile());
 
         //copying other players hand, filling the values in the master array with nulls
-        for (int i = 1; i < masterGameState.getNumPlayers(); i++) {
+        for (int i = 0; i < masterGameState.getNumPlayers(); i++) {
             this.playerHands.add(new ArrayList<Card>());
             for (int j = 0; j < masterGameState.getPlayerHandSize(playerID + i % masterGameState.getNumPlayers()); j++) {
                 this.playerHands.get(playerID + i % masterGameState.getNumPlayers()).add(null);
