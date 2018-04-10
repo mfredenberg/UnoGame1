@@ -59,6 +59,8 @@ public class UnoGameView extends SurfaceView {
 
             }else if(numCard > 10) {
 
+                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
+                        (int) (getWidth() * (.1*numCard ) -25), (int) (getHeight()*.8), null);
 
             }
             numCard++;
