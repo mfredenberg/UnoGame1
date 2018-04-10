@@ -75,7 +75,7 @@ public class UnoGameView extends SurfaceView {
 
 
     public void initHash() {
-
+        //red cards
         Bitmap redZero = BitmapFactory.decodeResource(getResources(), R.drawable.red_zero);
         this.cardPics.put("" + Color.RED + Type.ZERO, redZero);
         Bitmap redOne = BitmapFactory.decodeResource(getResources(), R.drawable.red_one);
@@ -89,20 +89,20 @@ public class UnoGameView extends SurfaceView {
         Bitmap redFive = BitmapFactory.decodeResource(getResources(), R.drawable.red_five);
         this.cardPics.put("" + Color.RED + Type.FIVE, redFive);
         Bitmap redSix = BitmapFactory.decodeResource(getResources(), R.drawable.red_six);
-        this.cardPics.put("" + Color.RED + Type.REVERSE, redSix);
+        this.cardPics.put("" + Color.RED + Type.SIX, redSix);
         Bitmap redSeven = BitmapFactory.decodeResource(getResources(), R.drawable.red_seven);
-        this.cardPics.put("" + Color.RED + Type.REVERSE, redSeven);
+        this.cardPics.put("" + Color.RED + Type.SEVEN, redSeven);
         Bitmap redEight = BitmapFactory.decodeResource(getResources(), R.drawable.red_eight);
-        this.cardPics.put("" + Color.RED + Type.REVERSE, redEight);
+        this.cardPics.put("" + Color.RED + Type.EIGHT, redEight);
         Bitmap redNine = BitmapFactory.decodeResource(getResources(), R.drawable.red_nine);
-        this.cardPics.put("" + Color.RED + Type.REVERSE, redNine);
+        this.cardPics.put("" + Color.RED + Type.NINE, redNine);
         Bitmap redSkip = BitmapFactory.decodeResource(getResources(), R.drawable.red_skip);
-        this.cardPics.put("" + Color.RED + Type.REVERSE, redSkip);
+        this.cardPics.put("" + Color.RED + Type.SKIP, redSkip);
         Bitmap redDraw2 = BitmapFactory.decodeResource(getResources(), R.drawable.red_draw2);
-        this.cardPics.put("" + Color.RED + Type.REVERSE, redDraw2);
+        this.cardPics.put("" + Color.RED + Type.PLUS2, redDraw2);
         Bitmap redRev = BitmapFactory.decodeResource(getResources(), R.drawable.red_reverse);
         this.cardPics.put("" + Color.RED + Type.REVERSE, redRev);
-
+        //yellow cards
         Bitmap yellowZero = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_zero);
         this.cardPics.put("" + Color.YELLOW + Type.ZERO, yellowZero);
         Bitmap yellowOne = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_one);
@@ -116,20 +116,20 @@ public class UnoGameView extends SurfaceView {
         Bitmap yellowFive = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_five);
         this.cardPics.put("" + Color.YELLOW + Type.FIVE, yellowFive);
         Bitmap yellowSix = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_six);
-        this.cardPics.put("" + Color.YELLOW + Type.REVERSE, yellowSix);
+        this.cardPics.put("" + Color.YELLOW + Type.SIX, yellowSix);
         Bitmap yellowSeven = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_seven);
-        this.cardPics.put("" + Color.YELLOW + Type.REVERSE, yellowSeven);
+        this.cardPics.put("" + Color.YELLOW + Type.SEVEN, yellowSeven);
         Bitmap yellowEight = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_eight);
-        this.cardPics.put("" + Color.YELLOW + Type.REVERSE, yellowEight);
+        this.cardPics.put("" + Color.YELLOW + Type.EIGHT, yellowEight);
         Bitmap yellowNine = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_nine);
-        this.cardPics.put("" + Color.YELLOW + Type.REVERSE, yellowNine);
+        this.cardPics.put("" + Color.YELLOW + Type.NINE, yellowNine);
         Bitmap yellowSkip = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_skip);
-        this.cardPics.put("" + Color.YELLOW + Type.REVERSE, yellowSkip);
+        this.cardPics.put("" + Color.YELLOW + Type.SKIP, yellowSkip);
         Bitmap yellowDraw2 = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_draw2);
-        this.cardPics.put("" + Color.YELLOW + Type.REVERSE, yellowDraw2);
+        this.cardPics.put("" + Color.YELLOW + Type.PLUS2, yellowDraw2);
         Bitmap yellowRev = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_reverse);
         this.cardPics.put("" + Color.YELLOW + Type.REVERSE, yellowRev);
-
+        //green cards
         Bitmap greenZero = BitmapFactory.decodeResource(getResources(), R.drawable.green_zero);
         this.cardPics.put("" + Color.GREEN + Type.ZERO, greenZero);
         Bitmap greenOne = BitmapFactory.decodeResource(getResources(), R.drawable.green_one);
@@ -143,20 +143,20 @@ public class UnoGameView extends SurfaceView {
         Bitmap greenFive = BitmapFactory.decodeResource(getResources(), R.drawable.green_five);
         this.cardPics.put("" + Color.GREEN + Type.FIVE, greenFive);
         Bitmap greenSix = BitmapFactory.decodeResource(getResources(), R.drawable.green_six);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, greenSix);
+        this.cardPics.put("" + Color.GREEN + Type.SIX, greenSix);
         Bitmap greenSeven = BitmapFactory.decodeResource(getResources(), R.drawable.green_seven);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, greenSeven);
+        this.cardPics.put("" + Color.GREEN + Type.SEVEN, greenSeven);
         Bitmap greenEight = BitmapFactory.decodeResource(getResources(), R.drawable.green_eight);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, greenEight);
+        this.cardPics.put("" + Color.GREEN + Type.EIGHT, greenEight);
         Bitmap greenNine = BitmapFactory.decodeResource(getResources(), R.drawable.green_nine);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, greenNine);
+        this.cardPics.put("" + Color.GREEN + Type.NINE, greenNine);
         Bitmap greenSkip = BitmapFactory.decodeResource(getResources(), R.drawable.green_skip);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, greenSkip);
+        this.cardPics.put("" + Color.GREEN + Type.SKIP, greenSkip);
         Bitmap greenDraw2 = BitmapFactory.decodeResource(getResources(), R.drawable.green_draw2);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, greenDraw2);
+        this.cardPics.put("" + Color.GREEN + Type.PLUS2, greenDraw2);
         Bitmap greenRev = BitmapFactory.decodeResource(getResources(), R.drawable.green_reverse);
         this.cardPics.put("" + Color.GREEN + Type.REVERSE, greenRev);
-
+        //blue cards
         Bitmap blueZero = BitmapFactory.decodeResource(getResources(), R.drawable.blue_zero);
         this.cardPics.put("" + Color.BLUE + Type.ZERO, blueZero);
         Bitmap blueOne = BitmapFactory.decodeResource(getResources(), R.drawable.blue_one);
@@ -168,22 +168,27 @@ public class UnoGameView extends SurfaceView {
         Bitmap blueFour = BitmapFactory.decodeResource(getResources(), R.drawable.blue_four);
         this.cardPics.put("" + Color.BLUE + Type.FOUR, blueFour);
         Bitmap blueFive = BitmapFactory.decodeResource(getResources(), R.drawable.blue_five);
-        this.cardPics.put("" + Color.GREEN + Type.FIVE, blueFive);
+        this.cardPics.put("" + Color.BLUE + Type.FIVE, blueFive);
         Bitmap blueSix = BitmapFactory.decodeResource(getResources(), R.drawable.blue_six);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, blueSix);
+        this.cardPics.put("" + Color.BLUE + Type.SIX, blueSix);
         Bitmap blueSeven = BitmapFactory.decodeResource(getResources(), R.drawable.blue_seven);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, blueSeven);
+        this.cardPics.put("" + Color.BLUE + Type.SEVEN, blueSeven);
         Bitmap blueEight = BitmapFactory.decodeResource(getResources(), R.drawable.blue_eight);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, blueEight);
+        this.cardPics.put("" + Color.BLUE + Type.EIGHT, blueEight);
         Bitmap blueNine = BitmapFactory.decodeResource(getResources(), R.drawable.blue_nine);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, blueNine);
+        this.cardPics.put("" + Color.BLUE + Type.NINE, blueNine);
         Bitmap blueSkip = BitmapFactory.decodeResource(getResources(), R.drawable.blue_skip);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, blueSkip);
+        this.cardPics.put("" + Color.BLUE + Type.SKIP, blueSkip);
         Bitmap blueDraw2 = BitmapFactory.decodeResource(getResources(), R.drawable.blue_draw2);
-        this.cardPics.put("" + Color.GREEN + Type.REVERSE, blueDraw2);
+        this.cardPics.put("" + Color.BLUE + Type.PLUS2, blueDraw2);
         Bitmap blueRev = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
         this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
 
+        //wild cards
+        Bitmap wild = BitmapFactory.decodeResource(getResources(), R.drawable.wild);
+        this.cardPics.put(""+ Type.WILD, wild);
+        Bitmap wildDrawFour = BitmapFactory.decodeResource(getResources(), R.drawable.wild_draw_four);
+        this.cardPics.put(""+ Type.WILD, wildDrawFour);
        // Bitmap nullCard=
     }
 
