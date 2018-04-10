@@ -19,6 +19,8 @@ public class UnoMainActivity extends GameMainActivity {
     // the port number that this game will use when playing over the network
     private static final int PORT_NUMBER = 4498;
 
+
+    // copied from pig lab
     @Override
     public GameConfig createDefaultConfig() {
 
