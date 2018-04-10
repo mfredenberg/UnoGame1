@@ -90,6 +90,8 @@ public class UnoLocalGame extends LocalGame {
                 //Getnewcolorfromuser
 
                 //placethecard
+                //this.currentGameState.setDiscardPile(this.currentGameState.getDiscardPile().getDeck()
+                        //.take(this.currentGameState.getCurrentPlayerHand().get(0)));
 
                 return true;
             } else if (toPlace.getType() == Type.WILDDRAW4) {//ifcardisawilddraw4card
