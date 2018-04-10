@@ -179,17 +179,15 @@ public class UnoGameView extends SurfaceView {
         this.cardPics.put("" + Color.BLUE + Type.PLUS2, blueDraw2);
         Bitmap blueRev = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
         this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
-
-<<<<<<< Updated upstream
         //wild cards
         Bitmap wild = BitmapFactory.decodeResource(getResources(), R.drawable.wild);
         this.cardPics.put(""+ Type.WILD, wild);
         Bitmap wildDrawFour = BitmapFactory.decodeResource(getResources(), R.drawable.wild_draw_four);
         this.cardPics.put(""+ Type.WILD, wildDrawFour);
-       // Bitmap nullCard=
-=======
-        // Bitmap nullCard=
->>>>>>> Stashed changes
+        //null card per Nux's suggestion
+        Bitmap nullCard= BitmapFactory.decodeResource(getResources(), R.drawable.nullcard);
+        this.cardPics.put("Null Card", nullCard);
+
     }
 
     public void setHand(ArrayList<Card> hand) {
