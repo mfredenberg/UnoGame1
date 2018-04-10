@@ -2,10 +2,12 @@ package edu.up.cs301.Uno;
 
 import android.view.DragEvent;
 import android.view.View;
+import android.widget.Button;
 
 import edu.up.cs301.game.GameHumanPlayer;
 import edu.up.cs301.game.GameMainActivity;
 import edu.up.cs301.game.infoMsg.GameInfo;
+
 
 /**
  * Created by fredenbe20 on 3/27/2018.
@@ -35,6 +37,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     }
 
     public void onClick(View view) {
+
 
         //get which card is pressed
 
