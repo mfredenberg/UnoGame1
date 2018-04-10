@@ -87,8 +87,8 @@ public class UnoGameState extends GameState {
 
         /*this.playerHands = new ArrayList<ArrayList<Card>>();
         this.hasUno = new ArrayList<Boolean>();
-        for (boolean hasUno : masterGameState.hasUno) {
-            this.hasUno.add(hasUno);
+        for (boolean hasUnoBool : masterGameState.hasUno) {
+            this.hasUno.add(hasUnoBool);
         }
 
         // telling the game state whose turn it is
@@ -99,17 +99,22 @@ public class UnoGameState extends GameState {
         this.discardPile = new Deck(masterGameState.getDiscardPile());
 
         //copying other players hand, filling the values in the master array with nulls
-        for (int i = 1; i < masterGameState.getNumPlayers(); i++) {
+        for (int i = 0; i < masterGameState.getNumPlayers(); i++) {
             this.playerHands.add(new ArrayList<Card>());
-            for (int j = 0; j < masterGameState.getPlayerHandSize(playerID + i % masterGameState.getNumPlayers()); j++) {
-                this.playerHands.get(playerID + i % masterGameState.getNumPlayers()).add(null);
+            for (int j = 0; j < masterGameState.getPlayerHandSize(i); j++) {
+                this.playerHands.get(i).add(null);
             }
         }
 
         // copying the current players hand
-        this.playerHands.add(playerID, new ArrayList<Card>());
+
+        int i = 0;
         for (Card card : masterGameState.getCurrentPlayerHand())
-            this.playerHands.get(playerID).add(new Card(card.getColor(), card.getType()));
+        {
+            this.playerHands.get(playerID).set(i,new Card(card.getColor(), card.getType()));
+            i++;
+
+        }
 
         //copying color
         this.currentColor = discardPile.getCardAt(0).getColor();

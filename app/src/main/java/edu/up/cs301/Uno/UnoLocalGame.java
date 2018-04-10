@@ -28,9 +28,8 @@ public class UnoLocalGame extends LocalGame {
 
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
-        //UnoGameState copy = new UnoGameState(this.currentGameState, this.currentGameState.getTurn());
-        UnoGameState copy = new UnoGameState();
-        p.sendInfo(copy);
+        UnoGameState copy = new UnoGameState(this.currentGameState,this.currentGameState.getTurn());
+       p.sendInfo(copy);
 
     }
 
@@ -58,17 +57,18 @@ public class UnoLocalGame extends LocalGame {
     */
     @Override
     protected boolean makeMove(GameAction action) {
-        if (action instanceof Quit) {
-            quit();
-        } else if (action instanceof SkipTurnAction) {
-            return skipTurn(this.currentGameState.getTurn());
-        } else if (action instanceof HasUnoAction) {
-            return hasUno(this.currentGameState.getTurn());
-        } else if (action instanceof PlaceCardAction) {
-            PlaceCardAction place = (PlaceCardAction) action;
-            return placeCard(this.currentGameState.getTurn(), place.getCard());
-        }
         return false;
+//        if (action instanceof Quit) {
+//            quit();
+//        } else if (action instanceof SkipTurnAction) {
+//            return skipTurn(this.currentGameState.getTurn());
+//        } else if (action instanceof HasUnoAction) {
+//            return hasUno(this.currentGameState.getTurn());
+//        } else if (action instanceof PlaceCardAction) {
+//            PlaceCardAction place = (PlaceCardAction) action;
+//            return placeCard(this.currentGameState.getTurn(), place.getCard());
+//        }
+//        return false;
     }
 
     /*
@@ -77,7 +77,7 @@ public class UnoLocalGame extends LocalGame {
     */
     public boolean placeCard(int playerID, Card toPlace) {
 
-        if(canMove(playerID)) {
+        if (canMove(playerID)) {
             return true;
         }
         return false;
