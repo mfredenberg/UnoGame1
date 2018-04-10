@@ -20,6 +20,7 @@ public class UnoMainActivity extends GameMainActivity {
     @Override
     public LocalGame createLocalGame() {return null;}
 
+    //copied Vegdahl's format
     private void initWidgets(){
         //quit button
         Button qButton=(Button) findViewById(quitButton);
