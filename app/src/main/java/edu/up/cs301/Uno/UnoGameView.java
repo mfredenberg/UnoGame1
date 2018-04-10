@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import edu.up.cs301.game.R;
@@ -18,6 +19,7 @@ import edu.up.cs301.game.R;
 
 public class UnoGameView extends SurfaceView {
 
+    private ArrayList<Card> handtoDraw;
     private HashMap<String, Bitmap> cardPics;
     public UnoGameView(Context context) {
         super(context);
@@ -43,6 +45,11 @@ public class UnoGameView extends SurfaceView {
     @Override
     public void onDraw(Canvas canvas) {
 
+        for(Card card:this.handtoDraw)
+        {
+            canvas.drawBitmap();
+        }
+
 
     }
 
@@ -50,6 +57,11 @@ public class UnoGameView extends SurfaceView {
     public void intHash() {
         Bitmap blueRev = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
         this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
+    }
+
+    public void setHand(ArrayList<Card> hand)
+    {
+        this.handtoDraw = hand;
     }
 
 
