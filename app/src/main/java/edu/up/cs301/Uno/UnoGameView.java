@@ -53,7 +53,7 @@ public class UnoGameView extends SurfaceView {
 
             for (int i = 0; i < this.handtoDraw.size(); i++) {
                 if (i < 10)
-                    drawCard(canvas, this.handtoDraw.get(i), width * (i+2), (int) (getHeight() * .7));
+                    drawCard(canvas, this.handtoDraw.get(i), width * (i+1), (int) (getHeight() * .7));
                 else
                     drawCard(canvas, this.handtoDraw.get(i), width * (i - 5), (int) (getHeight() * .5));
             }
@@ -180,16 +180,16 @@ public class UnoGameView extends SurfaceView {
         Bitmap blueRev = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
         this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
 
-<<<<<<< Updated upstream
+
         //wild cards
         Bitmap wild = BitmapFactory.decodeResource(getResources(), R.drawable.wild);
         this.cardPics.put(""+ Type.WILD, wild);
         Bitmap wildDrawFour = BitmapFactory.decodeResource(getResources(), R.drawable.wild_draw_four);
         this.cardPics.put(""+ Type.WILD, wildDrawFour);
        // Bitmap nullCard=
-=======
+
         // Bitmap nullCard=
->>>>>>> Stashed changes
+
     }
 
     public void setHand(ArrayList<Card> hand) {

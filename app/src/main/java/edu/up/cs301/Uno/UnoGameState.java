@@ -108,9 +108,8 @@ public class UnoGameState extends GameState {
         // copying the current players hand
 
         int i = 0;
-        for (Card card : masterGameState.getCurrentPlayerHand())
-        {
-            this.playerHands.get(playerID).set(i,new Card(card.getColor(), card.getType()));
+        for (Card card : masterGameState.getCurrentPlayerHand()) {
+            this.playerHands.get(playerID).set(i, new Card(card.getColor(), card.getType()));
             i++;
 
         }
@@ -173,10 +172,16 @@ public class UnoGameState extends GameState {
 
     public void setNextTurn(int numTurns) {
 
-        if (this.gameDirection)
-            this.turn = (this.turn + numTurns % this.playerHands.size());
-        else
-            this.turn = (this.turn - numTurns % this.playerHands.size());
+        if (this.turn == 0) {
+            this.turn = 1;
+        } else
+            this.turn = 0;
+
+
+//        if (this.gameDirection)
+//            this.turn = (this.turn + numTurns % this.playerHands.size());
+//        else
+//            this.turn = (this.turn - numTurns % this.playerHands.size());
 
     }
 

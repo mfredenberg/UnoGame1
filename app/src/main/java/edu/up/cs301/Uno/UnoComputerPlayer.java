@@ -12,15 +12,16 @@ import edu.up.cs301.game.infoMsg.GameInfo;
 
 public class UnoComputerPlayer extends GameComputerPlayer {
 
-    public UnoComputerPlayer(String name){
+    public UnoComputerPlayer(String name) {
         super(name);
     }
 
     @Override
     protected void receiveInfo(GameInfo info) {
-        if(info instanceof UnoGameState)
-        {
-            this.game.sendAction(new PlaceCardAction(this));
+        if (info instanceof UnoGameState) {
+            UnoGameState gameState = (UnoGameState) info;
+            if (gameState.getTurn() == 1)
+                this.game.sendAction(new PlaceCardAction(this));
         }
 
     }

@@ -79,6 +79,7 @@ public class UnoLocalGame extends LocalGame {
         if (canMove(playerID)) {
             Card card = this.currentGameState.getCurrentPlayerHand().remove(0);
             this.currentGameState.getDiscardPile().put(card);
+            this.currentGameState.setNextTurn(1);
             return true;
         }
         return false;
