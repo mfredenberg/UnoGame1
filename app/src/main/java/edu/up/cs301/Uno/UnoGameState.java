@@ -177,11 +177,11 @@ public class UnoGameState extends GameState {
         } else
             this.turn = 0;
 
-
-//        if (this.gameDirection)
-//            this.turn = (this.turn + numTurns % this.playerHands.size());
-//        else
-//            this.turn = (this.turn - numTurns % this.playerHands.size());
+//
+//            if (this.gameDirection)
+//                this.turn = (this.turn + numTurns % this.playerHands.size());
+//            else
+//                this.turn = (this.turn - numTurns % this.playerHands.size());
 
     }
 

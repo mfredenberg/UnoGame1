@@ -83,14 +83,19 @@ public class UnoLocalGame extends LocalGame {
         boolean didPlace = false;
 
         if (canMove(playerID)) { //check if the player can make a mover
-            Card card = this.currentGameState.getCurrentPlayerHand().remove(0);
+            Card card = this.currentGameState.getCurrentPlayerHand().get(0);
 
             //place card on top of discard pile, and make it the next players turn
-            this.currentGameState.getDiscardPile().put(card);
-            this.currentGameState.setNextTurn(1);
+
+                this.currentGameState.getCurrentPlayerHand().remove(0);
+                this.currentGameState.getDiscardPile().put(card);
+                this.currentGameState.setCurrentColor(card.getColor());
+                this.currentGameState.setNextTurn(1);
+                didPlace = true;
+
 
             //say that the placement happened
-            didPlace = true;
+
         }
 
         return didPlace;
@@ -203,5 +208,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     //getters and setters
-    public UnoGameState getCurrentGameState(){return currentGameState;}
+    public UnoGameState getCurrentGameState() {
+        return currentGameState;
+    }
 }

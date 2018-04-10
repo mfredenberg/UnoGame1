@@ -26,7 +26,11 @@ public class UnoComputerPlayer extends GameComputerPlayer {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+
                 this.game.sendAction(new PlaceCardAction(this));
+
+
             }
         }
 

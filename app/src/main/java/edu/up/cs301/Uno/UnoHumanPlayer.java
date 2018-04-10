@@ -1,6 +1,7 @@
 package edu.up.cs301.Uno;
 
-import android.graphics.Canvas;
+import android.graphics.*;
+import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -88,10 +89,11 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.unoSurface.invalidate();
             } else if (state.getTurn() == 1) {
                 ArrayList<Card> humanHand = this.unoSurface.getHumanplayerHand();
-                if (state.getPlayerHandSize(0) != humanHand.size())
+                if (state.getPlayerHandSize(0) <  humanHand.size())
                     humanHand.remove(0);
                 this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
                 this.unoSurface.invalidate();
+
             }
         }
 
