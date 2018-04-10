@@ -40,40 +40,41 @@ public class UnoGameView extends SurfaceView {
     private void startUp() {
         setWillNotDraw(false);
         this.cardPics = new HashMap<String, Bitmap>();
-        intHash();
+        //intHash();
     }
 
     @Override
     public void onDraw(Canvas canvas) {
-        int numCard = 1;
 
-        canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
-                (int) (getWidth() * .5), (int) (getHeight()*.5), null);
-
-        for(Card card:this.handtoDraw)
-        {
-            if(numCard < 11) {
-
-                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
-                        (int) (getWidth() * (.1*numCard ) -25), (int) (getHeight()*.7), null);
-
-            }else if(numCard > 10) {
-
-                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
-                        (int) (getWidth() * (.1*numCard ) -25), (int) (getHeight()*.8), null);
-
-            }
-            numCard++;
-        }
+//        int numCard = 1;
+//
+//        canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
+//                (int) (getWidth() * .5), (int) (getHeight()*.5), null);
+//
+//        for(Card card:this.handtoDraw)
+//        {
+//            if(numCard < 11) {
+//
+//                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
+//                        (int) (getWidth() * (.1*numCard ) -25), (int) (getHeight()*.7), null);
+//
+//            }else if(numCard > 10) {
+//
+//                canvas.drawBitmap(this.cardPics.get("" + Color.BLUE + Type.REVERSE),
+//                        (int) (getWidth() * (.1*numCard ) -25), (int) (getHeight()*.8), null);
+//
+//            }
+//            numCard++;
+//        }
 
 
     }
 
 
-    public void intHash() {
-        Bitmap blueRev = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
-        this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
-    }
+//    public void intHash() {
+//        Bitmap blueRev = BitmapFactory.decodeResource(getResources(), R.drawable.blue_reverse);
+//        this.cardPics.put("" + Color.BLUE + Type.REVERSE, blueRev);
+//    }
 
     public void setHand(ArrayList<Card> hand)
     {
