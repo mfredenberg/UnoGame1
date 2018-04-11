@@ -253,8 +253,8 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 	 * 		the "game over" message sent by the game
 	 */
 	protected void gameIsOver(String msg) {
-		// the default behavior is to put a pop-up for the user to see that tells
-		// the game's result
+		// the default behavior is to put a pop-up for the user to see
+		// that tells the game's result
 		MessageBox.popUpMessage(msg, myActivity);
 	}
 	

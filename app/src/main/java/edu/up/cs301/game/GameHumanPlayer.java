@@ -22,9 +22,9 @@ import android.view.View;
 /**
  * class GameHumanPlayer
  * 
- * is an abstract base class for a player that is controlled by a human. For any
- * particular game, a subclass should be created that can display the current
- * game state and responds to user commands.
+ * is an abstract base class for a player that is controlled by a human. For
+ * any particular game, a subclass should be created that can display the
+ * current game state and responds to user commands.
  * 
  * @author Steven R. Vegdahl
  * @author Andrew Nuxoll
@@ -131,8 +131,8 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 	
 	/**
 	 * Flashes the background of the GUI--typically indicating that some kind
-	 * of error occurred. Caveat: if multiple flash calls overlap, the prior one
-	 * will take precedence. 
+	 * of error occurred. Caveat: if multiple flash calls overlap, the prior
+	 * one will take precedence.
 	 * 
 	 * @param color
 	 * 			the color to flash
@@ -235,7 +235,8 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 		// the run method, which is run in the main GUI thread
 		public void run() {
 			
-			// if the game is over, just tell the activity that the game is over
+			// if the game is over, just tell the activity that the game is
+			// over
 			if (gameOver) {
 				myActivity.setGameOver(true);
 				return;
@@ -251,11 +252,13 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 					playerNum = bgs.getPlayerNum(); // set our player id
 					
 					// respond to the game, telling it our name
-					game.sendAction(new MyNameIsAction(GameHumanPlayer.this, name));
+					game.sendAction(new MyNameIsAction
+							(GameHumanPlayer.this, name));
 				}
 			}
 			else if (allPlayerNames == null) {
-				// here, the only thing we're looking for is a StartGameInfo object;
+				// here, the only thing we're looking for is a StartGameInfo
+				// object;
 				// ignore everything else
 				if (myInfo instanceof StartGameInfo) {
 					Log.i("GameHumanPlayer", "notification to start game");
@@ -273,10 +276,12 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 			else if (myInfo instanceof GameOverInfo) {
 				// if we're being notified the game is over, finish up
 				
-				// perform the "gave over" behavior--by default, to show pop-up message
+				// perform the "gave over" behavior--by default,
+				// to show pop-up message
 				gameIsOver(((GameOverInfo)myInfo).getMessage());
 				
-				// if our activity is non-null (which it should be), mark the activity as over
+				// if our activity is non-null (which it should be),
+				// mark the activity as over
 				if (myActivity != null) myActivity.setGameOver(true);
 				
 				// acknowledge to the game that the game is over
