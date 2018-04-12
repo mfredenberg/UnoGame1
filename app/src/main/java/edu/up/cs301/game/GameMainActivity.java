@@ -54,7 +54,8 @@ View.OnClickListener {
 	// launchGame.
 	private Game game = null;
 
-	// an array containing references to all the players that are playing the game
+	// an array containing references to all the players that are playing
+	// the game
 	private GamePlayer[] players = null;
 
 	// tells which player, if any, is running in the GUI
@@ -146,27 +147,30 @@ View.OnClickListener {
 		// create the default configuration for this game
 		this.config = createDefaultConfig();
 		
-		// if there is a saved configuration, modify the default configuration accordingly
+		// if there is a saved configuration, modify the default configuration
+		// accordingly
 		if (!this.config.restoreSavedConfig(saveFileName(), this)) {
-			MessageBox.popUpMessage("Error in attempting to read game configuration file.",
-					this);
+			MessageBox.popUpMessage("Error in attempting to read game " +
+							"configuration file.", this);
 		}
 
 
-		if (this.config.isUserModifiable()) { // normal run: user has chance to modify configuration
+		if (this.config.isUserModifiable()) {
+			// normal run: user has chance to modify configuration
 
-			// initialize and show the GUI that allows the user to specify the game's
-			// configuration
+			// initialize and show the GUI that allows the user to
+			// specify the game's configuration
 			initStarterGui();
 
-			// hide the soft keyboard, so the that user does not need to dismiss it (which
-			// he would often want to do)
+			// hide the soft keyboard, so the that user does not need
+			// to dismiss it (which he would often want to do)
 			hideSoftKeyboard();
 
 			// allow buttons to interact
 			justStarted = false;
 		}
-		else { // special run (during debugging?): use the given configuration, unmodified
+		else { // special run (during debugging?): use the given configuration,
+            // unmodified
 			String msg = launchGame(this.config);
 			if(msg != null) {
 				// we have an error message
@@ -184,7 +188,8 @@ View.OnClickListener {
 	 */
 	private String saveFileName() {
 		return "savedConfig"+getPortNumber()+".dat";		
-	}//saveFileName
+	}
+	//saveFileName
 
 	/**
 	 * hides the soft keyboard so that the use does not need to dismiss it
@@ -201,7 +206,8 @@ View.OnClickListener {
 					// hide the keyboard
 					InputMethodManager inputMethodManager = (InputMethodManager)
 							getSystemService(Context.INPUT_METHOD_SERVICE); 
-					inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+					inputMethodManager.hideSoftInputFromWindow(getCurrentFocus()
+                                    .getWindowToken(),
 							InputMethodManager.RESULT_UNCHANGED_SHOWN);
 				}
 				catch (Exception x) {
@@ -222,8 +228,8 @@ View.OnClickListener {
 	}//hideSoftKeyboard
 
 	/**
-	 * Callback-method, called when the configuration changes--typically when the tablet
-	 * is rotated.
+	 * Callback-method, called when the configuration changes--typically
+     * when the tablet is rotated.
 	 */
 	public void onConfigurationChanged(Configuration newConfig) {
 
@@ -252,7 +258,7 @@ View.OnClickListener {
 	 * @param config
 	 *            is the configuration for this game
 	 * @return
-	 * 			null if the launch was successful; otherwise a message telling 
+	 * 			null if the launch was successful; otherwise a message telling
 	 * 			why game could not be launched
 	 */
 	private final String launchGame(GameConfig config) {
@@ -276,23 +282,27 @@ View.OnClickListener {
 		//////////////////////////////////////
 		int requiresGuiCount = 0; // the number of players that require a GUI
 		guiPlayer = null; // the player that will be our GUI player
-		players = new GamePlayer[config.getNumPlayers()]; // the array to contains our players
+		players = new GamePlayer[config.getNumPlayers()]; // the array to contain
+        // our players
 
 		// loop through each player
 		for (int i = 0; i < players.length; i++) {
-			String name = config.getSelName(i); // the player's name
-			GamePlayerType gpt = config.getSelType(i); // the player's type
-			GamePlayerType[] availTypes = config.getAvailTypes(); // the available player types
+			String name = config.getSelName(i);// the player's name
+			GamePlayerType gpt = config.getSelType(i);// the player's type
+			GamePlayerType[] availTypes = config.getAvailTypes();
+            // the available player types
 			players[i] = gpt.createPlayer(name); // create the player
 
 			// check that the player name is legal
 			if (name.length() <= 0 && gpt != availTypes[availTypes.length-1]) {
-				// disallow an empty player name, unless it's a dummy (proxy) player
+				// disallow an empty player name, unless it's a dummy (proxy)
+                // player
 				return "Local player name cannot be empty.";
 			}
 
-			// if the player requires a GUI, count and mark it; otherwise, if a player
-			// supports a GUI and the "requires" count is zero, mark it
+			// if the player requires a GUI, count and mark it; otherwise,
+            // if a player supports a GUI and the "requires" count is zero,
+            // mark it
 			if (players[i].requiresGui()) {
 				requiresGuiCount++;
 				guiPlayer = players[i];
@@ -382,21 +392,28 @@ View.OnClickListener {
 			playerName.setText(config.getSelName(i));
 
 			// Set the initial selection for the spinner
-			GamePlayerType[] selTypes = config.getSelTypes(); // the player types in the config
-			GamePlayerType[] availTypes = config.getAvailTypes(); // the available player types
+			GamePlayerType[] selTypes = config.getSelTypes();
+            // the player types in the config
+			GamePlayerType[] availTypes = config.getAvailTypes();
+            // the available player types
 			Spinner typeSpinner = (Spinner) row
-					.findViewById(R.id.playerTypeSpinner); // the spinner for the current player
-			// search through to find the one whose label matches; set it as the selection
+					.findViewById(R.id.playerTypeSpinner);
+            // the spinner for the current player
+			// search through to find the one whose label matches;
+            // set it as the selection
 			for (int j = 0; j < availTypes.length; ++j) {
-				if (selTypes[i].getTypeName().equals(availTypes[j].getTypeName())) {
-					typeSpinner.setSelection(j);
+				if (selTypes[i].getTypeName().equals
+                        (availTypes[j].getTypeName())) {
+                    typeSpinner.setSelection(j);
 					break;
 				}
 			}
 
-			// set up our spinner so that when its last element ("Network Player") is selected,
-			// the corresponding EditText (the player name) is disabled.
-			typeSpinner.setOnItemSelectedListener(new SpinnerListListener(playerName, availTypes.length-1));
+			// set up our spinner so that when its last element
+            // ("Network Player") is selected, the corresponding
+            // EditText (the player name) is disabled.
+			typeSpinner.setOnItemSelectedListener(new SpinnerListListener
+                    (playerName, availTypes.length-1));
 			
 		}// for
 		
@@ -407,22 +424,26 @@ View.OnClickListener {
 
 	protected void initRemoteWidgets() {
 		//Set the remote name
-		EditText remoteNameEditText = (EditText)findViewById(R.id.remoteNameEditText);
+		EditText remoteNameEditText = (EditText)findViewById
+                (R.id.remoteNameEditText);
 		remoteNameEditText.setText(config.getRemoteName());
 
 		// index of remote player type
 		GamePlayerType remotePlayerType = config.getRemoteSelType();
 		GamePlayerType[] availTypes = config.getAvailTypes();
-		Spinner remoteTypeSpinner = (Spinner)findViewById(R.id.remote_player_spinner);
+		Spinner remoteTypeSpinner = (Spinner)findViewById
+                (R.id.remote_player_spinner);
 		for (int j = 0; j < availTypes.length; ++j) {
-			if (remotePlayerType.getTypeName().equals(availTypes[j].getTypeName())) {
+			if (remotePlayerType.getTypeName().
+                    equals(availTypes[j].getTypeName())) {
 				remoteTypeSpinner.setSelection(j);
 				break;
 			}
 		}
 
 		//Set the IP code
-		EditText ipCodeEditText = (EditText)findViewById(R.id.remoteIPCodeEditText);
+		EditText ipCodeEditText = (EditText)findViewById
+                (R.id.remoteIPCodeEditText);
 		ipCodeEditText.setText(config.getIpCode());
 	}
 
@@ -473,7 +494,7 @@ View.OnClickListener {
 	 * this method is called whenever the user clicks on a button.
 	 * 
 	 * <p>
-	 * NOTE: With the current layout it could either be a Button or ImageButton.
+	 * NOTE: With the current layout it could either be a Button or ImageButton
 	 */
 	public void onClick(View button) {
 		
@@ -513,7 +534,8 @@ View.OnClickListener {
 				MessageBox.popUpMessage("Game configuration saved.", this);
 			}
 			else {
-				MessageBox.popUpMessage("Unable to save game configuration.", this);
+				MessageBox.popUpMessage
+                        ("Unable to save game configuration.", this);
 			}
 		}
 
@@ -546,8 +568,8 @@ View.OnClickListener {
 	private void removePlayer(TableRow row) {
 		// first, make sure that we won't exceed the min number of players
 		if (this.tableRows.size() <= config.getMinPlayers()) {
-			MessageBox.popUpMessage("Sorry, removing a player would drop below the minimum allowed.",
-					this);
+			MessageBox.popUpMessage("Sorry, removing a player would drop " +
+                            "below the minimum allowed.", this);
 			return;
 		}
 
@@ -568,8 +590,8 @@ View.OnClickListener {
 	private TableRow addPlayer() {
 		// first, make sure that we won't exceed the max number of players
 		if (this.tableRows.size() >= config.getMaxPlayers()) {
-			MessageBox.popUpMessage("Sorry, adding another player would exceed the maximum allowed.",
-					this);
+			MessageBox.popUpMessage("Sorry, adding another player would " +
+                            "exceed the maximum allowed.", this);
 			return null;
 		}
 
@@ -582,7 +604,8 @@ View.OnClickListener {
 		GamePlayerType[] availTypes = config.getAvailTypes();
 		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
 				this, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		adapter.setDropDownViewResource
+                (android.R.layout.simple_spinner_dropdown_item);
 		for (GamePlayerType gpt : availTypes) {
 			adapter.add(gpt.getTypeName());
 		}
@@ -592,17 +615,20 @@ View.OnClickListener {
 		// link player name field and spinner
 		TextView playerName = (TextView) row
 				.findViewById(R.id.playerNameEditText);
-		typeSpinner.setOnItemSelectedListener(new SpinnerListListener(playerName, availTypes.length-1));
+		typeSpinner.setOnItemSelectedListener(new SpinnerListListener
+                (playerName, availTypes.length-1));
 		typeSpinner.setSelection(0);
 
 		ArrayAdapter<CharSequence> adapter2 = new ArrayAdapter<CharSequence>(
 				this, android.R.layout.simple_spinner_item);
-		adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		adapter2.setDropDownViewResource
+                (android.R.layout.simple_spinner_dropdown_item);
 		for (int j = 0; j < availTypes.length-1; j++) {
 			// leaves out the last item (network player)
 			adapter2.add(availTypes[j].getTypeName());
 		}
-		Spinner remoteTypeSpinner = (Spinner)findViewById(R.id.remote_player_spinner);
+		Spinner remoteTypeSpinner = (Spinner)findViewById
+                (R.id.remote_player_spinner);
 		remoteTypeSpinner.setAdapter(adapter2);
 
 		// set myself up as the button listener for the button
@@ -649,17 +675,20 @@ View.OnClickListener {
 		}//for
 
 		//Set the remote name
-		EditText remoteNameEditText = (EditText)findViewById(R.id.remoteNameEditText);
+		EditText remoteNameEditText = (EditText)findViewById
+                (R.id.remoteNameEditText);
 		String remoteName = remoteNameEditText.getText().toString();
 		result.setRemoteName(remoteName);
 
 		//index of remote player type
-		Spinner remoteTypeSpinner = (Spinner)findViewById(R.id.remote_player_spinner);
+		Spinner remoteTypeSpinner = (Spinner)findViewById
+                (R.id.remote_player_spinner);
 		int selIndex = remoteTypeSpinner.getSelectedItemPosition();
 		result.setRemoteSelType(selIndex);
 
 		//Set the IP code
-		EditText ipCodeEditText = (EditText)findViewById(R.id.remoteIPCodeEditText);
+		EditText ipCodeEditText = (EditText)findViewById
+                (R.id.remoteIPCodeEditText);
 		String ipCode = ipCodeEditText.getText().toString();
 		result.setIpCode(ipCode);
 
@@ -667,9 +696,9 @@ View.OnClickListener {
 	}// scrapeData
 
 	/**
-	 * Call-back method when a soft key-event happens. Intercepts the "back" button
-	 * so that the activity is not killed with out user confirmation (unless the
-	 * game is already over).
+	 * Call-back method when a soft key-event happens.
+     * Intercepts the "back" button so that the activity is not killed without
+     * user confirmation (unless the game is already over).
 	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -695,8 +724,8 @@ View.OnClickListener {
 			return true;
 		}
 		else {
-			// otherwise (not BACK key, or game is over), allow superclass method
-			// to handle it
+			// otherwise (not BACK key, or game is over), allow superclass
+            // method to handle it
 			return super.onKeyDown(keyCode, event);
 		}
 	}// onKeyDown
@@ -718,7 +747,8 @@ View.OnClickListener {
 	 */
 	public void setGameOver(boolean b) {
 		gameIsOver = b;
-	}// setGameOver
+	}
+	// setGameOver
 	
 	/**
 	 *  the label for the local tab header
@@ -778,10 +808,10 @@ View.OnClickListener {
 		 * @param id
 		 *		the row id of the item that is selected
 		 */
-		public void onItemSelected(AdapterView<?> parent, View view, int position,
-				long id) {
-			// enable the corresponding TextView depending on whether the "disabling"
-			// position was selected
+		public void onItemSelected(AdapterView<?> parent, View view,
+                                   int position, long id) {
+			// enable the corresponding TextView depending on whether
+            // the "disabling" position was selected
 			correspondingTextField.setEnabled(position != disableIndex);
 		}// onItemSelected
 		
