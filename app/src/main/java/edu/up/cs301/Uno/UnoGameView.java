@@ -63,7 +63,7 @@ public class UnoGameView extends SurfaceView {
             drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 700);
             width = 20;
             for (int i = 0; i < this.handtoDraw.size(); i++) {
-                if (i == 7) {
+                if (i == 6) {
                     width = 20;
                     heightMul = .7;
                 }
@@ -74,10 +74,10 @@ public class UnoGameView extends SurfaceView {
                 }
 
 
-                if (i < 7) {
+                if (i < 6) {
                     drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul));
                     width += 300;
-                } else if (i < 13) {
+                } else if (i < 12) {
                     drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul));
                     width += 300;
                 }
@@ -229,12 +229,12 @@ public class UnoGameView extends SurfaceView {
         width = 20;
         for (int i = 0; i < this.handtoDraw.size(); i++) {
             this.isSelected.add(i, false);
-            if (i == 7) width = 20;
-            if (i < 7) {
+            if (i == 6) width = 20;
+            if (i < 6) {
                 this.handToSelect.add(new RectF(width, (int) (getHeight() * .5), width + CARD_WIDTH, (int) (getHeight() * .5)
                         + CARD_HEIGHT));
                 width += 300;
-            } else if (i < 13) {
+            } else if (i < 12) {
                 this.handToSelect.add(new RectF(width, (int) (getHeight() * .7), width + CARD_WIDTH, (int) (getHeight() * .7)
                         + CARD_HEIGHT));
                 width += 300;
