@@ -16,7 +16,7 @@ public class UnoComputerPlayer extends GameComputerPlayer {
 
     public UnoComputerPlayer(String name) {
         super(name);
-        this.playerID = this.playerNum;
+        this.playerID = this.playerNum +1;
     }
 
     @Override
