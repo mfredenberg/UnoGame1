@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -20,9 +23,15 @@ import edu.up.cs301.game.R;
 
 public class UnoGameView extends SurfaceView {
 
+    private static final int CARD_WIDTH = 246;//constant for card width
+    private static final int CARD_HEIGHT = 366;//constant for card height
     private ArrayList<Card> handtoDraw;
+    private ArrayList<Boolean> isSelected = new ArrayList<Boolean>();
     private Card topCard;
     private HashMap<String, Bitmap> cardPics;
+    private ArrayList<RectF> handToSelect = new ArrayList<RectF>(); //holds the Rect objects surrounding each card, letting them be selectable
+
+    int width;
 
     public UnoGameView(Context context) {
         super(context);
@@ -43,22 +52,34 @@ public class UnoGameView extends SurfaceView {
         setWillNotDraw(false);
         this.cardPics = new HashMap<String, Bitmap>();
         initHash();
+
+
     }
 
     @Override
     public void onDraw(Canvas canvas) {
         if (this.handtoDraw != null) {
+            double heightMul = .5;
             drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 700);
-            int width = 30;
-
+            width = 20;
             for (int i = 0; i < this.handtoDraw.size(); i++) {
-                if (i == 8) width = 20;
-                if (i < 8) {
-                    drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * .5));
-                    width += 200;
-                } else {
-                    drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * .7));
-                    width += 200;
+                if (i == 7) {
+                    width = 20;
+                    heightMul = .7;
+                }
+                if (this.isSelected.get(i)) {
+                    drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul - 30));
+                    width += 300;
+                    continue;
+                }
+
+
+                if (i < 7) {
+                    drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul));
+                    width += 300;
+                } else if (i < 13) {
+                    drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul));
+                    width += 300;
                 }
             }
 
@@ -73,8 +94,9 @@ public class UnoGameView extends SurfaceView {
             card = this.cardPics.get("" + toDraw.getType());
         else
             card = this.cardPics.get("" + toDraw.getColor() + toDraw.getType());
-        if (card != null)
+        if (card != null) {
             canvas.drawBitmap(card, x, y, null);
+        }
     }
 
 
@@ -202,6 +224,23 @@ public class UnoGameView extends SurfaceView {
 
     public void setHand(ArrayList<Card> hand) {
         this.handtoDraw = hand;
+        this.isSelected.clear();
+        this.handToSelect.clear();
+        width = 20;
+        for (int i = 0; i < this.handtoDraw.size(); i++) {
+            this.isSelected.add(i, false);
+            if (i == 7) width = 20;
+            if (i < 7) {
+                this.handToSelect.add(new RectF(width, (int) (getHeight() * .5), width + CARD_WIDTH, (int) (getHeight() * .5)
+                        + CARD_HEIGHT));
+                width += 300;
+            } else if (i < 13) {
+                this.handToSelect.add(new RectF(width, (int) (getHeight() * .7), width + CARD_WIDTH, (int) (getHeight() * .7)
+                        + CARD_HEIGHT));
+                width += 300;
+            }
+
+        }
     }
 
 
@@ -212,5 +251,20 @@ public class UnoGameView extends SurfaceView {
     public ArrayList<Card> getHumanplayerHand() {
         return this.handtoDraw;
 
+    }
+
+    public int checkSelectedCard(int x, int y) {
+        for (int i = 0; i < handToSelect.size(); i++) {
+            if (handToSelect.get(i).contains(x, y)) {
+                selectCard(i);
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void selectCard(int index) {
+        for (int i = 0; i < isSelected.size(); i++) isSelected.set(i, false);
+        isSelected.set(index, true);
     }
 }

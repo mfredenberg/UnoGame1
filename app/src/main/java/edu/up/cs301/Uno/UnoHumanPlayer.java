@@ -65,8 +65,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.hasUnoButton.setOnClickListener(this);
         this.skipTurnButton.setOnClickListener(this);
         this.unoSurface.setOnTouchListener(this);
-        this.playerName.setText(this.playerName.getText()+ "\n" + this.name);
-
+        this.playerName.setText(this.playerName.getText() + "\n" + this.name);
 
 
     }
@@ -89,7 +88,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.unoSurface.invalidate();
             } else if (state.getTurn() == 1) {
                 ArrayList<Card> humanHand = this.unoSurface.getHumanplayerHand();
-                if (state.getPlayerHandSize(0) <  humanHand.size())
+                if (state.getPlayerHandSize(0) < humanHand.size())
                     humanHand.remove(0);
                 this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
                 this.unoSurface.invalidate();
@@ -130,18 +129,24 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     */
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
+        int index;
         if (view.getId() == R.id.unoSurface) {
 
-            //if the motion of the user is a down press, then place a card
-            switch (motionEvent.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    this.game.sendAction(new PlaceCardAction(this));
-                    return true;
-
+            index = unoSurface.checkSelectedCard((int) motionEvent.getX(), (int) motionEvent.getY());
+            if (index != -1) {
+                this.unoSurface.invalidate();
             }
+            //if the motion of the user is a down press, then place a card
+//            switch (motionEvent.getAction()) {
+//                case MotionEvent.ACTION_DOWN:
+            //this.game.sendAction(new PlaceCardAction(this));
+            //return true;
 
         }
+        return true;
 
-        return false;
     }
+
+
 }
+
