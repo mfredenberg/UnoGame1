@@ -40,7 +40,6 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button yellowButton;
     private Button blueButton;
     private Button playCardButton;
-    private int playerID;
 
     /*
     *Ctor
@@ -49,8 +48,6 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     */
     public UnoHumanPlayer(String name) {
         super(name);
-        this.playerID = this.playerNum;
-
 
     }
 
@@ -103,7 +100,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
-            this.unoSurface.setHand(state.getPlayerHandAt(this.playerID));
+            this.unoSurface.setHand(state.getPlayerHandAt(this.playerNum));
             this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
             this.unoSurface.invalidate();
 
@@ -175,7 +172,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
 
     public int getPlayerID() {
-        return playerID;
+        return playerNum;
     }
 
 
