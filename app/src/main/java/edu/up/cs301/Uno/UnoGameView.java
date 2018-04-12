@@ -267,4 +267,13 @@ public class UnoGameView extends SurfaceView {
         for (int i = 0; i < isSelected.size(); i++) isSelected.set(i, false);
         isSelected.set(index, true);
     }
+
+    public int getCardIndex(){
+        for(int i = 0; i < isSelected.size(); i++){
+            if(isSelected.get(i)){
+                return i;
+            }
+        }
+        return -1;
+    }
 }
