@@ -76,8 +76,10 @@ public class UnoLocalGame extends LocalGame {
             playerID = human.getPlayerID();
         } else if (p instanceof UnoComputerPlayer) {
             UnoComputerPlayer cpuDumb = (UnoComputerPlayer) p;
-            playerID = cpuDumb.getPlayerID()
+            playerID = cpuDumb.getPlayerID();
         }
+
+        //actions
         if (action instanceof Quit) {
             quit();
         } else if (action instanceof SkipTurnAction) {
@@ -221,13 +223,14 @@ public class UnoLocalGame extends LocalGame {
     * draws a card for the current player
     */
     private boolean drawCard(int playerID) {
-        //if (canMove(playerID)) { //make sure it's the players turn
+        if (canMove(playerID)) { //make sure it's the players turn
 
-        //take a card from the draw pile and put it on the players hand
-        this.currentGameState.getPlayerHandAt(playerID).add(this.currentGameState.getDrawPile().take());
+            //take a card from the draw pile and put it on the players hand
+            this.currentGameState.getPlayerHandAt(playerID).add(this.currentGameState.getDrawPile().take());
 
-        return true;
-        // }
+            return true;
+        }
+        return false;
 
     }
 
@@ -240,7 +243,7 @@ public class UnoLocalGame extends LocalGame {
         if (draw) { //if card is drawable
 
             //make it the next turn
-            this.currentGameState.setNextTurn(this.currentGameState.getTurn() + 1);
+            this.currentGameState.setNextTurn(1);
 
             return true;
         }
