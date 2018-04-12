@@ -12,18 +12,18 @@ import android.util.Log;
  */
 
 public class UnoComputerPlayer extends GameComputerPlayer {
-    private int playerID;
+
 
     public UnoComputerPlayer(String name) {
         super(name);
-        this.playerID = this.playerNum +1;
+
     }
 
     @Override
     protected void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState gameState = (UnoGameState) info;
-            if (gameState.getTurn() == this.playerID ) {
+            if (gameState.getTurn() == this.playerNum ) {
 
                 this.sleep(2000);
                 int i;
@@ -53,6 +53,6 @@ public class UnoComputerPlayer extends GameComputerPlayer {
     }
 
     public int getPlayerID() {
-        return playerID;
+        return this.playerNum;
     }
 }

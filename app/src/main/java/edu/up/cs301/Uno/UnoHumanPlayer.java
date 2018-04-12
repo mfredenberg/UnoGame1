@@ -40,7 +40,6 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button yellowButton;
     private Button blueButton;
     private Button playCardButton;
-    private int playerID;
 
     /*
     *Ctor
@@ -49,8 +48,6 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     */
     public UnoHumanPlayer(String name) {
         super(name);
-        this.playerID = this.playerNum;
-
 
     }
 
@@ -103,7 +100,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
-            this.unoSurface.setHand(state.getPlayerHandAt(this.playerID));
+            this.unoSurface.setHand(state.getPlayerHandAt(this.playerNum));
             this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
             if(this.unoSurface.getTopCard().getType() == Type.WILD ||
                     this.unoSurface.getTopCard().getType() == Type.WILDDRAW4){
@@ -135,29 +132,15 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         } else if (view.getId() == R.id.skipTurnButton) {
             this.game.sendAction(new SkipTurnAction(this));
         } else if(view.getId() == R.id.play_card_button){
-            this.game.sendAction(new PlaceCardAction(this, unoSurface.getCardIndex()));
+            this.game.sendAction(new PlaceCardAction(this,
+                    unoSurface.getCardIndex()));
         }
-        /* needs while loop to get card? Help!- alli
-        else if (view.getId() == R.id.play_card_button){
-            this.game.sendAction(new placeCardAction(this));
-        }
-            //needs to be addressed in make move and local game
-        else if(view.getId() == R.id.red_wild_button || view.getId()
-                == R.id.green_wild_button || view.getId()
-                == R.id.yellow_wild_button || view.getId()
-                == R.id.blue_wild_button){
-            this.game.sendAction(new ColorAction(this));
-        }
-        */
-
-
         //get which card is pressed
 
         //if discard pile is pressed and the card can be
         //placed, then place card and move on to next player
 
         //if skip button is pressed, move turn to next player
-
     }
 
     /*
@@ -189,7 +172,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
 
     public int getPlayerID() {
-        return playerID;
+        return playerNum;
     }
 
 
