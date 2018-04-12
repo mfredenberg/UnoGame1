@@ -109,7 +109,7 @@ public class UnoGameState extends GameState {
         // copying the current players hand
 
         int i = 0;
-        for (Card card : masterGameState.getCurrentPlayerHand()) {
+        for (Card card : masterGameState.getPlayerHandAt(playerID)) {
             this.playerHands.get(playerID).set(i, new Card(card.getColor(), card.getType()));
             i++;
 

@@ -130,6 +130,8 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             this.game.sendAction(new HasUnoAction(this));
         } else if (view.getId() == R.id.skipTurnButton) {
             this.game.sendAction(new SkipTurnAction(this));
+        } else if(view.getId() == R.id.play_card_button){
+            this.game.sendAction(new PlaceCardAction(this, unoSurface.getCardIndex()));
         }
         /* needs while loop to get card? Help!- alli
         else if (view.getId() == R.id.play_card_button){

@@ -9,14 +9,18 @@ import edu.up.cs301.game.actionMsg.GameAction;
  */
 
 public class PlaceCardAction  extends GameAction {
-    private Card card;
+    private int cardIndex;
 
     public PlaceCardAction(GamePlayer player){
         super(player);
-        //card = newCard;
+
+    }
+    public PlaceCardAction(GamePlayer player, int index){
+        super(player);
+        cardIndex = index;
     }
 
-    public Card getCard() {
-        return card;
+    public int getCardIndex() {
+        return cardIndex;
     }
 }

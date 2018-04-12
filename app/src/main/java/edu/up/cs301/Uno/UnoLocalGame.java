@@ -76,7 +76,7 @@ public class UnoLocalGame extends LocalGame {
             playerID = human.getPlayerID();
         } else if (p instanceof UnoComputerPlayer) {
             UnoComputerPlayer cpuDumb = (UnoComputerPlayer) p;
-            playerID = cpuDumb.getPlayerID()
+            playerID = cpuDumb.getPlayerID();
         }
         if (action instanceof Quit) {
             quit();
@@ -86,7 +86,7 @@ public class UnoLocalGame extends LocalGame {
             return hasUno(playerID);
         } else if (action instanceof PlaceCardAction) {
             PlaceCardAction place = (PlaceCardAction) action;
-            return placeCard(playerID, place.getCard());
+            return placeCard(playerID, place.getCardIndex());
         }
         return false;
     }
@@ -96,11 +96,10 @@ public class UnoLocalGame extends LocalGame {
     * place it onto discard pile and places it
     */
 
-    public boolean placeCard(int playerID, Card toPlace) {
+    public boolean placeCard(int playerID, int cardIndex) {
 
         boolean didPlace = false;
-
-        toPlace = this.currentGameState.getCurrentPlayerHand().get(0);
+        Card toPlace = this.currentGameState.getCurrentPlayerHand().get(cardIndex);
 
         /*if (canMove(playerID)) { //check if the player can make a mover
             Card card = this.currentGameState.getCurrentPlayerHand().get(0);
