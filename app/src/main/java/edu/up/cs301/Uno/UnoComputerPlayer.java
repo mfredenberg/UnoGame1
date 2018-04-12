@@ -12,9 +12,11 @@ import android.util.Log;
  */
 
 public class UnoComputerPlayer extends GameComputerPlayer {
+    private int playerID;
 
     public UnoComputerPlayer(String name) {
         super(name);
+        this.playerID = this.playerNum;
     }
 
     @Override
@@ -43,5 +45,9 @@ public class UnoComputerPlayer extends GameComputerPlayer {
             }
         }
 
+    }
+
+    public int getPlayerID() {
+        return playerID;
     }
 }

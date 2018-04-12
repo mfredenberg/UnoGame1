@@ -31,8 +31,17 @@ public class UnoLocalGame extends LocalGame {
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
-        UnoGameState copy = new UnoGameState(this.currentGameState, this.currentGameState.getTurn());
-        p.sendInfo(copy);
+        if (p instanceof UnoHumanPlayer) {
+            UnoHumanPlayer human = (UnoHumanPlayer) p;
+            UnoGameState copy = new UnoGameState(this.currentGameState, human.getPlayerID());
+            human.sendInfo(copy);
+        } else if (p instanceof UnoComputerPlayer) {
+            UnoComputerPlayer cpuDumb = (UnoComputerPlayer) p;
+            UnoGameState copy = new UnoGameState(this.currentGameState, cpuDumb.getPlayerID());
+            cpuDumb.sendInfo(copy);
+
+        }
+
 
     }
 
@@ -124,7 +133,7 @@ public class UnoLocalGame extends LocalGame {
 
                     //have the next player up draw 4 cards
                     for (int i = 0; i < 4; i++)
-                        drawCard(this.currentGameState.getTurn() + 1);
+                        drawCard(this.currentGameState.getTurn() + 1 % this.currentGameState.getNumPlayers());
 
                     //placecard
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
@@ -204,11 +213,11 @@ public class UnoLocalGame extends LocalGame {
     private boolean drawCard(int playerID) {
         //if (canMove(playerID)) { //make sure it's the players turn
 
-            //take a card from the draw pile and put it on the players hand
-            this.currentGameState.getPlayerHandAt(playerID).add(this.currentGameState.getDrawPile().take());
+        //take a card from the draw pile and put it on the players hand
+        this.currentGameState.getPlayerHandAt(playerID).add(this.currentGameState.getDrawPile().take());
 
-            return true;
-       // }
+        return true;
+        // }
 
     }
 

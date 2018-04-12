@@ -40,6 +40,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button yellowButton;
     private Button blueButton;
     private Button playCardButton;
+    private int playerID;
 
     /*
     *Ctor
@@ -48,6 +49,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     */
     public UnoHumanPlayer(String name) {
         super(name);
+        this.playerID = this.playerNum;
 
 
     }
@@ -66,7 +68,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.hasUnoButton = (Button) activity.findViewById(R.id.hasUnoButton);
         this.unoSurface = (UnoGameView) activity.findViewById(R.id.unoSurface);
         this.playerName = (TextView) activity.findViewById(R.id.playerName);
-         //no longer crashing yeet
+        //no longer crashing yeet
         this.redButton = (Button) activity.findViewById(R.id.red_wild_button);
         this.greenButton = (Button) activity.findViewById(R.id.green_wild_button);
         this.yellowButton = (Button) activity.findViewById(R.id.yellow_wild_button);
@@ -78,7 +80,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.hasUnoButton.setOnClickListener(this);
         this.skipTurnButton.setOnClickListener(this);
         this.unoSurface.setOnTouchListener(this);
-         //no longer crashing booya
+        //no longer crashing booya
         this.playCardButton.setOnClickListener(this);
         this.redButton.setOnClickListener(this);
         this.greenButton.setOnClickListener(this);
@@ -86,7 +88,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.blueButton.setOnClickListener(this);
 
 
-        this.playerName.setText(this.playerName.getText()+ "\n" + this.name);
+        this.playerName.setText(this.playerName.getText() + "\n" + this.name);
     }
 
     @Override
@@ -143,7 +145,6 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         */
 
 
-
         //get which card is pressed
 
         //if discard pile is pressed and the card can be
@@ -177,6 +178,11 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         }
         return true;
 
+    }
+
+
+    public int getPlayerID() {
+        return playerID;
     }
 
 
