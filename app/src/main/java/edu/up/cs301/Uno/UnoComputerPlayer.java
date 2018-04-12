@@ -24,11 +24,8 @@ public class UnoComputerPlayer extends GameComputerPlayer {
         if (info instanceof UnoGameState) {
             UnoGameState gameState = (UnoGameState) info;
             if (gameState.getTurn() == this.playerID ) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+                this.sleep(2000);
 
 
                 if(gameState.getCurrentPlayerHand().get(0).getColor() == gameState.getDiscardPile().getTopCard().getColor()
