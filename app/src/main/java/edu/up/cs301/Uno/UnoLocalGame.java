@@ -60,7 +60,6 @@ public class UnoLocalGame extends LocalGame {
     */
     @Override
     protected boolean makeMove(GameAction action) {
-
         if (action instanceof Quit) {
             quit();
         } else if (action instanceof SkipTurnAction) {

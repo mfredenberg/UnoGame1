@@ -25,7 +25,18 @@ public class UnoGameStateTest {
         state.setNextTurn(1);
         assertEquals(state.getTurn(), 1);
         state.setNextTurn(1);
-        assertEquals(state.getTurn(), 0);
+
+        state.setGameDirection(false);
+        state.setNextTurn(1);
+        assertEquals(state.getTurn(), 3);
+        state.setNextTurn(1);
+        assertEquals(state.getTurn(), 2);
+        state.setNextTurn(1);
+        assertEquals(state.getTurn(), 1);
+
+
+
+
     }
 
     @Test

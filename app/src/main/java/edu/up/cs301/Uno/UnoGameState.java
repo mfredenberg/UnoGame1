@@ -35,6 +35,7 @@ public class UnoGameState extends GameState {
     // color of the center card
     private Color currentColor;
 
+
     //game direction
     private boolean gameDirection; //true = clockwise; false = counterclockwise
 
@@ -91,7 +92,7 @@ public class UnoGameState extends GameState {
         }
 
         // telling the game state whose turn it is
-        this.turn = playerID;
+        this.turn = masterGameState.getTurn();
 
         // copying decks
         this.drawPile = new Deck(masterGameState.getDrawPile());
@@ -171,17 +172,15 @@ public class UnoGameState extends GameState {
     }
 
     public void setNextTurn(int numTurns) {
-
-        if (this.turn == 0) {
-            this.turn = 1;
-        } else
-            this.turn = 0;
-
-//
-//            if (this.gameDirection)
-//                this.turn = (this.turn + numTurns % this.playerHands.size());
-//            else
-//                this.turn = (this.turn - numTurns % this.playerHands.size());
+        if (this.gameDirection)
+            this.turn = (this.turn + numTurns) % this.playerHands.size();
+        else
+            this.turn = (((this.turn - numTurns) % this.playerHands.size() + this.playerHands.size())
+                    % this.playerHands.size());
+        /*
+        https://stackoverflow.com/questions/5385024/mod-in-java-produces-negative-numbers
+        CITE THIS!!!!!!
+         */
 
     }
 
@@ -226,11 +225,13 @@ public class UnoGameState extends GameState {
         this.hasUno.set(playerID, this.getPlayerHandAt(playerID).size() == 1);
     }
 
-    public void setGameDirection (boolean dir) {
+    public void setGameDirection(boolean dir) {
         gameDirection = dir;
     }
 
-    public boolean getGameDirection() {return gameDirection;}
+    public boolean getGameDirection() {
+        return gameDirection;
+    }
 
 }
 
