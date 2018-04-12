@@ -76,7 +76,7 @@ public class UnoGameView extends SurfaceView {
 
                 if (i < 9) {
                     drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul));
-                    width += 200;
+                    width += 195;
                 } else if (i < 15) {
                     drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul));
                     width += 195;
