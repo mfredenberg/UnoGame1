@@ -222,6 +222,7 @@ public class UnoGameView extends SurfaceView {
 
     }
 
+    //syncs all three ArrayLists so the index's are aligned
     public void setHand(ArrayList<Card> hand) {
         this.handtoDraw = hand;
         this.isSelected.clear();
@@ -248,6 +249,7 @@ public class UnoGameView extends SurfaceView {
         this.topCard = topCard;
     }
 
+    public Card getTopCard(){ return this.topCard; }
     public ArrayList<Card> getHumanplayerHand() {
         return this.handtoDraw;
 
