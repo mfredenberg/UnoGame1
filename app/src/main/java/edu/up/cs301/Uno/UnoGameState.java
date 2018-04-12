@@ -226,6 +226,11 @@ public class UnoGameState extends GameState {
         this.hasUno.set(playerID, this.getPlayerHandAt(playerID).size() == 1);
     }
 
+    public void setGameDirection (boolean dir) {
+        gameDirection = dir;
+    }
+
+    public boolean getGameDirection() {return gameDirection;}
 
 }
 
