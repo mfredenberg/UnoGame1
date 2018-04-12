@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import edu.up.cs301.Uno.actionMsg.ColorAction;
 import edu.up.cs301.Uno.actionMsg.HasUnoAction;
 import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
 import edu.up.cs301.Uno.actionMsg.Quit;
@@ -128,6 +129,19 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         } else if (view.getId() == R.id.skipTurnButton) {
             this.game.sendAction(new SkipTurnAction(this));
         }
+        /* needs while loop to get card? Help!- alli
+        else if (view.getId() == R.id.play_card_button){
+            this.game.sendAction(new placeCardAction(this));
+        }
+            //needs to be addressed in make move and local game
+        else if(view.getId() == R.id.red_wild_button || view.getId()
+                == R.id.green_wild_button || view.getId()
+                == R.id.yellow_wild_button || view.getId()
+                == R.id.blue_wild_button){
+            this.game.sendAction(new ColorAction(this));
+        }
+        */
+
 
 
         //get which card is pressed
