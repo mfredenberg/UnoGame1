@@ -61,25 +61,25 @@ public class UnoGameView extends SurfaceView {
         if (this.handtoDraw != null) {
             double heightMul = .5;
             drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 700);
-            width = 20;
+            width = 0;
             for (int i = 0; i < this.handtoDraw.size(); i++) {
-                if (i == 6) {
-                    width = 20;
+                if (i == 9) {
+                    width = 0;
                     heightMul = .7;
                 }
                 if (this.isSelected.get(i)) {
                     drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul - 30));
-                    width += 300;
+                    width += 195;
                     continue;
                 }
 
 
-                if (i < 6) {
+                if (i < 9) {
                     drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul));
-                    width += 300;
-                } else if (i < 12) {
+                    width += 195;
+                } else if (i < 15) {
                     drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul));
-                    width += 300;
+                    width += 195;
                 }
             }
 
@@ -226,18 +226,18 @@ public class UnoGameView extends SurfaceView {
         this.handtoDraw = hand;
         this.isSelected.clear();
         this.handToSelect.clear();
-        width = 20;
+        width = 0;
         for (int i = 0; i < this.handtoDraw.size(); i++) {
             this.isSelected.add(i, false);
-            if (i == 6) width = 20;
-            if (i < 6) {
+            if (i == 9) width = 0;
+            if (i < 9) {
                 this.handToSelect.add(new RectF(width, (int) (getHeight() * .5), width + CARD_WIDTH, (int) (getHeight() * .5)
                         + CARD_HEIGHT));
-                width += 300;
-            } else if (i < 12) {
+                width += 195;
+            } else if (i < 15) {
                 this.handToSelect.add(new RectF(width, (int) (getHeight() * .7), width + CARD_WIDTH, (int) (getHeight() * .7)
                         + CARD_HEIGHT));
-                width += 300;
+                width += 195;
             }
 
         }

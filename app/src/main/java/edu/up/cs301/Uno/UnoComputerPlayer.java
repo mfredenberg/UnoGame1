@@ -26,16 +26,22 @@ public class UnoComputerPlayer extends GameComputerPlayer {
             if (gameState.getTurn() == this.playerID ) {
 
                 this.sleep(2000);
+                int i;
+                for(i = 0; i < gameState.getCurrentPlayerHand().size(); i++){
+                    if(gameState.getCurrentPlayerHand().get(i).getColor() == gameState.getDiscardPile().getTopCard().getColor()
+                            || gameState.getCurrentPlayerHand().get(0).getType() == gameState.getDiscardPile().getTopCard().getType()) {
 
-
-                if(gameState.getCurrentPlayerHand().get(0).getColor() == gameState.getDiscardPile().getTopCard().getColor()
-                        || gameState.getCurrentPlayerHand().get(0).getType() == gameState.getDiscardPile().getTopCard().getType()) {
-
-                    Log.i("Computer Player: ","Computer Placed the Card: " + gameState.getCurrentPlayerHand().get(0).getColor()
+                        Log.i("Computer Player: ","Computer Placed the Card: " + gameState.getCurrentPlayerHand().get(0).getColor()
                                 + gameState.getCurrentPlayerHand().get(0).getType() + "----------------------------------------------------------//");
 
-                    this.game.sendAction(new PlaceCardAction(this));
-                } else
+                        this.game.sendAction(new PlaceCardAction(this, i));
+                        i = gameState.getCurrentPlayerHand().size() + 1;
+
+                }
+
+                }
+
+                if(i != gameState.getCurrentPlayerHand().size() + 1)
                     this.game.sendAction(new SkipTurnAction(this));
 
 
