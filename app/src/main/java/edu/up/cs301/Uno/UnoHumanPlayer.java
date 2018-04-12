@@ -119,29 +119,15 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         } else if (view.getId() == R.id.skipTurnButton) {
             this.game.sendAction(new SkipTurnAction(this));
         } else if(view.getId() == R.id.play_card_button){
-            this.game.sendAction(new PlaceCardAction(this, unoSurface.getCardIndex()));
+            this.game.sendAction(new PlaceCardAction(this,
+                    unoSurface.getCardIndex()));
         }
-        /* needs while loop to get card? Help!- alli
-        else if (view.getId() == R.id.play_card_button){
-            this.game.sendAction(new placeCardAction(this));
-        }
-            //needs to be addressed in make move and local game
-        else if(view.getId() == R.id.red_wild_button || view.getId()
-                == R.id.green_wild_button || view.getId()
-                == R.id.yellow_wild_button || view.getId()
-                == R.id.blue_wild_button){
-            this.game.sendAction(new ColorAction(this));
-        }
-        */
-
-
         //get which card is pressed
 
         //if discard pile is pressed and the card can be
         //placed, then place card and move on to next player
 
         //if skip button is pressed, move turn to next player
-
     }
 
     /*
