@@ -34,6 +34,11 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button skipTurnButton;
     private UnoGameView unoSurface;
     private TextView playerName;
+    private Button redButton;
+    private Button greenButton;
+    private Button yellowButton;
+    private Button blueButton;
+    private Button playCardButton;
 
     /*
     *Ctor
@@ -60,14 +65,27 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.hasUnoButton = (Button) activity.findViewById(R.id.hasUnoButton);
         this.unoSurface = (UnoGameView) activity.findViewById(R.id.unoSurface);
         this.playerName = (TextView) activity.findViewById(R.id.playerName);
+         //no longer crashing yeet
+        this.redButton = (Button) activity.findViewById(R.id.red_wild_button);
+        this.greenButton = (Button) activity.findViewById(R.id.green_wild_button);
+        this.yellowButton = (Button) activity.findViewById(R.id.yellow_wild_button);
+        this.blueButton = (Button) activity.findViewById(R.id.blue_wild_button);
+        this.playCardButton = (Button) activity.findViewById(R.id.play_card_button);
+
 
         this.quitButton.setOnClickListener(this);
         this.hasUnoButton.setOnClickListener(this);
         this.skipTurnButton.setOnClickListener(this);
         this.unoSurface.setOnTouchListener(this);
-        this.playerName.setText(this.playerName.getText() + "\n" + this.name);
+         //no longer crashing booya
+        this.playCardButton.setOnClickListener(this);
+        this.redButton.setOnClickListener(this);
+        this.greenButton.setOnClickListener(this);
+        this.yellowButton.setOnClickListener(this);
+        this.blueButton.setOnClickListener(this);
 
 
+        this.playerName.setText(this.playerName.getText()+ "\n" + this.name);
     }
 
     @Override

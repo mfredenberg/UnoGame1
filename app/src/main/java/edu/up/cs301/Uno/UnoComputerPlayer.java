@@ -4,6 +4,7 @@ import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
 import edu.up.cs301.Uno.actionMsg.SkipTurnAction;
 import edu.up.cs301.game.GameComputerPlayer;
 import edu.up.cs301.game.infoMsg.GameInfo;
+import android.util.Log;
 
 
 /**
@@ -28,7 +29,15 @@ public class UnoComputerPlayer extends GameComputerPlayer {
                 }
 
 
-                this.game.sendAction(new PlaceCardAction(this));
+                if(gameState.getCurrentPlayerHand().get(0).getColor() == gameState.getDiscardPile().getTopCard().getColor()
+                        || gameState.getCurrentPlayerHand().get(0).getType() == gameState.getDiscardPile().getTopCard().getType()) {
+
+                    Log.i("Computer Player: ","Computer Placed the Card: " + gameState.getCurrentPlayerHand().get(0).getColor()
+                                + gameState.getCurrentPlayerHand().get(0).getType() + "----------------------------------------------------------//");
+
+                    this.game.sendAction(new PlaceCardAction(this));
+                } else
+                    this.game.sendAction(new SkipTurnAction(this));
 
 
             }
