@@ -77,6 +77,15 @@ public class UnoGameState extends GameState {
         //moving the top card from drawPile to discardPile
         this.discardPile.put(drawPile.take());
 
+        if(this.discardPile.getTopCard().getType() == Type.WILD ||
+                this.discardPile.getTopCard().getType() == Type.WILDDRAW4)
+        {
+            this.discardPile.put(this.drawPile.take());
+        }
+
+        this.setCurrentColor(this.discardPile.getTopCard().getColor());
+
+
     }
 
     /*

@@ -103,22 +103,13 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
-            if (state.getTurn() == 0) {
-                this.unoSurface.setHand(state.getPlayerHandAt(0));
-                this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
-                this.unoSurface.invalidate();
-            } else if (state.getTurn() == 1) {
-                ArrayList<Card> humanHand = this.unoSurface.getHumanplayerHand();
-                if (state.getPlayerHandSize(0) < humanHand.size())
-                    humanHand.remove(0);
-                this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
-                this.unoSurface.invalidate();
+            this.unoSurface.setHand(state.getPlayerHandAt(this.playerID));
+            this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
+            this.unoSurface.invalidate();
 
-            }
         }
-
-
     }
+
 
     /*
     * method listens to the users button clicks and responds accordingly
