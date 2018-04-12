@@ -82,6 +82,8 @@ public class UnoLocalGame extends LocalGame {
 
         boolean didPlace = false;
 
+        toPlace = this.currentGameState.getCurrentPlayerHand().get(0);
+
         /*if (canMove(playerID)) { //check if the player can make a mover
             Card card = this.currentGameState.getCurrentPlayerHand().get(0);
 
@@ -220,7 +222,7 @@ public class UnoLocalGame extends LocalGame {
         if (draw) { //if card is drawable
 
             //make it the next turn
-            this.currentGameState.setNextTurn(1);
+            this.currentGameState.setNextTurn(this.currentGameState.getTurn() + 1);
 
             return true;
         }
