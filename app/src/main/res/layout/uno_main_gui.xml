@@ -94,27 +94,20 @@
         android:background="@color/grey"
         android:orientation="horizontal">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/play_card_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/play_card_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="0"
-                android:background="@android:color/holo_purple"
-                android:padding="5dp"
-                android:text="Play Card"
-                android:textColor="@android:color/white"
-                android:textSize="30sp" />
-        </LinearLayout>
+            android:background="@android:color/holo_purple"
+            android:padding="5dp"
+            android:text="Play Card"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/red_wild_button"
