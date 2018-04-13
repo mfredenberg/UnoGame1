@@ -141,17 +141,11 @@ public class UnoGameState extends GameState {
         return turn;
     }
 
-    public void setNextTurn(int numTurns) {
-        if (this.gameDirection)
-            this.turn = (this.turn + numTurns) % this.playerHands.size();
-        else
-            this.turn = (((this.turn - numTurns) % this.playerHands.size() + this.playerHands.size())
-                    % this.playerHands.size());
-        /*
-        https://stackoverflow.com/questions/5385024/mod-in-java-produces-negative-numbers
-        CITE THIS!!!!!!
-         */
 
+
+    public void setTurn(int turn)
+    {
+        this.turn = turn;
     }
 
     public Deck getDiscardPile() {

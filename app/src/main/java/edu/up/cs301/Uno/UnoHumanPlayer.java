@@ -40,6 +40,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button yellowButton;
     private Button blueButton;
     private Button playCardButton;
+    private ArrayList<Integer> oppHands = new ArrayList<Integer>();
 
     /*
     *Ctor
@@ -100,6 +101,13 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
+            this.oppHands.clear();
+            for(int i = 0; i < state.getNumPlayers(); i++)
+            {
+                if(i == this.playerNum) continue;
+                this.oppHands.add(state.getPlayerHandSize(i));
+            }
+            this.unoSurface.setDrawCpuHand(this.oppHands);
             this.unoSurface.setHand(state.getPlayerHandAt(this.playerNum));
             this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
             if(this.unoSurface.getTopCard().getType() == Type.WILD ||
