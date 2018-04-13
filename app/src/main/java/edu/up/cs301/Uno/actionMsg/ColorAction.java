@@ -1,5 +1,7 @@
 package edu.up.cs301.Uno.actionMsg;
 
+
+import edu.up.cs301.Uno.Color;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.actionMsg.GameAction;
 
@@ -13,7 +15,12 @@ public class ColorAction extends GameAction {
      *
      * @param player the player who created the action
      */
-    public ColorAction(GamePlayer player) {
+    private Color wildColor;
+    public ColorAction(GamePlayer player, Color color) {
+
         super(player);
+        wildColor = color;
     }
+
+    public Color getWildColor() {return wildColor;}
 }

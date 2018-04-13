@@ -134,6 +134,18 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         } else if(view.getId() == R.id.play_card_button){
             this.game.sendAction(new PlaceCardAction(this,
                     unoSurface.getCardIndex()));
+        } else if(view.getId()== R.id.red_wild_button){
+            this.game.sendAction(new ColorAction(this,
+                    edu.up.cs301.Uno.Color.RED));
+        } else if(view.getId()== R.id.green_wild_button){
+            this.game.sendAction(new ColorAction(this,
+                    edu.up.cs301.Uno.Color.GREEN));
+        } else if(view.getId()== R.id.yellow_wild_button){
+            this.game.sendAction(new ColorAction(this,
+                    edu.up.cs301.Uno.Color.YELLOW));
+        } else if(view.getId()== R.id.blue_wild_button){
+            this.game.sendAction(new ColorAction(this,
+                    edu.up.cs301.Uno.Color.BLUE));
         }
         //get which card is pressed
 
