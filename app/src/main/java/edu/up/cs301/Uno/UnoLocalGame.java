@@ -107,22 +107,6 @@ public class UnoLocalGame extends LocalGame {
         boolean didPlace = false;
         Card toPlace = this.currentGameState.getCurrentPlayerHand().get(cardIndex);
 
-        /*if (canMove(playerID)) { //check if the player can make a mover
-            Card card = this.currentGameState.getCurrentPlayerHand().get(0);
-
-            //place card on top of discard pile, and make it the next players turn
-
-                this.currentGameState.getCurrentPlayerHand().remove(0);
-                this.currentGameState.getDiscardPile().put(card);
-                this.currentGameState.setCurrentColor(card.getColor());
-                this.currentGameState.setNextTurn(1);
-                didPlace = true;
-
-
-            //say that the placement happened
-
-        }*/
-
         if (canMove(playerID)) { //check if the player can make a mover
 
             //Check if selected card is a wild card ------------------------------------------------------\\
