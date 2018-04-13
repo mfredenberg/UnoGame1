@@ -266,6 +266,11 @@ public class UnoGameView extends SurfaceView {
     }
 
     public void selectCard(int index) {
+        if(isSelected.get(index))
+        {
+            isSelected.set(index,false);
+            return;
+        }
         for (int i = 0; i < isSelected.size(); i++) isSelected.set(i, false);
         isSelected.set(index, true);
     }
