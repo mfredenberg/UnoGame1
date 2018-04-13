@@ -90,9 +90,9 @@ public class UnoLocalGame extends LocalGame {
         } else if (action instanceof PlaceCardAction) {
             PlaceCardAction place = (PlaceCardAction) action;
             return placeCard(playerID, place.getCardIndex());
-        } else if (action instanceof ColorAction){
+        } else if (action instanceof ColorAction) {
             ColorAction color = (ColorAction) action;
-            return changeColor(color.getWildColor());
+            return changeColor(playerID, color.getWildColor());
         }
         return false;
     }
@@ -136,7 +136,7 @@ public class UnoLocalGame extends LocalGame {
                     //placethecard
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.setTurn(getNextTurn(1));
+
 
                     didPlace = true;
 
@@ -147,13 +147,15 @@ public class UnoLocalGame extends LocalGame {
 
 
                     //have the next player up draw 4 cards
-                    for (int i = 0; i < 4; i++)
-                        drawCard(this.currentGameState.getTurn() + 1 % this.currentGameState.getNumPlayers());
 
                     //placecard
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.setTurn(getNextTurn(1));
+                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+
 
                     didPlace = true;
                 }
@@ -269,20 +271,31 @@ public class UnoLocalGame extends LocalGame {
     }
 
     public int getNextTurn(int numTurns) {
-        if (this.currentGameState.getGameDirection())
-            return (this.currentGameState.getTurn() + numTurns) % this.currentGameState.getNumPlayers();
-        else
-            return (((this.currentGameState.getTurn() - numTurns) % this.currentGameState.getNumPlayers() + this.currentGameState.getNumPlayers())
-                    % this.currentGameState.getNumPlayers());
-        /*
-        https://stackoverflow.com/questions/5385024/mod-in-java-produces-negative-numbers
-        CITE THIS!!!!!!
-         */
+        int turn = this.currentGameState.getTurn();
+        while (numTurns != 0)
+        {
+            if(this.currentGameState.getGameDirection())
+            {
+                turn+=1;
+                if(turn == this.currentGameState.getNumPlayers()) turn = 0;
+            }
+            else {
+                turn-=1;
+                if(turn == -1) turn = this.currentGameState.getNumPlayers()-1;
+            }
+            numTurns--;
+        }
+        return turn;
+
 
     }
 
-    public boolean changeColor( Color colorChange){
-        currentGameState.setCurrentColor(colorChange);
-        return true;
+    public boolean changeColor(int playerID,Color colorChange) {
+        if(canMove(playerID)) {
+            currentGameState.setCurrentColor(colorChange);
+            this.currentGameState.setTurn(getNextTurn(1));
+            return true;
+        }
+       return false;
     }
 }
