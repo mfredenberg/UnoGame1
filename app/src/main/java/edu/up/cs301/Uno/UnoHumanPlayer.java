@@ -139,17 +139,12 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
         int index;
-        if (view.getId() == R.id.unoSurface) {
+        if (view.getId() == R.id.unoSurface && motionEvent.getAction() == motionEvent.ACTION_DOWN) {
 
             index = unoSurface.checkSelectedCard((int) motionEvent.getX(), (int) motionEvent.getY());
             if (index != -1) {
                 this.unoSurface.invalidate();
             }
-            //if the motion of the user is a down press, then place a card
-//            switch (motionEvent.getAction()) {
-//                case MotionEvent.ACTION_DOWN:
-            //this.game.sendAction(new PlaceCardAction(this));
-            //return true;
 
         }
         return true;
