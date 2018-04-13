@@ -18,6 +18,7 @@ public class UnoMainActivity extends GameMainActivity {
 
     // the port number that this game will use when playing over the network
     private static final int PORT_NUMBER = 4498;
+    private int numPlayers;
 
 
     // copied from pig lab
@@ -43,6 +44,7 @@ public class UnoMainActivity extends GameMainActivity {
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
+        this.numPlayers = defaultConfig.getNumTypes();
         return defaultConfig;
 
 
@@ -50,16 +52,7 @@ public class UnoMainActivity extends GameMainActivity {
 
     @Override
     public LocalGame createLocalGame() {
-        return new UnoLocalGame();
+        return new UnoLocalGame(this.numPlayers);
     }
 
-//    //copied Vegdahl's format
-//    private void initWidgets() {
-//        //quit button
-//        Button qButton = (Button) findViewById(quitButton);
-//        //has uno button
-//        Button huButton = (Button) findViewById(hasUnoButton);
-//        //skip button
-//        Button sButton = (Button) findViewById(skipTurnButton);
-//    }
 }

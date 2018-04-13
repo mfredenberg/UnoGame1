@@ -22,8 +22,8 @@ public class UnoLocalGame extends LocalGame {
     /*
     *Ctor called at begining of game that initializes the game state to a new game
      */
-    public UnoLocalGame() {
-        this.currentGameState = new UnoGameState(this.players.length);
+    public UnoLocalGame(int numPlayers) {
+        this.currentGameState = new UnoGameState(numPlayers);
     }
 
     /*

@@ -51,14 +51,12 @@ public class UnoGameState extends GameState {
         // creating array of hands and makeing the decks
         this.playerHands = new ArrayList<ArrayList<Card>>();
         this.hasUno = new ArrayList<Boolean>();
-        this.hasUno.add(false);
-        this.hasUno.add(false);
         this.drawPile = new Deck();
         this.discardPile = new Deck();
         this.drawPile.add108();
-
         for (int i = 0; i < numPlayers; i++) {
             this.playerHands.add(new ArrayList<Card>());
+            this.hasUno.add(false);
             for (int j = 0; j < 7; j++) {
                 this.playerHands.get(i).add(this.drawPile.take());
 
