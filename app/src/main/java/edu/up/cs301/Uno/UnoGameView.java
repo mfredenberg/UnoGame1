@@ -111,7 +111,8 @@ public class UnoGameView extends SurfaceView {
 
 
     public void initHash() {
-        //red cards
+
+        //red cards----------------------------------------------------------------------\\
         Bitmap redZero = BitmapFactory.decodeResource(getResources(), R.drawable.red_zero);
         this.cardPics.put("" + Color.RED + Type.ZERO, redZero);
         Bitmap redOne = BitmapFactory.decodeResource(getResources(), R.drawable.red_one);
@@ -138,7 +139,8 @@ public class UnoGameView extends SurfaceView {
         this.cardPics.put("" + Color.RED + Type.PLUS2, redDraw2);
         Bitmap redRev = BitmapFactory.decodeResource(getResources(), R.drawable.red_reverse);
         this.cardPics.put("" + Color.RED + Type.REVERSE, redRev);
-        //yellow cards
+
+        //yellow cards----------------------------------------------------------------------\\
         Bitmap yellowZero = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_zero);
         this.cardPics.put("" + Color.YELLOW + Type.ZERO, yellowZero);
         Bitmap yellowOne = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_one);
@@ -165,7 +167,8 @@ public class UnoGameView extends SurfaceView {
         this.cardPics.put("" + Color.YELLOW + Type.PLUS2, yellowDraw2);
         Bitmap yellowRev = BitmapFactory.decodeResource(getResources(), R.drawable.yellow_reverse);
         this.cardPics.put("" + Color.YELLOW + Type.REVERSE, yellowRev);
-        //green cards
+
+        //green cards----------------------------------------------------------------------\\
         Bitmap greenZero = BitmapFactory.decodeResource(getResources(), R.drawable.green_zero);
         this.cardPics.put("" + Color.GREEN + Type.ZERO, greenZero);
         Bitmap greenOne = BitmapFactory.decodeResource(getResources(), R.drawable.green_one);
@@ -192,7 +195,8 @@ public class UnoGameView extends SurfaceView {
         this.cardPics.put("" + Color.GREEN + Type.PLUS2, greenDraw2);
         Bitmap greenRev = BitmapFactory.decodeResource(getResources(), R.drawable.green_reverse);
         this.cardPics.put("" + Color.GREEN + Type.REVERSE, greenRev);
-        //blue cards
+
+        //blue cards----------------------------------------------------------------------\\
         Bitmap blueZero = BitmapFactory.decodeResource(getResources(), R.drawable.blue_zero);
         this.cardPics.put("" + Color.BLUE + Type.ZERO, blueZero);
         Bitmap blueOne = BitmapFactory.decodeResource(getResources(), R.drawable.blue_one);
