@@ -72,7 +72,6 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.blueButton = (Button) activity.findViewById(R.id.blue_wild_button);
         this.playCardButton = (Button) activity.findViewById(R.id.play_card_button);
 
-
         this.quitButton.setOnClickListener(this);
         this.hasUnoButton.setOnClickListener(this);
         this.skipTurnButton.setOnClickListener(this);
@@ -136,8 +135,6 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.game.sendAction(new PlaceCardAction(this,
                         unoSurface.getCardIndex()));
             }
-            this.game.sendAction(new PlaceCardAction(this,
-                    unoSurface.getCardIndex()));
         } else if(view.getId()== R.id.red_wild_button){
             this.game.sendAction(new ColorAction(this,
                     edu.up.cs301.Uno.Color.RED));
