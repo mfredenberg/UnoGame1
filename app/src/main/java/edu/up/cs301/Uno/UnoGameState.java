@@ -130,43 +130,6 @@ public class UnoGameState extends GameState {
 
     }
 
-    /*
-    * method converts all variables into strings
-    */
-    //@Override
-//    public String toString() {
-//        String str = "# cards in draw pile: " + drawPile.getDeckSize();
-//        str += "\n";
-//
-//        str += "Player1 #cards: " + this.playerHands.get(0).size();
-//        str += "\n";
-//
-//        str += "Player2 #cards: " + this.playerHands.get(1).size();
-//        str += "\n";
-//
-//
-//        str += "current player: " + this.turn;
-//        str += "\n";
-//        str += "card Val: ";
-//        for (Card card : this.playerHands.get(this.turn)) {
-//            str += " " + card.getType() + " " + card.getColor();
-//        }
-//        str += "\n";
-//
-//        str += "Top card in discard pile: " + this.getDiscardPile().take().getType() + " " + this.getDiscardPile().take().getColor();
-//        str += "\n";
-//        str += "Game direction: " + this.gameDirection;
-//        str += "\n";
-//        str += "Current color: " + this.currentColor;
-//
-//        str += "\n";
-//        str += "\n";
-//        str += "\n";
-//
-//
-//        return str;
-//    }
-
 
     //getters and setters
 
