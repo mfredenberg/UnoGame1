@@ -60,7 +60,7 @@ public class UnoLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         if (this.currentGameState.getCurrentPlayerHand().size() == 0) {
-            return "Player " + this.currentGameState.getTurn() + " has won";
+            return "Player " + this.currentGameState.getTurn() + 1 + " has won";
         }
         return null;
     }
@@ -89,6 +89,15 @@ public class UnoLocalGame extends LocalGame {
             return hasUno(playerID);
         } else if (action instanceof PlaceCardAction) {
             PlaceCardAction place = (PlaceCardAction) action;
+            if (p instanceof UnoComputerPlayer &&
+                    (this.currentGameState.getPlayerHandAt(playerID).get(place.getCardIndex()).getType() == Type.WILD
+                            || this.currentGameState.getPlayerHandAt(playerID).get(place.getCardIndex()).getType()
+                            == Type.WILDDRAW4)) {
+                this.currentGameState.setTurn(getNextTurn(1));
+                // pretend cpu player is the next player so it can play
+                playerID = getNextTurn(1);
+
+            }
             return placeCard(playerID, place.getCardIndex());
         } else if (action instanceof ColorAction) {
             ColorAction color = (ColorAction) action;
@@ -177,7 +186,10 @@ public class UnoLocalGame extends LocalGame {
                     //place card
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.setTurn(getNextTurn(1));
+                    if (this.currentGameState.getNumPlayers() == 2)
+                        this.currentGameState.setTurn(getNextTurn(2));
+                    else
+                        this.currentGameState.setTurn(getNextTurn(1));
 
                     didPlace = true;
 
@@ -188,10 +200,8 @@ public class UnoLocalGame extends LocalGame {
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
                     this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
                     this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+                    this.currentGameState.setTurn(getNextTurn(1));
 
-                    //next player draws 2 cards
-                    for (int i = 0; i < 2; i++)
-                        drawCard(this.currentGameState.getTurn() + 1);
 
                     didPlace = true;
 
@@ -256,16 +266,13 @@ public class UnoLocalGame extends LocalGame {
 
     public int getNextTurn(int numTurns) {
         int turn = this.currentGameState.getTurn();
-        while (numTurns != 0)
-        {
-            if(this.currentGameState.getGameDirection())
-            {
-                turn+=1;
-                if(turn == this.currentGameState.getNumPlayers()) turn = 0;
-            }
-            else {
-                turn-=1;
-                if(turn == -1) turn = this.currentGameState.getNumPlayers()-1;
+        while (numTurns != 0) {
+            if (this.currentGameState.getGameDirection()) {
+                turn += 1;
+                if (turn == this.currentGameState.getNumPlayers()) turn = 0;
+            } else {
+                turn -= 1;
+                if (turn < 0) turn = this.currentGameState.getNumPlayers() - 1;
             }
             numTurns--;
         }
@@ -274,12 +281,12 @@ public class UnoLocalGame extends LocalGame {
 
     }
 
-    public boolean changeColor(int playerID,Color colorChange) {
-        if(canMove(playerID)) {
+    public boolean changeColor(int playerID, Color colorChange) {
+        if (canMove(playerID)) {
             currentGameState.setCurrentColor(colorChange);
             this.currentGameState.setTurn(getNextTurn(1));
             return true;
         }
-       return false;
+        return false;
     }
 }
