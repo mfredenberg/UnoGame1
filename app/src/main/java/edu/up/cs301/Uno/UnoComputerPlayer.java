@@ -29,13 +29,15 @@ public class UnoComputerPlayer extends GameComputerPlayer {
                 int i;
                 //loops through computer player's hand
                 for(i = 0; i < gameState.getCurrentPlayerHand().size(); i++){
-                    if(gameState.getCurrentPlayerHand().get(i).getColor() == gameState.getDiscardPile().getTopCard().getColor()
+                    if(gameState.getCurrentPlayerHand().get(i).getColor() == gameState.getCurrentColor()
                             || gameState.getCurrentPlayerHand().get(0).getType() == gameState.getDiscardPile().getTopCard().getType()) {
                 //plays first card that matches the top card of discard
                         Log.i("Computer Player: ","Computer Placed the Card: " + gameState.getCurrentPlayerHand().get(0).getColor()
                                 + gameState.getCurrentPlayerHand().get(0).getType() + "----------------------------------------------------------//");
-
                         this.game.sendAction(new PlaceCardAction(this, i));
+                        if (gameState.getCurrentPlayerHand().get(i).getType() == Type.WILD
+                                || gameState.getCurrentPlayerHand().get(i).getType() == Type.WILDDRAW4)
+                            gameState.setCurrentColor(Color.RED);
                         //force ends loop
                         i = gameState.getCurrentPlayerHand().size() + 1;
 

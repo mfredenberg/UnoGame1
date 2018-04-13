@@ -89,6 +89,9 @@ public class UnoLocalGame extends LocalGame {
         } else if (action instanceof PlaceCardAction) {
             PlaceCardAction place = (PlaceCardAction) action;
             return placeCard(playerID, place.getCardIndex());
+        } else if (action instanceof ColorAction){
+            ColorAction color = (ColorAction) action;
+            return changeColor(color.getWildColor());
         }
         return false;
     }
@@ -157,7 +160,7 @@ public class UnoLocalGame extends LocalGame {
 
             //Check if selected card is not a wild card but valid------------------------------------------------------\\
             if (toPlace.getType() == currentGameState.getDiscardPile().getCardAt(0).getType()
-                    || toPlace.getColor() == currentGameState.getDiscardPile().getCardAt(0).getColor()) {
+                    || toPlace.getColor() == currentGameState.getCurrentColor()) {
 
                 if (toPlace.getType() == Type.ZERO || toPlace.getType() == Type.ONE ||
                         toPlace.getType() == Type.TWO || toPlace.getType() == Type.THREE ||
@@ -199,10 +202,14 @@ public class UnoLocalGame extends LocalGame {
                     this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
                     this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
 
+                    //next player draws 2 cards
+                    for (int i = 0; i < 2; i++)
+                        drawCard(this.currentGameState.getTurn() + 1);
 
                     didPlace = true;
 
                 }
+                currentGameState.setCurrentColor(currentGameState.getDiscardPile().getTopCard().getColor());
             }
         }
         return didPlace;  //double check this!  -- Nux
@@ -271,5 +278,10 @@ public class UnoLocalGame extends LocalGame {
         CITE THIS!!!!!!
          */
 
+    }
+
+    public boolean changeColor( Color colorChange){
+        currentGameState.setCurrentColor(colorChange);
+        return true;
     }
 }
