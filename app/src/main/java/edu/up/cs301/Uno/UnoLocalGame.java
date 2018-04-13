@@ -92,7 +92,7 @@ public class UnoLocalGame extends LocalGame {
             return placeCard(playerID, place.getCardIndex());
         } else if (action instanceof ColorAction){
             ColorAction color = (ColorAction) action;
-            changeColor(color.getWildColor());
+            return changeColor(color.getWildColor());
         }
         return false;
     }
@@ -161,7 +161,7 @@ public class UnoLocalGame extends LocalGame {
 
             //Check if selected card is not a wild card but valid------------------------------------------------------\\
             if (toPlace.getType() == currentGameState.getDiscardPile().getCardAt(0).getType()
-                    || toPlace.getColor() == currentGameState.getDiscardPile().getCardAt(0).getColor()) {
+                    || toPlace.getColor() == currentGameState.getCurrentColor()) {
 
                 if (toPlace.getType() == Type.ZERO || toPlace.getType() == Type.ONE ||
                         toPlace.getType() == Type.TWO || toPlace.getType() == Type.THREE ||
@@ -273,8 +273,8 @@ public class UnoLocalGame extends LocalGame {
         return currentGameState;
     }
 
-    public Color changeColor( Color colorChange){
+    public boolean changeColor( Color colorChange){
         currentGameState.setCurrentColor(colorChange);
-        return colorChange;
+        return true;
     }
 }
