@@ -216,6 +216,7 @@ public class UnoLocalGame extends LocalGame {
                     didPlace = true;
 
                 }
+                currentGameState.setCurrentColor(currentGameState.getDiscardPile().getTopCard().getColor());
             }
         }
         return didPlace;  //double check this!  -- Nux
