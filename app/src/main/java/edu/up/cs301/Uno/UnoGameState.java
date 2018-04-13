@@ -47,7 +47,7 @@ public class UnoGameState extends GameState {
     /*
     * regular constructor
     */
-    public UnoGameState() {
+    public UnoGameState(int numPlayers) {
         // creating array of hands and makeing the decks
         this.playerHands = new ArrayList<ArrayList<Card>>();
         this.hasUno = new ArrayList<Boolean>();
@@ -57,16 +57,17 @@ public class UnoGameState extends GameState {
         this.discardPile = new Deck();
         this.drawPile.add108();
 
-        //adds two players
-        this.playerHands.add(new ArrayList<Card>());
-        this.playerHands.add(new ArrayList<Card>());
+        for (int i = 0; i < numPlayers; i++) {
+            this.playerHands.add(new ArrayList<Card>());
+            for (int j = 0; j < 7; j++) {
+                this.playerHands.get(i).add(this.drawPile.take());
+
+            }
+        }
 
 
         // adding 7 cards to each player
-        for (int i = 0; i < 7; i++) {
-            this.playerHands.get(0).add(this.drawPile.take());
-            this.playerHands.get(1).add(this.drawPile.take());
-        }
+
 
         //setting all of the integer-based info
         this.turn = 0;
@@ -77,9 +78,8 @@ public class UnoGameState extends GameState {
         //moving the top card from drawPile to discardPile
         this.discardPile.put(drawPile.take());
 
-        if(this.discardPile.getTopCard().getType() == Type.WILD ||
-                this.discardPile.getTopCard().getType() == Type.WILDDRAW4)
-        {
+        if (this.discardPile.getTopCard().getType() == Type.WILD ||
+                this.discardPile.getTopCard().getType() == Type.WILDDRAW4) {
             this.discardPile.put(this.drawPile.take());
         }
 
