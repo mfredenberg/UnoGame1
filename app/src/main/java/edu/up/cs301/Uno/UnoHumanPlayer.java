@@ -102,6 +102,19 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             UnoGameState state = (UnoGameState) info;
             this.unoSurface.setHand(state.getPlayerHandAt(this.playerNum));
             this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
+            if(this.unoSurface.getTopCard().getType() == Type.WILD ||
+                    this.unoSurface.getTopCard().getType() == Type.WILDDRAW4){
+                redButton.setVisibility(View.VISIBLE);
+                greenButton.setVisibility(View.VISIBLE);
+                blueButton.setVisibility(View.VISIBLE);
+                yellowButton.setVisibility(View.VISIBLE);
+            }
+            else{
+                redButton.setVisibility(View.INVISIBLE);
+                greenButton.setVisibility(View.INVISIBLE);
+                blueButton.setVisibility(View.INVISIBLE);
+                yellowButton.setVisibility(View.INVISIBLE);
+            }
             this.unoSurface.invalidate();
 
         }
@@ -141,6 +154,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         int index;
         if (view.getId() == R.id.unoSurface && motionEvent.getAction() == motionEvent.ACTION_DOWN) {
 
+            //checks if the spot touched is a card, if it is card is selected
             index = unoSurface.checkSelectedCard((int) motionEvent.getX(), (int) motionEvent.getY());
             if (index != -1) {
                 this.unoSurface.invalidate();
