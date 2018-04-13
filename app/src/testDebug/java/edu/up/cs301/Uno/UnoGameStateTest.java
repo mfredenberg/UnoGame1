@@ -10,8 +10,7 @@ import static org.junit.Assert.*;
 public class UnoGameStateTest {
     @Test
     public void getDrawPile() throws Exception {
-        UnoGameState orginal = new UnoGameState();
-        UnoGameState copy = new UnoGameState(orginal, 0);
+       ;
 
 
 
@@ -20,11 +19,6 @@ public class UnoGameStateTest {
     @Test
     public void getTurn() throws Exception {
 
-        UnoGameState state = new UnoGameState();
-        assertEquals(state.getTurn(), 0);
-        state.setNextTurn(1);
-        assertEquals(state.getTurn(), 1);
-        state.setNextTurn(1);
 
 
 
@@ -33,10 +27,7 @@ public class UnoGameStateTest {
 
     }
 
-    @Test
-    public void setNextTurn() throws Exception {
 
-    }
 
     @Test
     public void getDiscardPile() throws Exception {

@@ -27,6 +27,7 @@ public class UnoGameView extends SurfaceView {
     private static final int CARD_HEIGHT = 366;//constant for card height
     private ArrayList<Card> handtoDraw;
     private ArrayList<Boolean> isSelected = new ArrayList<Boolean>();
+    private ArrayList<Integer> oppHands;
     private Card topCard;
     private HashMap<String, Bitmap> cardPics;
     private ArrayList<RectF> handToSelect = new ArrayList<RectF>(); //holds the Rect objects surrounding each card, letting them be selectable
@@ -58,6 +59,15 @@ public class UnoGameView extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas) {
+        if(this.oppHands != null)
+        {
+            Paint p = new Paint();
+            p.setColor(android.graphics.Color.BLACK);
+            p.setTextSize(50);
+            canvas.drawText("CPU Hand" + "\n" + this.oppHands.get(0),50,50,p);
+        }
+
+
         if (this.handtoDraw != null) {
             double heightMul = .5;
             drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 700);
@@ -282,5 +292,23 @@ public class UnoGameView extends SurfaceView {
             }
         }
         return -1;
+    }
+
+    public void setDrawCpuHand(ArrayList<Integer> oppHands)
+    {
+        this.oppHands = oppHands;
+    }
+
+    public boolean checkIsASelection()
+    {
+
+        for(int i = 0; i < isSelected.size(); i++)
+        {
+            if (isSelected.get(i))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

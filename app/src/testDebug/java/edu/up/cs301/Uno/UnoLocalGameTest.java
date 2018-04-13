@@ -2,6 +2,8 @@ package edu.up.cs301.Uno;
 
 import org.junit.Test;
 
+import edu.up.cs301.game.infoMsg.GameState;
+
 import static org.junit.Assert.*;
 
 /**
@@ -30,10 +32,10 @@ public class UnoLocalGameTest {
 
     @Test
     public void placeCard() throws Exception {
-        UnoLocalGame local = new UnoLocalGame();
+        UnoLocalGame local = new UnoLocalGame(2);
         UnoGameState state = local.getCurrentGameState();
         //assertTrue(local.placeCard(state.getTurn(), null));
-        local.placeCard(state.getTurn(), null);
+       // local.placeCard(state.getTurn(), null);
 
         assertTrue(state.getCurrentPlayerHand().size()==7);
 
@@ -55,6 +57,21 @@ public class UnoLocalGameTest {
 
     @Test
     public void hasUno() throws Exception {
+
+    }
+
+    @Test
+    public void getNextTurn() throws Exception
+    {
+        UnoLocalGame game = new UnoLocalGame(2);
+        UnoGameState gamme = game.getCurrentGameState();
+        assertEquals(game.getNextTurn(1), 1);
+        assertEquals(game.getNextTurn(1), 0);
+
+        gamme.setGameDirection(false);
+        assertEquals(game.getNextTurn(1),1);
+
+
 
     }
 

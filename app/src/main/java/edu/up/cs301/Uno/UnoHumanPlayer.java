@@ -40,6 +40,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button yellowButton;
     private Button blueButton;
     private Button playCardButton;
+    private ArrayList<Integer> oppHands = new ArrayList<Integer>();
 
     /*
     *Ctor
@@ -65,13 +66,12 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.hasUnoButton = (Button) activity.findViewById(R.id.hasUnoButton);
         this.unoSurface = (UnoGameView) activity.findViewById(R.id.unoSurface);
         this.playerName = (TextView) activity.findViewById(R.id.playerName);
-        //no longer crashing yeet
+        //no longer crashing "yeet"
         this.redButton = (Button) activity.findViewById(R.id.red_wild_button);
         this.greenButton = (Button) activity.findViewById(R.id.green_wild_button);
         this.yellowButton = (Button) activity.findViewById(R.id.yellow_wild_button);
         this.blueButton = (Button) activity.findViewById(R.id.blue_wild_button);
         this.playCardButton = (Button) activity.findViewById(R.id.play_card_button);
-
 
         this.quitButton.setOnClickListener(this);
         this.hasUnoButton.setOnClickListener(this);
@@ -100,6 +100,13 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
+            this.oppHands.clear();
+            for(int i = 0; i < state.getNumPlayers(); i++)
+            {
+                if(i == this.playerNum) continue;
+                this.oppHands.add(state.getPlayerHandSize(i));
+            }
+            this.unoSurface.setDrawCpuHand(this.oppHands);
             this.unoSurface.setHand(state.getPlayerHandAt(this.playerNum));
             this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
             if(this.unoSurface.getTopCard().getType() == Type.WILD ||
@@ -132,8 +139,10 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         } else if (view.getId() == R.id.skipTurnButton) {
             this.game.sendAction(new SkipTurnAction(this));
         } else if(view.getId() == R.id.play_card_button){
-            this.game.sendAction(new PlaceCardAction(this,
-                    unoSurface.getCardIndex()));
+            if(unoSurface.checkIsASelection()) {
+                this.game.sendAction(new PlaceCardAction(this,
+                        unoSurface.getCardIndex()));
+            }
         } else if(view.getId()== R.id.red_wild_button){
             this.game.sendAction(new ColorAction(this,
                     edu.up.cs301.Uno.Color.RED));

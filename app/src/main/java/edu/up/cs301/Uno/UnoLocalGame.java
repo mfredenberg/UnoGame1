@@ -92,7 +92,7 @@ public class UnoLocalGame extends LocalGame {
             return placeCard(playerID, place.getCardIndex());
         } else if (action instanceof ColorAction){
             ColorAction color = (ColorAction) action;
-            changeColor(color.getWildColor());
+            return changeColor(color.getWildColor());
         }
         return false;
     }
@@ -136,7 +136,7 @@ public class UnoLocalGame extends LocalGame {
                     //placethecard
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.setNextTurn(1);
+                    this.currentGameState.setTurn(getNextTurn(1));
 
                     didPlace = true;
 
@@ -153,7 +153,7 @@ public class UnoLocalGame extends LocalGame {
                     //placecard
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.setNextTurn(1);
+                    this.currentGameState.setTurn(getNextTurn(1));
 
                     didPlace = true;
                 }
@@ -161,7 +161,7 @@ public class UnoLocalGame extends LocalGame {
 
             //Check if selected card is not a wild card but valid------------------------------------------------------\\
             if (toPlace.getType() == currentGameState.getDiscardPile().getCardAt(0).getType()
-                    || toPlace.getColor() == currentGameState.getDiscardPile().getCardAt(0).getColor()) {
+                    || toPlace.getColor() == currentGameState.getCurrentColor()) {
 
                 if (toPlace.getType() == Type.ZERO || toPlace.getType() == Type.ONE ||
                         toPlace.getType() == Type.TWO || toPlace.getType() == Type.THREE ||
@@ -172,7 +172,7 @@ public class UnoLocalGame extends LocalGame {
                     //placethecard
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.setNextTurn(1);
+                    this.currentGameState.setTurn(getNextTurn(1));
 
                     didPlace = true;
 
@@ -181,16 +181,7 @@ public class UnoLocalGame extends LocalGame {
                     //add card to discard pile
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
-
-                    //skip next players turn
-                    if (this.currentGameState.getNumPlayers() == 2) //if two players
-                    {
-                        this.currentGameState.setNextTurn(this.currentGameState.getTurn());
-                    } else if (this.currentGameState.getNumPlayers() == 3 ||
-                            this.currentGameState.getNumPlayers() == 4) { //if three or four players
-                        this.currentGameState.setNextTurn(this.currentGameState.getTurn() + 2);
-                    }
-
+                    this.currentGameState.setTurn(getNextTurn(2));
                     didPlace = true;
 
                 } else if (toPlace.getType() == Type.REVERSE) {
@@ -200,6 +191,7 @@ public class UnoLocalGame extends LocalGame {
                     //place card
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
+                    this.currentGameState.setTurn(getNextTurn(1));
 
                     didPlace = true;
 
@@ -208,6 +200,8 @@ public class UnoLocalGame extends LocalGame {
                     //place card
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
+                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
 
                     //next player draws 2 cards
                     for (int i = 0; i < 2; i++)
@@ -216,6 +210,7 @@ public class UnoLocalGame extends LocalGame {
                     didPlace = true;
 
                 }
+                currentGameState.setCurrentColor(currentGameState.getDiscardPile().getTopCard().getColor());
             }
         }
         return didPlace;  //double check this!  -- Nux
@@ -246,7 +241,7 @@ public class UnoLocalGame extends LocalGame {
         if (draw) { //if card is drawable
 
             //make it the next turn
-            this.currentGameState.setNextTurn(1);
+            this.currentGameState.setTurn(getNextTurn(1));
 
             return true;
         }
@@ -273,8 +268,21 @@ public class UnoLocalGame extends LocalGame {
         return currentGameState;
     }
 
-    public Color changeColor( Color colorChange){
+    public int getNextTurn(int numTurns) {
+        if (this.currentGameState.getGameDirection())
+            return (this.currentGameState.getTurn() + numTurns) % this.currentGameState.getNumPlayers();
+        else
+            return (((this.currentGameState.getTurn() - numTurns) % this.currentGameState.getNumPlayers() + this.currentGameState.getNumPlayers())
+                    % this.currentGameState.getNumPlayers());
+        /*
+        https://stackoverflow.com/questions/5385024/mod-in-java-produces-negative-numbers
+        CITE THIS!!!!!!
+         */
+
+    }
+
+    public boolean changeColor( Color colorChange){
         currentGameState.setCurrentColor(colorChange);
-        return colorChange;
+        return true;
     }
 }
