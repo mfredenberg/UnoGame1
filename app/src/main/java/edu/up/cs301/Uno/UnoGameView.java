@@ -298,4 +298,17 @@ public class UnoGameView extends SurfaceView {
     {
         this.oppHands = oppHands;
     }
+
+    public boolean checkIsASelection()
+    {
+
+        for(int i = 0; i < isSelected.size(); i++)
+        {
+            if (isSelected.get(i))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
