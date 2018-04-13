@@ -283,4 +283,18 @@ public class UnoGameView extends SurfaceView {
         }
         return -1;
     }
+
+    /*
+    * Method checks if there is a card selection
+     */
+    public boolean checkIsASelection(){
+
+        for(int i = 0; i < isSelected.size(); i++)
+        {
+            if(isSelected.get(i))
+                return true;
+        }
+
+        return false;
+    }
 }

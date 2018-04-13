@@ -65,7 +65,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.hasUnoButton = (Button) activity.findViewById(R.id.hasUnoButton);
         this.unoSurface = (UnoGameView) activity.findViewById(R.id.unoSurface);
         this.playerName = (TextView) activity.findViewById(R.id.playerName);
-        //no longer crashing yeet
+        //no longer crashing "yeet"
         this.redButton = (Button) activity.findViewById(R.id.red_wild_button);
         this.greenButton = (Button) activity.findViewById(R.id.green_wild_button);
         this.yellowButton = (Button) activity.findViewById(R.id.yellow_wild_button);
@@ -132,8 +132,10 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         } else if (view.getId() == R.id.skipTurnButton) {
             this.game.sendAction(new SkipTurnAction(this));
         } else if(view.getId() == R.id.play_card_button){
-            this.game.sendAction(new PlaceCardAction(this,
-                    unoSurface.getCardIndex()));
+            if(unoSurface.checkIsASelection()) {
+                this.game.sendAction(new PlaceCardAction(this,
+                        unoSurface.getCardIndex()));
+            }
         }
         //get which card is pressed
 
