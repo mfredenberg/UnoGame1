@@ -2,6 +2,7 @@ package edu.up.cs301.Uno;
 
 import java.util.ArrayList;
 
+import edu.up.cs301.Uno.actionMsg.ColorAction;
 import edu.up.cs301.Uno.actionMsg.HasUnoAction;
 import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
 import edu.up.cs301.Uno.actionMsg.Quit;
@@ -22,8 +23,8 @@ public class UnoLocalGame extends LocalGame {
     /*
     *Ctor called at begining of game that initializes the game state to a new game
      */
-    public UnoLocalGame() {
-        this.currentGameState = new UnoGameState();
+    public UnoLocalGame(int numPlayers) {
+        this.currentGameState = new UnoGameState(numPlayers);
     }
 
     /*
@@ -89,6 +90,9 @@ public class UnoLocalGame extends LocalGame {
         } else if (action instanceof PlaceCardAction) {
             PlaceCardAction place = (PlaceCardAction) action;
             return placeCard(playerID, place.getCardIndex());
+        } else if (action instanceof ColorAction){
+            ColorAction color = (ColorAction) action;
+            changeColor(color.getWildColor());
         }
         return false;
     }
@@ -267,5 +271,10 @@ public class UnoLocalGame extends LocalGame {
     //getters and setters
     public UnoGameState getCurrentGameState() {
         return currentGameState;
+    }
+
+    public Color changeColor( Color colorChange){
+        currentGameState.setCurrentColor(colorChange);
+        return colorChange;
     }
 }

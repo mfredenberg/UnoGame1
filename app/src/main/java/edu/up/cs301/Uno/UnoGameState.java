@@ -47,26 +47,25 @@ public class UnoGameState extends GameState {
     /*
     * regular constructor
     */
-    public UnoGameState() {
+    public UnoGameState(int numPlayers) {
         // creating array of hands and makeing the decks
         this.playerHands = new ArrayList<ArrayList<Card>>();
         this.hasUno = new ArrayList<Boolean>();
-        this.hasUno.add(false);
-        this.hasUno.add(false);
         this.drawPile = new Deck();
         this.discardPile = new Deck();
         this.drawPile.add108();
+        for (int i = 0; i < numPlayers; i++) {
+            this.playerHands.add(new ArrayList<Card>());
+            this.hasUno.add(false);
+            for (int j = 0; j < 7; j++) {
+                this.playerHands.get(i).add(this.drawPile.take());
 
-        //adds two players
-        this.playerHands.add(new ArrayList<Card>());
-        this.playerHands.add(new ArrayList<Card>());
+            }
+        }
 
 
         // adding 7 cards to each player
-        for (int i = 0; i < 7; i++) {
-            this.playerHands.get(0).add(this.drawPile.take());
-            this.playerHands.get(1).add(this.drawPile.take());
-        }
+
 
         //setting all of the integer-based info
         this.turn = 0;
@@ -77,9 +76,8 @@ public class UnoGameState extends GameState {
         //moving the top card from drawPile to discardPile
         this.discardPile.put(drawPile.take());
 
-        if(this.discardPile.getTopCard().getType() == Type.WILD ||
-                this.discardPile.getTopCard().getType() == Type.WILDDRAW4)
-        {
+        if (this.discardPile.getTopCard().getType() == Type.WILD ||
+                this.discardPile.getTopCard().getType() == Type.WILDDRAW4) {
             this.discardPile.put(this.drawPile.take());
         }
 
@@ -131,43 +129,6 @@ public class UnoGameState extends GameState {
         this.gameDirection = masterGameState.gameDirection;
 
     }
-
-    /*
-    * method converts all variables into strings
-    */
-    //@Override
-//    public String toString() {
-//        String str = "# cards in draw pile: " + drawPile.getDeckSize();
-//        str += "\n";
-//
-//        str += "Player1 #cards: " + this.playerHands.get(0).size();
-//        str += "\n";
-//
-//        str += "Player2 #cards: " + this.playerHands.get(1).size();
-//        str += "\n";
-//
-//
-//        str += "current player: " + this.turn;
-//        str += "\n";
-//        str += "card Val: ";
-//        for (Card card : this.playerHands.get(this.turn)) {
-//            str += " " + card.getType() + " " + card.getColor();
-//        }
-//        str += "\n";
-//
-//        str += "Top card in discard pile: " + this.getDiscardPile().take().getType() + " " + this.getDiscardPile().take().getColor();
-//        str += "\n";
-//        str += "Game direction: " + this.gameDirection;
-//        str += "\n";
-//        str += "Current color: " + this.currentColor;
-//
-//        str += "\n";
-//        str += "\n";
-//        str += "\n";
-//
-//
-//        return str;
-//    }
 
 
     //getters and setters

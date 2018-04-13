@@ -134,6 +134,18 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         } else if(view.getId() == R.id.play_card_button){
             this.game.sendAction(new PlaceCardAction(this,
                     unoSurface.getCardIndex()));
+        } else if(view.getId()== R.id.red_wild_button){
+            this.game.sendAction(new ColorAction(this,
+                    edu.up.cs301.Uno.Color.RED));
+        } else if(view.getId()== R.id.green_wild_button){
+            this.game.sendAction(new ColorAction(this,
+                    edu.up.cs301.Uno.Color.GREEN));
+        } else if(view.getId()== R.id.yellow_wild_button){
+            this.game.sendAction(new ColorAction(this,
+                    edu.up.cs301.Uno.Color.YELLOW));
+        } else if(view.getId()== R.id.blue_wild_button){
+            this.game.sendAction(new ColorAction(this,
+                    edu.up.cs301.Uno.Color.BLUE));
         }
         //get which card is pressed
 
@@ -152,18 +164,13 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
         int index;
-        if (view.getId() == R.id.unoSurface) {
+        if (view.getId() == R.id.unoSurface && motionEvent.getAction() == motionEvent.ACTION_DOWN) {
 
             //checks if the spot touched is a card, if it is card is selected
             index = unoSurface.checkSelectedCard((int) motionEvent.getX(), (int) motionEvent.getY());
             if (index != -1) {
                 this.unoSurface.invalidate();
             }
-            //if the motion of the user is a down press, then place a card
-//            switch (motionEvent.getAction()) {
-//                case MotionEvent.ACTION_DOWN:
-            //this.game.sendAction(new PlaceCardAction(this));
-            //return true;
 
         }
         return true;
