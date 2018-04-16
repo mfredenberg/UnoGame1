@@ -106,12 +106,13 @@ public class UnoLocalGame extends LocalGame {
     */
 
     //checks to see if draw is empty
-    public boolean isDrawEmpty(){
-        if(currentGameState.getDrawPile().getDeckSize() == 0){
+    public boolean isDrawEmpty() {
+        if (currentGameState.getDrawPile().getDeckSize() == 0) {
             return true;
         }
         return false;
     }
+
     public boolean placeCard(int playerID, int cardIndex) {
 
         boolean didPlace = false;
@@ -130,7 +131,6 @@ public class UnoLocalGame extends LocalGame {
                     //placethecard
                     this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
-
 
 
                     didPlace = true;
@@ -152,8 +152,7 @@ public class UnoLocalGame extends LocalGame {
                     this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
 
 
-
-                   return true;
+                    return true;
                 }
             }
 
@@ -223,7 +222,7 @@ public class UnoLocalGame extends LocalGame {
 
         if (canMove(playerID)) { //make sure it's the players turn
             //checks if draw is empty, if so refills-
-            if(this.isDrawEmpty()){
+            if (this.isDrawEmpty()) {
                 currentGameState.getDrawPile().drawEmpty(currentGameState.getDiscardPile());
                 currentGameState.getDrawPile().suffle();
             }
@@ -265,6 +264,7 @@ public class UnoLocalGame extends LocalGame {
     * checks if the player has uno
     */
     public boolean hasUno(int playerID) {
+        this.currentGameState.setHasUno(playerID);
         return this.currentGameState.hasUno(playerID);
     }
 
@@ -298,4 +298,6 @@ public class UnoLocalGame extends LocalGame {
         }
         return false;
     }
+
+
 }
