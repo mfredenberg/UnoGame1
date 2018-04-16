@@ -232,7 +232,7 @@ public class UnoGameView extends SurfaceView {
         // Bitmap nullCard = BitmapFactory.decodeResource(getResources(), R.drawable.nullcard);
         // this.cardPics.put(""+ Type.WILD, nullCard);
         //cover card
-        Bitmap coverCard = BitmapFactory.decodeResource(getResources(), R.drawable.blue_draw2);
+        Bitmap coverCard = BitmapFactory.decodeResource(getResources(), R.drawable.uno_cover_card);
         this.cardPics.put("cover", coverCard);
 
     }
