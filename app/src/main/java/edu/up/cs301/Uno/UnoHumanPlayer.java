@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.up.cs301.Uno.actionMsg.ColorAction;
+import edu.up.cs301.Uno.actionMsg.FalseUno;
 import edu.up.cs301.Uno.actionMsg.HasUnoAction;
 import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
 import edu.up.cs301.Uno.actionMsg.Quit;
@@ -102,6 +103,10 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
+            if (state.getTurn() == this.playerNum) {
+                if (state.getCurrentPlayerHand().size() == 1 && !state.hasUno(this.playerNum))
+                    this.game.sendAction(new FalseUno(this));
+            }
             this.hands.clear();
             for (int i = 0; i < state.getNumPlayers(); i++) {
                 this.hands.add(state.getPlayerHandAt(i));

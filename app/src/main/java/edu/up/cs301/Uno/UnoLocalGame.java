@@ -3,6 +3,7 @@ package edu.up.cs301.Uno;
 import java.util.ArrayList;
 
 import edu.up.cs301.Uno.actionMsg.ColorAction;
+import edu.up.cs301.Uno.actionMsg.FalseUno;
 import edu.up.cs301.Uno.actionMsg.HasUnoAction;
 import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
 import edu.up.cs301.Uno.actionMsg.Quit;
@@ -79,6 +80,7 @@ public class UnoLocalGame extends LocalGame {
 
         } else if (p instanceof UnoComputerPlayer) {
             UnoComputerPlayer cpuDumb = (UnoComputerPlayer) p;
+            hasUno(cpuDumb.getPlayerID());
             playerID = cpuDumb.getPlayerID();
 
         }
@@ -96,6 +98,10 @@ public class UnoLocalGame extends LocalGame {
         } else if (action instanceof ColorAction) {
             ColorAction color = (ColorAction) action;
             return changeColor(playerID, color.getWildColor());
+        } else if (action instanceof FalseUno) {
+            drawCard(playerID);
+            return drawCard(playerID);
+
         }
         return false;
     }
