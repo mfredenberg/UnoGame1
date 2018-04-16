@@ -70,6 +70,13 @@ public class Deck {
             deck.add(index, card);
         }
     }
+    //takes cards out of the Deck passed in and adds them to this deck
+    public void drawEmpty(Deck discard){
+        for(int i = discard.getDeckSize() - 1; i > 1; i--){
+            this.put(discard.getCardAt(i));
+            discard.getDeck().remove(i);
+        }
+    }
 
     /*
     * method puts a card at the beginning of the deck
