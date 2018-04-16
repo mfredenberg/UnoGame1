@@ -40,7 +40,9 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button yellowButton;
     private Button blueButton;
     private Button playCardButton;
-    private ArrayList<Integer> oppHands = new ArrayList<Integer>();
+    private ArrayList<ArrayList<Card>> hands;
+    private boolean wildSelect = false;
+
 
     /*
     *Ctor
@@ -100,30 +102,13 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
-            this.oppHands.clear();
-            for(int i = 0; i < state.getNumPlayers(); i++)
-            {
-                if(i == this.playerNum) continue;
-                this.oppHands.add(state.getPlayerHandSize(i));
+            this.hands.clear();
+            for (int i = 0; i < state.getNumPlayers(); i++) {
+                this.hands.add(state.getPlayerHandAt(i));
             }
-            this.unoSurface.setDrawCpuHand(this.oppHands);
+            //this.unoSurface.setDrawCpuHand(this.oppHands);
             this.unoSurface.setHand(state.getPlayerHandAt(this.playerNum));
             this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
-            if((this.unoSurface.getTopCard().getType() == Type.WILD ||
-                    this.unoSurface.getTopCard().getType() == Type.WILDDRAW4)
-                && state.getTurn() == this.playerNum)
-            {
-                redButton.setVisibility(View.VISIBLE);
-                greenButton.setVisibility(View.VISIBLE);
-                blueButton.setVisibility(View.VISIBLE);
-                yellowButton.setVisibility(View.VISIBLE);
-            }
-            else{
-                redButton.setVisibility(View.INVISIBLE);
-                greenButton.setVisibility(View.INVISIBLE);
-                blueButton.setVisibility(View.INVISIBLE);
-                yellowButton.setVisibility(View.INVISIBLE);
-            }
             this.unoSurface.invalidate();
 
         }
@@ -134,37 +119,59 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     * method listens to the users button clicks and responds accordingly
     */
     public void onClick(View view) {
-        if (view.getId() == R.id.quitButton) {
-            this.game.sendAction(new Quit(this));
-        } else if (view.getId() == R.id.hasUnoButton) {
-            this.game.sendAction(new HasUnoAction(this));
-        } else if (view.getId() == R.id.skipTurnButton) {
-            this.game.sendAction(new SkipTurnAction(this));
-        } else if(view.getId() == R.id.play_card_button){
-            if(unoSurface.checkIsASelection()) {
-                if()
-                this.game.sendAction(new PlaceCardAction(this,
-                        unoSurface.getCardIndex()));
+        if (!this.wildSelect) {
+            if (view.getId() == R.id.quitButton) {
+                this.game.sendAction(new Quit(this));
+            } else if (view.getId() == R.id.hasUnoButton) {
+                this.game.sendAction(new HasUnoAction(this));
+            } else if (view.getId() == R.id.skipTurnButton) {
+                this.game.sendAction(new SkipTurnAction(this));
+            } else if (view.getId() == R.id.play_card_button) {
+                if (unoSurface.checkIsASelection()) {
+                    if (!(this.hands.get(this.playerNum).get(unoSurface.getCardIndex()).getType() == Type.WILD
+                            || this.hands.get(this.playerNum).get(unoSurface.getCardIndex()).getType() == Type.WILDDRAW4))
+                        this.game.sendAction(new PlaceCardAction(this,
+                                unoSurface.getCardIndex()));
+                    else {
+                        redButton.setVisibility(View.VISIBLE);
+                        greenButton.setVisibility(View.VISIBLE);
+                        blueButton.setVisibility(View.VISIBLE);
+                        yellowButton.setVisibility(View.VISIBLE);
+                        this.unoSurface.invalidate();
+                        this.wildSelect = true;
+                    }
+                }
             }
-        } else if(view.getId()== R.id.red_wild_button){
-            this.game.sendAction(new ColorAction(this,
-                    edu.up.cs301.Uno.Color.RED));
-        } else if(view.getId()== R.id.green_wild_button){
-            this.game.sendAction(new ColorAction(this,
-                    edu.up.cs301.Uno.Color.GREEN));
-        } else if(view.getId()== R.id.yellow_wild_button){
-            this.game.sendAction(new ColorAction(this,
-                    edu.up.cs301.Uno.Color.YELLOW));
-        } else if(view.getId()== R.id.blue_wild_button){
-            this.game.sendAction(new ColorAction(this,
-                    edu.up.cs301.Uno.Color.BLUE));
+        } else {
+            if (view.getId() == R.id.red_wild_button) {
+                this.game.sendAction(new ColorAction(this,
+                        edu.up.cs301.Uno.Color.RED));
+            } else if (view.getId() == R.id.green_wild_button)
+            {
+                this.game.sendAction(new ColorAction(this,
+                        edu.up.cs301.Uno.Color.GREEN));
+            } else if (view.getId() == R.id.yellow_wild_button)
+            {
+                this.game.sendAction(new ColorAction(this,
+                        edu.up.cs301.Uno.Color.YELLOW));
+            } else if (view.getId() == R.id.blue_wild_button)
+            {
+                this.game.sendAction(new ColorAction(this,
+                        edu.up.cs301.Uno.Color.BLUE));
+            }
+            redButton.setVisibility(View.INVISIBLE);
+            greenButton.setVisibility(View.INVISIBLE);
+            blueButton.setVisibility(View.INVISIBLE);
+            yellowButton.setVisibility(View.INVISIBLE);
+            this.unoSurface.invalidate();
+            this.wildSelect = false;
+            //get which card is pressed
+
+            //if discard pile is pressed and the card can be
+            //placed, then place card and move on to next player
+
+            //if skip button is pressed, move turn to next player
         }
-        //get which card is pressed
-
-        //if discard pile is pressed and the card can be
-        //placed, then place card and move on to next player
-
-        //if skip button is pressed, move turn to next player
     }
 
     /*
@@ -176,7 +183,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
         int index;
-        if (view.getId() == R.id.unoSurface && motionEvent.getAction() == motionEvent.ACTION_DOWN) {
+        if (view.getId() == R.id.unoSurface && motionEvent.getAction() == motionEvent.ACTION_DOWN  && !this.wildSelect) {
 
             //checks if the spot touched is a card, if it is card is selected
             index = unoSurface.checkSelectedCard((int) motionEvent.getX(), (int) motionEvent.getY());
