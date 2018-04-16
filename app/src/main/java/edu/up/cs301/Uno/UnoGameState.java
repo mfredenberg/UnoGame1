@@ -24,9 +24,6 @@ public class UnoGameState extends GameState {
     //one master array list that holds all the player hands
     private ArrayList<ArrayList<Card>> playerHands;
 
-    //one master array list holds all the player names
-    private ArrayList<String> playerNames;
-
     private ArrayList<Boolean> hasUno;
 
     //current turn, starting at 0
@@ -142,9 +139,7 @@ public class UnoGameState extends GameState {
     }
 
 
-
-    public void setTurn(int turn)
-    {
+    public void setTurn(int turn) {
         this.turn = turn;
     }
 
@@ -173,10 +168,6 @@ public class UnoGameState extends GameState {
         return this.playerHands.size();
     }
 
-    public String getPlayerNames(int playerID) {
-        return this.playerNames.get(playerID);
-    }
-
     public ArrayList<Card> getPlayerHandAt(int index) {
         return this.playerHands.get(index);
     }
@@ -188,6 +179,7 @@ public class UnoGameState extends GameState {
     public void setHasUno(int playerID) {
         this.hasUno.set(playerID, this.getPlayerHandAt(playerID).size() == 1);
     }
+
 
     public void setGameDirection(boolean dir) {
         gameDirection = dir;

@@ -40,7 +40,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button yellowButton;
     private Button blueButton;
     private Button playCardButton;
-    private ArrayList<ArrayList<Card>> hands;
+    private ArrayList<ArrayList<Card>> hands = new ArrayList<ArrayList<Card>>();
     private boolean wildSelect = false;
 
 
@@ -106,8 +106,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             for (int i = 0; i < state.getNumPlayers(); i++) {
                 this.hands.add(state.getPlayerHandAt(i));
             }
-            //this.unoSurface.setDrawCpuHand(this.oppHands);
-            this.unoSurface.setHand(state.getPlayerHandAt(this.playerNum));
+            this.unoSurface.setHand(this.hands, this.playerNum);
             this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
             this.unoSurface.invalidate();
 
@@ -143,19 +142,18 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 }
             }
         } else {
+            this.game.sendAction(new PlaceCardAction(this,
+                    unoSurface.getCardIndex()));
             if (view.getId() == R.id.red_wild_button) {
                 this.game.sendAction(new ColorAction(this,
                         edu.up.cs301.Uno.Color.RED));
-            } else if (view.getId() == R.id.green_wild_button)
-            {
+            } else if (view.getId() == R.id.green_wild_button) {
                 this.game.sendAction(new ColorAction(this,
                         edu.up.cs301.Uno.Color.GREEN));
-            } else if (view.getId() == R.id.yellow_wild_button)
-            {
+            } else if (view.getId() == R.id.yellow_wild_button) {
                 this.game.sendAction(new ColorAction(this,
                         edu.up.cs301.Uno.Color.YELLOW));
-            } else if (view.getId() == R.id.blue_wild_button)
-            {
+            } else if (view.getId() == R.id.blue_wild_button) {
                 this.game.sendAction(new ColorAction(this,
                         edu.up.cs301.Uno.Color.BLUE));
             }
@@ -183,7 +181,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
         int index;
-        if (view.getId() == R.id.unoSurface && motionEvent.getAction() == motionEvent.ACTION_DOWN  && !this.wildSelect) {
+        if (view.getId() == R.id.unoSurface && motionEvent.getAction() == motionEvent.ACTION_DOWN && !this.wildSelect) {
 
             //checks if the spot touched is a card, if it is card is selected
             index = unoSurface.checkSelectedCard((int) motionEvent.getX(), (int) motionEvent.getY());

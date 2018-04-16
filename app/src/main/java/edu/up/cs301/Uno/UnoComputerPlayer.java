@@ -27,9 +27,9 @@ public class UnoComputerPlayer extends GameComputerPlayer {
             UnoGameState gameState = (UnoGameState) info;
             if (gameState.getTurn() == this.playerNum) {
                 this.sleep(1000);
-                int i = 0;
+                boolean didPlace = false;
                 //loops through computer player's hand
-                for (i = 0; i < gameState.getCurrentPlayerHand().size(); i++) {
+                for (int i = 0; i < gameState.getCurrentPlayerHand().size(); i++) {
                     if (gameState.getCurrentPlayerHand().get(i).getColor() == gameState.getCurrentColor()
                             || gameState.getCurrentPlayerHand().get(i).getType() == gameState.getDiscardPile().getTopCard().getType()) {
                         //plays first card that matches the top card of discard
@@ -37,21 +37,20 @@ public class UnoComputerPlayer extends GameComputerPlayer {
                                 + gameState.getCurrentPlayerHand().get(0).getType() + "----------------------------------------------------------//");
                         this.game.sendAction(new PlaceCardAction(this, i));
                         if (gameState.getCurrentPlayerHand().get(i).getType() == Type.WILD
-                                || gameState.getCurrentPlayerHand().get(i).getType() == Type.WILDDRAW4)
+                                || gameState.getCurrentPlayerHand().get(i).getType() == Type.WILDDRAW4) {
                             this.game.sendAction(new ColorAction(this, Color.RED));
 
-
-                        //force ends loop
-                        i = gameState.getCurrentPlayerHand().size() + 1;
+                        }
+                        didPlace = true;
+                        break;
 
 
                     }
-                    //if the loop wasn't force ended (no card was played)
-                    if (i != gameState.getCurrentPlayerHand().size() + 1)
-                        this.game.sendAction(new SkipTurnAction(this));
-
-                  this.sleep(1000);
                 }
+                //if the loop wasn't force ended (no card was played)
+
+                if (!didPlace) this.game.sendAction(new SkipTurnAction(this));
+
             }
         }
     }
