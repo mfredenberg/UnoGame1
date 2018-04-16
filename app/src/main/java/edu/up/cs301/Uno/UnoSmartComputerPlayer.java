@@ -26,7 +26,8 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
         if(info instanceof UnoGameState){
             UnoGameState state = (UnoGameState) info;
             if(state.getTurn() == this.playerNum){
-                this.sleep(1000);
+                this.sleep(1000);//waits 1 second before playing
+
                 //the smart AI cycles through its hand and selects all cards that can be played in the turn
                 for(int i = 0; i < state.getCurrentPlayerHand().size(); i++){
                     if(state.getCurrentPlayerHand().get(i).getColor() == state.getCurrentColor()
@@ -80,11 +81,16 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
                             this.game.sendAction(new ColorAction(this, this.mostOfColor(state.getCurrentPlayerHand())));
                         }
                     }
+                    //skips turn if it can't play
                 } else if(isPlayableCardsNull()){
                     this.game.sendAction(new SkipTurnAction(this));
+                    //if none of these conditions are met, it will play the first card that matches
                 } else{
                     for(int i = 0; i < playableCards.size(); i++){
-
+                        if(playableCards.get(i).getColor() == state.getCurrentColor()
+                                || playableCards.get(i).getType() == state.getDiscardPile().getTopCard().getType()){
+                            this.game.sendAction(new PlaceCardAction(this, i));
+                        }
                     }
                 }
             }
