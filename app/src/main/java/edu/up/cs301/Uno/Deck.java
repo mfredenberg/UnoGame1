@@ -1,5 +1,6 @@
 package edu.up.cs301.Uno;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,7 +17,7 @@ import java.util.Random;
  * @author Mason Fredenberg
  */
 
-public class Deck {
+public class Deck implements Serializable {
 
     //holds the deck of cards
     private ArrayList<Card> deck = new ArrayList<Card>();

@@ -323,11 +323,11 @@ public class UnoGameView extends SurfaceView {
                 drawCard(canvas,null,10 + 5 * j, height);
                 j+=5;
             }
-            height+=50;
             Paint cpuText = new Paint();
             cpuText.setTextSize(30);
             canvas.drawText("Player's " + i + " Number of Cards: " + this.handstoDraw.get(i).size()
             , 20,height-50, cpuText);
+            height+=CARD_HEIGHT+20;
 
         }
     }
