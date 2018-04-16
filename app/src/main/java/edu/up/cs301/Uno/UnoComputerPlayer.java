@@ -1,5 +1,6 @@
 package edu.up.cs301.Uno;
 
+import edu.up.cs301.Uno.actionMsg.ColorAction;
 import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
 import edu.up.cs301.Uno.actionMsg.SkipTurnAction;
 import edu.up.cs301.game.GameComputerPlayer;
@@ -26,18 +27,18 @@ public class UnoComputerPlayer extends GameComputerPlayer {
             UnoGameState gameState = (UnoGameState) info;
             if (gameState.getTurn() == this.playerNum) {
                 this.sleep(1000);
-                int i;
+                int i = 0;
                 //loops through computer player's hand
                 for (i = 0; i < gameState.getCurrentPlayerHand().size(); i++) {
                     if (gameState.getCurrentPlayerHand().get(i).getColor() == gameState.getCurrentColor()
-                            || gameState.getCurrentPlayerHand().get(0).getType() == gameState.getDiscardPile().getTopCard().getType()) {
+                            || gameState.getCurrentPlayerHand().get(i).getType() == gameState.getDiscardPile().getTopCard().getType()) {
                         //plays first card that matches the top card of discard
                         Log.i("Computer Player: ", "Computer Placed the Card: " + gameState.getCurrentPlayerHand().get(0).getColor()
                                 + gameState.getCurrentPlayerHand().get(0).getType() + "----------------------------------------------------------//");
+                        this.game.sendAction(new PlaceCardAction(this, i));
                         if (gameState.getCurrentPlayerHand().get(i).getType() == Type.WILD
                                 || gameState.getCurrentPlayerHand().get(i).getType() == Type.WILDDRAW4)
-                            gameState.setCurrentColor(Color.RED);
-                        this.game.sendAction(new PlaceCardAction(this, i));
+                            this.game.sendAction(new ColorAction(this, Color.RED));
 
 
                         //force ends loop
@@ -49,9 +50,7 @@ public class UnoComputerPlayer extends GameComputerPlayer {
                     if (i != gameState.getCurrentPlayerHand().size() + 1)
                         this.game.sendAction(new SkipTurnAction(this));
 
-                    this.sleep(500);
-
-
+                  this.sleep(1000);
                 }
             }
         }

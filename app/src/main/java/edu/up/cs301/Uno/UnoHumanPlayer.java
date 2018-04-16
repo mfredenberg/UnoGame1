@@ -109,8 +109,10 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             this.unoSurface.setDrawCpuHand(this.oppHands);
             this.unoSurface.setHand(state.getPlayerHandAt(this.playerNum));
             this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
-            if(this.unoSurface.getTopCard().getType() == Type.WILD ||
-                    this.unoSurface.getTopCard().getType() == Type.WILDDRAW4){
+            if((this.unoSurface.getTopCard().getType() == Type.WILD ||
+                    this.unoSurface.getTopCard().getType() == Type.WILDDRAW4)
+                && state.getTurn() == this.playerNum)
+            {
                 redButton.setVisibility(View.VISIBLE);
                 greenButton.setVisibility(View.VISIBLE);
                 blueButton.setVisibility(View.VISIBLE);
@@ -140,6 +142,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             this.game.sendAction(new SkipTurnAction(this));
         } else if(view.getId() == R.id.play_card_button){
             if(unoSurface.checkIsASelection()) {
+                if()
                 this.game.sendAction(new PlaceCardAction(this,
                         unoSurface.getCardIndex()));
             }

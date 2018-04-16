@@ -20,6 +20,7 @@ public class UnoLocalGame extends LocalGame {
 
     private UnoGameState currentGameState; // current state
 
+
     /*
     *Ctor called at begining of game that initializes the game state to a new game
      */
@@ -75,9 +76,11 @@ public class UnoLocalGame extends LocalGame {
         if (p instanceof UnoHumanPlayer) {
             UnoHumanPlayer human = (UnoHumanPlayer) p;
             playerID = human.getPlayerID();
+
         } else if (p instanceof UnoComputerPlayer) {
             UnoComputerPlayer cpuDumb = (UnoComputerPlayer) p;
             playerID = cpuDumb.getPlayerID();
+
         }
 
         //actions
@@ -89,15 +92,6 @@ public class UnoLocalGame extends LocalGame {
             return hasUno(playerID);
         } else if (action instanceof PlaceCardAction) {
             PlaceCardAction place = (PlaceCardAction) action;
-            if (p instanceof UnoComputerPlayer &&
-                    (this.currentGameState.getPlayerHandAt(playerID).get(place.getCardIndex()).getType() == Type.WILD
-                            || this.currentGameState.getPlayerHandAt(playerID).get(place.getCardIndex()).getType()
-                            == Type.WILDDRAW4)) {
-                this.currentGameState.setTurn(getNextTurn(1));
-                // pretend cpu player is the next player so it can play
-                playerID = getNextTurn(1);
-
-            }
             return placeCard(playerID, place.getCardIndex());
         } else if (action instanceof ColorAction) {
             ColorAction color = (ColorAction) action;
@@ -131,6 +125,7 @@ public class UnoLocalGame extends LocalGame {
                     this.currentGameState.getDiscardPile().put(toPlace); //place card
 
 
+
                     didPlace = true;
 
                     return true;
@@ -150,7 +145,8 @@ public class UnoLocalGame extends LocalGame {
                     this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
 
 
-                    didPlace = true;
+
+                   return true;
                 }
             }
 
