@@ -139,9 +139,7 @@ public class UnoGameState extends GameState {
     }
 
 
-
-    public void setTurn(int turn)
-    {
+    public void setTurn(int turn) {
         this.turn = turn;
     }
 
@@ -181,6 +179,7 @@ public class UnoGameState extends GameState {
     public void setHasUno(int playerID) {
         this.hasUno.set(playerID, this.getPlayerHandAt(playerID).size() == 1);
     }
+
 
     public void setGameDirection(boolean dir) {
         gameDirection = dir;
