@@ -25,10 +25,10 @@ public class UnoGameView extends SurfaceView {
 
     private static final int CARD_WIDTH = 246;//constant for card width
     private static final int CARD_HEIGHT = 366;//constant for card height
-    private ArrayList<Card> handtoDraw;
+    private ArrayList<ArrayList<Card>> handstoDraw;
     private ArrayList<Boolean> isSelected = new ArrayList<Boolean>();
-    private ArrayList<Integer> oppHands;
     private Card topCard;
+    private int currPlayerID = 0;
     private HashMap<String, Bitmap> cardPics;
     private ArrayList<RectF> handToSelect = new ArrayList<RectF>(); //holds the Rect objects surrounding each card, letting them be selectable
 
@@ -59,36 +59,28 @@ public class UnoGameView extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas) {
-        if(this.oppHands != null)
-        {
-            Paint p = new Paint();
-            p.setColor(android.graphics.Color.BLACK);
-            p.setTextSize(50);
-            canvas.drawText("CPU Hand" + "\n" + this.oppHands.get(0),50,50,p);
-        }
-
-
-        if (this.handtoDraw != null) {
-            double heightMul = .5;
-            drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 700);
+        if (this.handstoDraw != null) {
+            drawCPUHands(canvas);
+            double heightMul = .62;
+            drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 -150);
             width = 0;
-            for (int i = 0; i < this.handtoDraw.size(); i++) {
+            for (int i = 0; i < this.handstoDraw.get(this.currPlayerID).size(); i++) {
                 if (i == 9) {
                     width = 0;
-                    heightMul = .7;
+                    heightMul = .82;
                 }
                 if (this.isSelected.get(i)) {
-                    drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul - 30));
+                    drawCard(canvas, this.handstoDraw.get(this.currPlayerID).get(i), width, (int) (getHeight() * heightMul - 30));
                     width += 195;
                     continue;
                 }
 
 
                 if (i < 9) {
-                    drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul));
+                    drawCard(canvas, this.handstoDraw.get(this.currPlayerID).get(i), width, (int) (getHeight() * heightMul));
                     width += 195;
-                } else if (i < 15) {
-                    drawCard(canvas, this.handtoDraw.get(i), width, (int) (getHeight() * heightMul));
+                } else if (i < 18) {
+                    drawCard(canvas, this.handstoDraw.get(this.currPlayerID).get(i), width, (int) (getHeight() * heightMul));
                     width += 195;
                 }
             }
@@ -100,6 +92,12 @@ public class UnoGameView extends SurfaceView {
 
     public void drawCard(Canvas canvas, Card toDraw, int x, int y) {
         Bitmap card;
+        if(toDraw == null)
+        {
+            card = this.cardPics.get("cover");
+            canvas.drawBitmap(card, x, y, null);
+            return;
+        }
         if (toDraw.getColor() == null)
             card = this.cardPics.get("" + toDraw.getType());
         else
@@ -231,28 +229,30 @@ public class UnoGameView extends SurfaceView {
         Bitmap wildDrawFour = BitmapFactory.decodeResource(getResources(), R.drawable.wild_draw_four);
         this.cardPics.put("" + Type.WILDDRAW4, wildDrawFour);
         //null card
-       // Bitmap nullCard = BitmapFactory.decodeResource(getResources(), R.drawable.nullcard);
-       // this.cardPics.put(""+ Type.WILD, nullCard);
+        // Bitmap nullCard = BitmapFactory.decodeResource(getResources(), R.drawable.nullcard);
+        // this.cardPics.put(""+ Type.WILD, nullCard);
         //cover card
-        Bitmap coverCard = BitmapFactory.decodeResource(getResources(), R.drawable.nullcard);
+        Bitmap coverCard = BitmapFactory.decodeResource(getResources(), R.drawable.blue_draw2);
+        this.cardPics.put("cover", coverCard);
 
     }
 
     //syncs all three ArrayLists so the index's are aligned
-    public void setHand(ArrayList<Card> hand) {
-        this.handtoDraw = hand;
+    public void setHand(ArrayList<ArrayList<Card>> hands, int playerID) {
+        this.handstoDraw = hands;
+        this.currPlayerID = playerID;
         this.isSelected.clear();
         this.handToSelect.clear();
         width = 0;
-        for (int i = 0; i < this.handtoDraw.size(); i++) {
+        for (int i = 0; i < this.handstoDraw.get(playerID).size(); i++) {
             this.isSelected.add(i, false);
             if (i == 9) width = 0;
             if (i < 9) {
-                this.handToSelect.add(new RectF(width, (int) (getHeight() * .5), width + CARD_WIDTH, (int) (getHeight() * .5)
+                this.handToSelect.add(new RectF(width, (int) (getHeight() * .62), width + CARD_WIDTH, (int) (getHeight() * .62)
                         + CARD_HEIGHT));
                 width += 195;
-            } else if (i < 15) {
-                this.handToSelect.add(new RectF(width, (int) (getHeight() * .7), width + CARD_WIDTH, (int) (getHeight() * .7)
+            } else if (i < 18) {
+                this.handToSelect.add(new RectF(width, (int) (getHeight() * .82), width + CARD_WIDTH, (int) (getHeight() * .82)
                         + CARD_HEIGHT));
                 width += 195;
             }
@@ -265,9 +265,12 @@ public class UnoGameView extends SurfaceView {
         this.topCard = topCard;
     }
 
-    public Card getTopCard(){ return this.topCard; }
+    public Card getTopCard() {
+        return this.topCard;
+    }
+
     public ArrayList<Card> getHumanplayerHand() {
-        return this.handtoDraw;
+        return this.handstoDraw.get(this.currPlayerID);
 
     }
 
@@ -282,39 +285,50 @@ public class UnoGameView extends SurfaceView {
     }
 
     public void selectCard(int index) {
-        if(isSelected.get(index))
-        {
-            isSelected.set(index,false);
+        if (isSelected.get(index)) {
+            isSelected.set(index, false);
             return;
         }
         for (int i = 0; i < isSelected.size(); i++) isSelected.set(i, false);
         isSelected.set(index, true);
     }
 
-    public int getCardIndex(){
-        for(int i = 0; i < isSelected.size(); i++){
-            if(isSelected.get(i)){
+    public int getCardIndex() {
+        for (int i = 0; i < isSelected.size(); i++) {
+            if (isSelected.get(i)) {
                 return i;
             }
         }
         return -1;
     }
 
-    public void setDrawCpuHand(ArrayList<Integer> oppHands)
-    {
-        this.oppHands = oppHands;
-    }
 
-    public boolean checkIsASelection()
-    {
+    public boolean checkIsASelection() {
 
-        for(int i = 0; i < isSelected.size(); i++)
-        {
-            if (isSelected.get(i))
-            {
+        for (int i = 0; i < isSelected.size(); i++) {
+            if (isSelected.get(i)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public void drawCPUHands(Canvas canvas) {
+        int height = 50;
+        for (int i = 0; i < this.handstoDraw.size(); i++) {
+            if (i == this.currPlayerID) continue;
+            int j = 0;
+            for(Card c: this.handstoDraw.get(i))
+            {
+                drawCard(canvas,null,10 + 5 * j, height);
+                j+=5;
+            }
+            height+=50;
+            Paint cpuText = new Paint();
+            cpuText.setTextSize(30);
+            canvas.drawText("Player's " + i + " Number of Cards: " + this.handstoDraw.get(i).size()
+            , 20,height-50, cpuText);
+
+        }
     }
 }

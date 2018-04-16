@@ -212,7 +212,7 @@ public class UnoLocalGame extends LocalGame {
                 currentGameState.setCurrentColor(currentGameState.getDiscardPile().getTopCard().getColor());
             }
         }
-        return didPlace;  //double check this!  -- Nux
+        return didPlace;
 
     }
 
@@ -220,12 +220,13 @@ public class UnoLocalGame extends LocalGame {
     * draws a card for the current player
     */
     private boolean drawCard(int playerID) {
-        //checks if draw is empty, if so refills
-        if(this.isDrawEmpty()){
-            currentGameState.getDrawPile().drawEmpty(currentGameState.getDiscardPile());
-            currentGameState.getDrawPile().suffle();
-        }
+
         if (canMove(playerID)) { //make sure it's the players turn
+            //checks if draw is empty, if so refills-
+            if(this.isDrawEmpty()){
+                currentGameState.getDrawPile().drawEmpty(currentGameState.getDiscardPile());
+                currentGameState.getDrawPile().suffle();
+            }
 
             //take a card from the draw pile and put it on the players hand
             this.currentGameState.getPlayerHandAt(playerID).add(this.currentGameState.getDrawPile().take());

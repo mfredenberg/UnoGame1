@@ -24,9 +24,6 @@ public class UnoGameState extends GameState {
     //one master array list that holds all the player hands
     private ArrayList<ArrayList<Card>> playerHands;
 
-    //one master array list holds all the player names
-    private ArrayList<String> playerNames;
-
     private ArrayList<Boolean> hasUno;
 
     //current turn, starting at 0
@@ -171,10 +168,6 @@ public class UnoGameState extends GameState {
 
     public int getNumPlayers() {
         return this.playerHands.size();
-    }
-
-    public String getPlayerNames(int playerID) {
-        return this.playerNames.get(playerID);
     }
 
     public ArrayList<Card> getPlayerHandAt(int index) {
