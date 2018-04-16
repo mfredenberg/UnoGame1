@@ -111,6 +111,13 @@ public class UnoLocalGame extends LocalGame {
     * place it onto discard pile and places it
     */
 
+    //checks to see if draw is empty
+    public boolean isDrawEmpty(){
+        if(currentGameState.getDrawPile().getDeckSize() == 0){
+            return true;
+        }
+        return false;
+    }
     public boolean placeCard(int playerID, int cardIndex) {
 
         boolean didPlace = false;
@@ -217,6 +224,11 @@ public class UnoLocalGame extends LocalGame {
     * draws a card for the current player
     */
     private boolean drawCard(int playerID) {
+        //checks if draw is empty, if so refills
+        if(this.isDrawEmpty()){
+            currentGameState.getDrawPile().drawEmpty(currentGameState.getDiscardPile());
+            currentGameState.getDrawPile().suffle();
+        }
         if (canMove(playerID)) { //make sure it's the players turn
 
             //take a card from the draw pile and put it on the players hand
