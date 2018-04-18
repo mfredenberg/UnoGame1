@@ -51,7 +51,7 @@ public class UnoGameState extends GameState implements Serializable {
 
 
     /*
-    * regular constructor
+    * Ctor
     */
     public UnoGameState() {
         // creating array of hands and makeing the decks
@@ -94,7 +94,7 @@ public class UnoGameState extends GameState implements Serializable {
     }
 
     /*
-    * this constructor is used to make a deep copy of the game state based on a playerID
+    * Ctor is used to make a deep copy of the game state based on a playerID
     */
     public UnoGameState(UnoGameState masterGameState, int playerID) {
 
