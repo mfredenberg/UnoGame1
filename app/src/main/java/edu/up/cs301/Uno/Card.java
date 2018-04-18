@@ -3,7 +3,7 @@ package edu.up.cs301.Uno;
 import java.io.Serializable;
 
 /**
- * Created by fredenbe20 on 2/25/2018.
+ * Created by Mason Fredenberg on 2/25/2018.
  * <p>
  * The card class is an object for an uno card with a specific value,
  * type, and color.

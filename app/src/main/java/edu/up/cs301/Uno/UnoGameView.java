@@ -18,8 +18,9 @@ import edu.up.cs301.game.R;
 
 
 /**
+ * Created by Mason Fredenberg on 4/15/2018.
  *
- * Created by fredenbe20 on 4/15/2018.
+ * This class sets up the view for the GUI.
  *
  * @author Chris Fishback
  * @author Stelios Popoutsakis
