@@ -15,8 +15,10 @@ import edu.up.cs301.game.actionMsg.GameAction;
 /**
  * Created by fredenbe20 on 3/27/2018.
  *
- * Edited by Stelios Popoutsakis, Alli Jacobs,
- * Chris Fishback and Mason Fredenberg
+ * @author Chris Fishback
+ * @author Stelios Popoutsakis
+ * @author Alli Jacobs
+ * @author Mason Fredenberg
  *
  * The local game class houses all necessary actions and rules
  * for uno to work
