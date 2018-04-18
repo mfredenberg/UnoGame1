@@ -54,7 +54,7 @@ public class Deck implements Serializable {
             }
 
         }
-
+        //Stelios doesn't know how to spell "shuffle"
         suffle();
 
     }
