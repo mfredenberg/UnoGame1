@@ -27,6 +27,7 @@ public class UnoLocalGame extends LocalGame {
     *Ctor called at beginning of game that initializes the game state to a new game
      */
     public UnoLocalGame() {
+        super();
         this.currentGameState = new UnoGameState();
     }
 
@@ -35,6 +36,17 @@ public class UnoLocalGame extends LocalGame {
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
+        if(ifStart())
+        {
+            this.currentGameState.setNumPlayers(this.players.length);
+            for(int i = 0; i < this.currentGameState.getNumPlayers(); i++)
+            {
+                for(int j = 0; j < 7; j++ )
+                {
+                    this.currentGameState.getPlayerHandAt(i).add(this.currentGameState.getDrawPile().take());
+                }
+            }
+        }
         if (p instanceof UnoHumanPlayer) {
             UnoHumanPlayer human = (UnoHumanPlayer) p;
             UnoGameState copy = new UnoGameState(this.currentGameState, human.getPlayerID());
@@ -158,20 +170,20 @@ public class UnoLocalGame extends LocalGame {
                     //place card
                     placeCardDown(toPlace);
 
-                    for(int i = 0; i < 4; i++)
+                    for (int i = 0; i < 4; i++)
                         this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
 
                     isPlaced = true;
                 }
             }
-                //checks to see if the card is playable and will place card if possible
-                if(placeNotWildCard(toPlace)) {
-                    isPlaced = true;
-                }
-
-                //change the color of the game
-                currentGameState.setCurrentColor(currentGameState.getDiscardPile().getTopCard().getColor());
+            //checks to see if the card is playable and will place card if possible
+            if (placeNotWildCard(toPlace)) {
+                isPlaced = true;
             }
+
+            //change the color of the game
+            currentGameState.setCurrentColor(currentGameState.getDiscardPile().getTopCard().getColor());
+        }
 
         //if the card doesn't match any other card so it cannot be played
         return isPlaced;
@@ -269,8 +281,7 @@ public class UnoLocalGame extends LocalGame {
     *
     * @param Card
     */
-    public void placeCardDown(Card placeCard)
-    {
+    public void placeCardDown(Card placeCard) {
 
         this.currentGameState.getCurrentPlayerHand().remove(placeCard); //remove card from players hand
         this.currentGameState.getDiscardPile().put(placeCard); //place card
@@ -341,6 +352,14 @@ public class UnoLocalGame extends LocalGame {
             }
         }
         return false;
+    }
+
+    public boolean ifStart() {
+        for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
+            if (!(this.currentGameState.getPlayerHandAt(i).isEmpty()))
+            return false;
+        }
+        return true;
     }
 
 }
