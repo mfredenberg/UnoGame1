@@ -69,6 +69,7 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
                         if (playableCards.get(i) == null) continue;
                         if (playableCards.get(i).getType() == Type.WILDDRAW4) {
                             this.game.sendAction(new PlaceCardAction(this, i));
+                            this.game.sendAction(new ColorAction(this,mostOfColor(state.getCurrentPlayerHand())));
                             return;
                         }
                     }
@@ -102,16 +103,15 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
                     if (this.playableCards.get(i) == null) continue;
                     if (playableCards.get(i).getType() != Type.WILD
                             || playableCards.get(i).getType() != Type.WILDDRAW4) {
-                        {
-                            this.game.sendAction(new PlaceCardAction(this, i));
-                            return;
-                        }
+                        this.game.sendAction(new PlaceCardAction(this, i));
+                        return;
+
                     }
                 }
 
 
                 //will play a wild if its is the only card it can play
-                    for (int i = 0; i < playableCards.size(); i++) {
+                for (int i = 0; i < playableCards.size(); i++) {
                     if (playableCards.get(i) == null) continue;
                     if (playableCards.get(i).getType() == Type.WILD
                             || playableCards.get(i).getType() == Type.WILDDRAW4) {

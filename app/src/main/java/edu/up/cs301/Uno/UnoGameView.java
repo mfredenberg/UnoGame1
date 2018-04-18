@@ -62,7 +62,7 @@ public class UnoGameView extends SurfaceView {
         if (this.handstoDraw != null) {
             drawCPUHands(canvas);
             double heightMul = .62;
-            drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 -150);
+            drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 150);
             width = 0;
             for (int i = 0; i < this.handstoDraw.get(this.currPlayerID).size(); i++) {
                 if (i == 9) {
@@ -92,8 +92,7 @@ public class UnoGameView extends SurfaceView {
 
     public void drawCard(Canvas canvas, Card toDraw, int x, int y) {
         Bitmap card;
-        if(toDraw == null)
-        {
+        if (toDraw == null) {
             card = this.cardPics.get("cover");
             canvas.drawBitmap(card, x, y, null);
             return;
@@ -314,24 +313,24 @@ public class UnoGameView extends SurfaceView {
     }
 
     public void drawCPUHands(Canvas canvas) {
-        int height = 70;
-        int drawHandTextWidth = 20;
+        int height = 90;
+        int drawHandTextWidth = 30;
         for (int i = 0; i < this.handstoDraw.size(); i++) {
             if (i == this.currPlayerID) continue;
             int j = 0;
-            for(Card c: this.handstoDraw.get(i))
-            {
-                drawCard(canvas,null,10 + 5 * j, height);
-                j+=5;
+            for (Card c : this.handstoDraw.get(i)) {
+                drawCard(canvas, null, 10 + 5 * j, height);
+                j += 5;
             }
             Paint cpuText = new Paint();
             cpuText.setTextSize(40);
+            if (this.handstoDraw.size() == 1) cpuText.setColor(android.graphics.Color.RED);
             int playerNum = i + 1;
             canvas.drawText("Player's " + playerNum + " Number of Cards: " + this.handstoDraw.get(i).size()
-            ,drawHandTextWidth,40, cpuText);
+                    , drawHandTextWidth, 40, cpuText);
 
-            drawHandTextWidth+=550;
-            height+=CARD_HEIGHT+20;
+            drawHandTextWidth += 550;
+            height += CARD_HEIGHT + 20;
 
         }
     }
