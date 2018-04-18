@@ -1,5 +1,7 @@
 package edu.up.cs301.Uno.actionMsg;
 
+import java.io.Serializable;
+
 import edu.up.cs301.Uno.Card;
 import edu.up.cs301.Uno.Color;
 import edu.up.cs301.game.GamePlayer;
@@ -9,7 +11,8 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * Created by fredenbe20 on 3/27/2018.
  */
 
-public class PlaceCardAction extends GameAction {
+public class PlaceCardAction extends GameAction implements Serializable {
+    private static final long serialVersionUID = 21323123L;
     private int cardIndex;
     private Color newColor = null;
 

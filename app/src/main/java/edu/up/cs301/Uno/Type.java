@@ -1,5 +1,7 @@
 package edu.up.cs301.Uno;
 
+import java.io.Serializable;
+
 /**
  * Created by steli on 3/27/2018.
  *
@@ -10,7 +12,7 @@ package edu.up.cs301.Uno;
  */
 
 
-public enum Type {
+public enum Type implements Serializable {
     ZERO,
     ONE,
     TWO,

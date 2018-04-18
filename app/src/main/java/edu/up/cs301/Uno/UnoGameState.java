@@ -137,8 +137,9 @@ public class UnoGameState extends GameState implements Serializable {
 
     }
 
-
-    //all getters and setters
+/*
+Appropriate Getters and setters for the Uno game state.
+ */
 
     public Deck getDrawPile() {
         return this.drawPile;
@@ -178,6 +179,12 @@ public class UnoGameState extends GameState implements Serializable {
         return this.playerHands.size();
     }
 
+
+    /*
+    Method that sets the num of players once game is initialized
+     @return void
+     @Param number of players
+     */
     public void setNumPlayers(int players) {
         while (players < getNumPlayers()) {
             this.playerHands.remove(this.playerHands.size() - 1);

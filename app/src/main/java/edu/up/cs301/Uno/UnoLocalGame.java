@@ -19,15 +19,15 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * @author Stelios Popoutsakis
  * @author Alli Jacobs
  * @author Mason Fredenberg
- *
- * The local game class houses all necessary actions and rules
- * for uno to work
+ *         <p>
+ *         The local game class houses all necessary actions and rules
+ *         for uno to work
  */
 
 public class UnoLocalGame extends LocalGame {
 
     private UnoGameState currentGameState; // current state
-    private boolean gameOver = false;// true if game is over
+
 
     /*
     *Ctor called at beginning of game that initializes the game state to a new game
@@ -44,13 +44,12 @@ public class UnoLocalGame extends LocalGame {
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
-        if(ifStart())
-        {
+
+        //Citiation
+        if (ifStart()) {
             this.currentGameState.setNumPlayers(this.players.length);
-            for(int i = 0; i < this.currentGameState.getNumPlayers(); i++)
-            {
-                for(int j = 0; j < 7; j++ )
-                {
+            for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
+                for (int j = 0; j < 7; j++) {
                     this.currentGameState.getPlayerHandAt(i).add(this.currentGameState.getDrawPile().take());
                 }
             }
@@ -92,10 +91,11 @@ public class UnoLocalGame extends LocalGame {
     */
     @Override
     protected String checkIfGameOver() {
-        if (this.currentGameState.getCurrentPlayerHand().size() == 0) {
-            int playerId = this.currentGameState.getTurn();
-            this.gameOver = true;
-            return this.playerNames[playerId] + " has won";
+        for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
+            if (this.currentGameState.getPlayerHandAt(i).size() == 0) {
+                int playerId = i + 1;
+                return this.playerNames[playerId] + " has won";
+            }
         }
         return null;
     }
@@ -108,47 +108,45 @@ public class UnoLocalGame extends LocalGame {
     */
     @Override
     protected boolean makeMove(GameAction action) {
-        if (!this.gameOver) {
-            GamePlayer p = action.getPlayer();
-            int playerID = -1;
-            if (p instanceof UnoHumanPlayer) {
-                UnoHumanPlayer human = (UnoHumanPlayer) p;
-                playerID = human.getPlayerID();
+        GamePlayer p = action.getPlayer();
+        int playerID = -1;
+        if (p instanceof UnoHumanPlayer) {
+            UnoHumanPlayer human = (UnoHumanPlayer) p;
+            playerID = human.getPlayerID();
 
-            } else if (p instanceof UnoComputerPlayer) {
-                UnoComputerPlayer cpuDumb = (UnoComputerPlayer) p;
-                hasUno(cpuDumb.getPlayerID());
-                playerID = cpuDumb.getPlayerID();
+        } else if (p instanceof UnoComputerPlayer) {
+            UnoComputerPlayer cpuDumb = (UnoComputerPlayer) p;
+            hasUno(cpuDumb.getPlayerID());
+            playerID = cpuDumb.getPlayerID();
 
-            } else if (p instanceof UnoSmartComputerPlayer) {
-                UnoSmartComputerPlayer cpuSmart = (UnoSmartComputerPlayer) p;
-                hasUno(cpuSmart.getPlayerID());
-                playerID = cpuSmart.getPlayerID();
+        } else if (p instanceof UnoSmartComputerPlayer) {
+            UnoSmartComputerPlayer cpuSmart = (UnoSmartComputerPlayer) p;
+            hasUno(cpuSmart.getPlayerID());
+            playerID = cpuSmart.getPlayerID();
 
-            }
+        }
 
-            //actions
-            if (action instanceof Quit) {
-                quit();
-            } else if (action instanceof SkipTurnAction) {
-                return skipTurn(playerID);
-            } else if (action instanceof HasUnoAction) {
-                return hasUno(playerID);
-            } else if (action instanceof PlaceCardAction) {
-                PlaceCardAction place = (PlaceCardAction) action;
-                return placeCard(playerID, place.getCardIndex());
-            } else if (action instanceof ColorAction) {
-                ColorAction color = (ColorAction) action;
-                return changeColor(playerID, color.getWildColor());
-            } else if (action instanceof FalseUno) {
-                drawCard(playerID);
-                return drawCard(playerID);
+        //actions
+        if (action instanceof Quit) {
+            quit();
+        } else if (action instanceof SkipTurnAction) {
+            return skipTurn(playerID);
+        } else if (action instanceof HasUnoAction) {
+            return hasUno(playerID);
+        } else if (action instanceof PlaceCardAction) {
+            PlaceCardAction place = (PlaceCardAction) action;
+            return placeCard(playerID, place.getCardIndex());
+        } else if (action instanceof ColorAction) {
+            ColorAction color = (ColorAction) action;
+            return changeColor(playerID, color.getWildColor());
+        } else if (action instanceof FalseUno) {
+            drawCard(playerID);
+            return drawCard(playerID);
 
-            }
-            return false;
         }
         return false;
     }
+
 
     /*
     * method checks to see if draw is empty
@@ -393,7 +391,7 @@ public class UnoLocalGame extends LocalGame {
     public boolean ifStart() {
         for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
             if (!(this.currentGameState.getPlayerHandAt(i).isEmpty()))
-            return false;
+                return false;
         }
         return true;
     }
