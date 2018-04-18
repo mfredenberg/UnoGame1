@@ -33,9 +33,14 @@ public class UnoMainActivity extends GameMainActivity {
                 return new UnoHumanPlayer(name);
             }
         });
-        playerTypes.add(new GamePlayerType("Computer Player") {
+        playerTypes.add(new GamePlayerType("Dumb Computer Player") {
             public GamePlayer createPlayer(String name) {
                 return new UnoComputerPlayer(name);
+            }
+        });
+        playerTypes.add(new GamePlayerType("Smart Computer Player") {
+            public GamePlayer createPlayer(String name) {
+                return new UnoSmartComputerPlayer(name);
             }
         });
 

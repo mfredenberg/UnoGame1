@@ -10,8 +10,12 @@ import edu.up.cs301.game.infoMsg.GameState;
  * Created by fredenbe20 on 2/25/2018.
  * <p>
  * The UnoGameState class holds all info on the
- * current game state, and houses methods for
- * all options for a players actions.
+ * current game state
+ *
+ * The class also has getters and setters to change the state of the game
+ *
+ * A copy ctor can be made based on a playerID,
+ * This in turn makes all the other hands null
  *
  * @author Stelios Papoutsakis
  * @author Chris Fishback
@@ -22,11 +26,13 @@ import edu.up.cs301.game.infoMsg.GameState;
 public class UnoGameState extends GameState implements Serializable {
 
 
+    //serial number for serializable
     private static final long serialVersionUID = 417201801L;
 
     //one master array list that holds all the player hands
     private ArrayList<ArrayList<Card>> playerHands;
 
+    // Array of boolean values if a player has uno
     private ArrayList<Boolean> hasUno;
 
     //current turn, starting at 0
@@ -54,6 +60,8 @@ public class UnoGameState extends GameState implements Serializable {
         this.drawPile = new Deck();
         this.discardPile = new Deck();
         this.drawPile.add108();
+
+        // adding 7 cards to each player, and adding false to the hasUno ArrayList
         for (int i = 0; i < numPlayers; i++) {
             this.playerHands.add(new ArrayList<Card>());
             this.hasUno.add(false);
@@ -64,10 +72,7 @@ public class UnoGameState extends GameState implements Serializable {
         }
 
 
-        // adding 7 cards to each player
-
-
-        //setting all of the integer-based info
+        //turn always starts at player zero
         this.turn = 0;
 
         //setting game direction clockwise
@@ -76,7 +81,9 @@ public class UnoGameState extends GameState implements Serializable {
         //moving the top card from drawPile to discardPile
         this.discardPile.put(drawPile.take());
 
-        if (this.discardPile.getTopCard().getType() == Type.WILD ||
+
+       // if the top card is wild, take another till it isn't
+        while(this.discardPile.getTopCard().getType() == Type.WILD ||
                 this.discardPile.getTopCard().getType() == Type.WILDDRAW4) {
             this.discardPile.put(this.drawPile.take());
         }
@@ -87,7 +94,7 @@ public class UnoGameState extends GameState implements Serializable {
     }
 
     /*
-    * this constructor is used to make a deep copy of the game state
+    * this constructor is used to make a deep copy of the game state based on a playerID
     */
     public UnoGameState(UnoGameState masterGameState, int playerID) {
 
@@ -131,7 +138,7 @@ public class UnoGameState extends GameState implements Serializable {
     }
 
 
-    //getters and setters
+    //all getters and setters
 
     public Deck getDrawPile() {
         return this.drawPile;

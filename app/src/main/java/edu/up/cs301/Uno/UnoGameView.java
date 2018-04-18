@@ -25,7 +25,7 @@ public class UnoGameView extends SurfaceView {
 
     private static final int CARD_WIDTH = 246;//constant for card width
     private static final int CARD_HEIGHT = 366;//constant for card height
-    private ArrayList<ArrayList<Card>> handstoDraw;
+    private ArrayList<ArrayList<Card>> handstoDraw; // All players hand to draw
     private ArrayList<Boolean> isSelected = new ArrayList<Boolean>();
     private Card topCard;
     private int currPlayerID = 0;

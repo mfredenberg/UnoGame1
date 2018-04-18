@@ -20,6 +20,7 @@ public class UnoLocalGame extends LocalGame {
 
 
     private UnoGameState currentGameState; // current state
+    private boolean gameOver = false;// true if game is over
 
 
     /*
@@ -43,6 +44,11 @@ public class UnoLocalGame extends LocalGame {
             UnoGameState copy = new UnoGameState(this.currentGameState, cpuDumb.getPlayerID());
             cpuDumb.sendInfo(copy);
 
+        } else if (p instanceof UnoSmartComputerPlayer) {
+            UnoSmartComputerPlayer cpuSmart = (UnoSmartComputerPlayer) p;
+            UnoGameState copy = new UnoGameState(this.currentGameState, cpuSmart.getPlayerID());
+            cpuSmart.sendInfo(copy);
+
         }
 
 
@@ -63,6 +69,7 @@ public class UnoLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         if (this.currentGameState.getCurrentPlayerHand().size() == 0) {
             int playerId = this.currentGameState.getTurn();
+            this.gameOver = true;
             return this.playerNames[playerId] + " has won";
         }
         return null;
@@ -73,37 +80,44 @@ public class UnoLocalGame extends LocalGame {
     */
     @Override
     protected boolean makeMove(GameAction action) {
-        if(checkIfGameOver() != null) return false;
-        GamePlayer p = action.getPlayer();
-        int playerID = -1;
-        if (p instanceof UnoHumanPlayer) {
-            UnoHumanPlayer human = (UnoHumanPlayer) p;
-            playerID = human.getPlayerID();
+        if (!this.gameOver) {
+            GamePlayer p = action.getPlayer();
+            int playerID = -1;
+            if (p instanceof UnoHumanPlayer) {
+                UnoHumanPlayer human = (UnoHumanPlayer) p;
+                playerID = human.getPlayerID();
 
-        } else if (p instanceof UnoComputerPlayer) {
-            UnoComputerPlayer cpuDumb = (UnoComputerPlayer) p;
-            hasUno(cpuDumb.getPlayerID());
-            playerID = cpuDumb.getPlayerID();
+            } else if (p instanceof UnoComputerPlayer) {
+                UnoComputerPlayer cpuDumb = (UnoComputerPlayer) p;
+                hasUno(cpuDumb.getPlayerID());
+                playerID = cpuDumb.getPlayerID();
 
-        }
+            } else if (p instanceof UnoSmartComputerPlayer) {
+                UnoSmartComputerPlayer cpuSmart = (UnoSmartComputerPlayer) p;
+                hasUno(cpuSmart.getPlayerID());
+                playerID = cpuSmart.getPlayerID();
 
-        //actions
-        if (action instanceof Quit) {
-            quit();
-        } else if (action instanceof SkipTurnAction) {
-            return skipTurn(playerID);
-        } else if (action instanceof HasUnoAction) {
-            return hasUno(playerID);
-        } else if (action instanceof PlaceCardAction) {
-            PlaceCardAction place = (PlaceCardAction) action;
-            return placeCard(playerID, place.getCardIndex());
-        } else if (action instanceof ColorAction) {
-            ColorAction color = (ColorAction) action;
-            return changeColor(playerID, color.getWildColor());
-        } else if (action instanceof FalseUno) {
-            drawCard(playerID);
-            return drawCard(playerID);
+            }
 
+            //actions
+            if (action instanceof Quit) {
+                quit();
+            } else if (action instanceof SkipTurnAction) {
+                return skipTurn(playerID);
+            } else if (action instanceof HasUnoAction) {
+                return hasUno(playerID);
+            } else if (action instanceof PlaceCardAction) {
+                PlaceCardAction place = (PlaceCardAction) action;
+                return placeCard(playerID, place.getCardIndex());
+            } else if (action instanceof ColorAction) {
+                ColorAction color = (ColorAction) action;
+                return changeColor(playerID, color.getWildColor());
+            } else if (action instanceof FalseUno) {
+                drawCard(playerID);
+                return drawCard(playerID);
+
+            }
+            return false;
         }
         return false;
     }
