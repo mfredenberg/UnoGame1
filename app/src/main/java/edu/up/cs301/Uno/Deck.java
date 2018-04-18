@@ -83,6 +83,8 @@ public class Deck implements Serializable {
 
     /*
     * method puts a card at the beginning of the deck
+    * @param card
+    * @return void
     */
     public void put(Card card) {
         put(card, 0);
@@ -90,6 +92,8 @@ public class Deck implements Serializable {
 
     /*
     * method puts a card at given index
+    * @param card int index
+    * @return void
     */
     public void put(Card card, int index) {
         this.deck.add(index, card);
@@ -97,6 +101,8 @@ public class Deck implements Serializable {
 
     /*
     * method removes card from the beginning of the deck
+    * @param none
+    * @return Card
     */
     public Card take() {
         return deck.remove(0);
@@ -106,6 +112,8 @@ public class Deck implements Serializable {
     /*
     * method gets a card at a given index <---- is a repeat of getCard,
     * we need to remove one of the tow
+    * @param int index
+    * @return Card
     */
     public Card getCardAt(int index) {
         return deck.get(index);
@@ -113,6 +121,7 @@ public class Deck implements Serializable {
 
     /*
     * method gets a deck
+    *
     */
     public ArrayList<Card> getDeck() {
         return deck;

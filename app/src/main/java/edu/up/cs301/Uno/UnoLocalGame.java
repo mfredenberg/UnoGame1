@@ -49,13 +49,17 @@ public class UnoLocalGame extends LocalGame {
     protected void sendUpdatedStateTo(GamePlayer p) {
         if(ifStart())
         {
+            // sets numplayers to correct length
             this.currentGameState.setNumPlayers(this.players.length);
+
+            // draws cards for players
             for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
                 for (int j = 0; j < 7; j++) {
                     this.currentGameState.getPlayerHandAt(i).add(this.currentGameState.getDrawPile().take());
                 }
             }
         }
+
         if (p instanceof UnoHumanPlayer) {
             UnoHumanPlayer human = (UnoHumanPlayer) p;
             UnoGameState copy = new UnoGameState(this.currentGameState, human.getPlayerID());
@@ -148,8 +152,7 @@ public class UnoLocalGame extends LocalGame {
             }
             return false;
         }
-        return false;
-    }
+
 
     /*
     * method checks to see if draw is empty
@@ -391,6 +394,13 @@ public class UnoLocalGame extends LocalGame {
         return false;
     }
 
+
+    /*
+   * method that checks if all the arrayLists are empty, which means it is the start of the game
+   *
+   * @returns boolean
+   * @param none
+   */
     public boolean ifStart() {
         for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
             if (!(this.currentGameState.getPlayerHandAt(i).isEmpty()))
