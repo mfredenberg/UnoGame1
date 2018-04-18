@@ -137,103 +137,44 @@ public class UnoLocalGame extends LocalGame {
 
     public boolean placeCard(int playerID, int cardIndex) {
 
-        boolean didPlace = false;
+        //find the card that is being placed
         Card toPlace = this.currentGameState.getCurrentPlayerHand().get(cardIndex);
+
+        boolean isPlaced = false;
 
         if (canMove(playerID)) { //check if the player can make a mover
 
             //Check if selected card is a wild card ------------------------------------------------------\\
             if (toPlace.getType() == Type.WILD || toPlace.getType() == Type.WILDDRAW4) {
 
-                if (toPlace.getType() == Type.WILD) {//ifcardiswild
+                if (toPlace.getType() == Type.WILD) { //if card is wild
 
-                    //Get new color from user
-                    //this.currentGameState.setCurrentColor(card.getColor());
+                    //place the card
+                    placeCardDown(toPlace);
 
-                    //placethecard
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
+                    isPlaced = true;
+                } else if (toPlace.getType() == Type.WILDDRAW4) { //if card is a wild draw 4 card
 
+                    //place card
+                    placeCardDown(toPlace);
 
-                    didPlace = true;
+                    for(int i = 0; i < 4; i++)
+                        this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
 
-                    return true;
-                } else if (toPlace.getType() == Type.WILDDRAW4) {//ifcardisawilddraw4card
-
-                    //Get new color from user
-
-
-                    //have the next player up draw 4 cards
-
-                    //placecard
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
-                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
-                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
-                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
-
-
-                    return true;
+                    isPlaced = true;
                 }
             }
-
-            //Check if selected card is not a wild card but valid------------------------------------------------------\\
-            if (toPlace.getType() == currentGameState.getDiscardPile().getCardAt(0).getType()
-                    || toPlace.getColor() == currentGameState.getCurrentColor()) {
-
-                if (toPlace.getType() == Type.ZERO || toPlace.getType() == Type.ONE ||
-                        toPlace.getType() == Type.TWO || toPlace.getType() == Type.THREE ||
-                        toPlace.getType() == Type.FOUR || toPlace.getType() == Type.FIVE ||
-                        toPlace.getType() == Type.SIX || toPlace.getType() == Type.SEVEN ||
-                        toPlace.getType() == Type.EIGHT || toPlace.getType() == Type.NINE) {
-
-                    //placethecard
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.setTurn(getNextTurn(1));
-
-                    didPlace = true;
-
-                } else if (toPlace.getType() == Type.SKIP) {
-
-                    //add card to discard pile
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.setTurn(getNextTurn(2));
-                    didPlace = true;
-
-                } else if (toPlace.getType() == Type.REVERSE) {
-                    //change game direction
-                    this.currentGameState.setGameDirection(!this.currentGameState.getGameDirection());
-
-                    //place card
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    if (this.currentGameState.getNumPlayers() == 2)
-                        this.currentGameState.setTurn(getNextTurn(2));
-                    else
-                        this.currentGameState.setTurn(getNextTurn(1));
-
-                    didPlace = true;
-
-                } else if (toPlace.getType() == Type.PLUS2) {
-
-                    //place card
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
-                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
-                    this.currentGameState.setTurn(getNextTurn(1));
-
-
-                    didPlace = true;
-
+                //checks to see if the card is playable and will place card if possible
+                if(placeNotWildCard(toPlace)) {
+                    isPlaced = true;
                 }
+
+                //change the color of the game
                 currentGameState.setCurrentColor(currentGameState.getDiscardPile().getTopCard().getColor());
             }
-        }
-        return didPlace;
+
+        //if the card doesn't match any other card so it cannot be played
+        return isPlaced;
 
     }
 
@@ -297,6 +238,7 @@ public class UnoLocalGame extends LocalGame {
 
     public int getNextTurn(int numTurns) {
         int turn = this.currentGameState.getTurn();
+
         while (numTurns != 0) {
             if (this.currentGameState.getGameDirection()) {
                 turn += 1;
@@ -307,6 +249,7 @@ public class UnoLocalGame extends LocalGame {
             }
             numTurns--;
         }
+
         return turn;
 
 
@@ -321,5 +264,77 @@ public class UnoLocalGame extends LocalGame {
         return false;
     }
 
+    /*
+    *This method places the players card onto the discard deck
+    */
+    public void placeCardDown(Card placeCard)
+    {
+
+        this.currentGameState.getCurrentPlayerHand().remove(placeCard); //remove card from players hand
+        this.currentGameState.getDiscardPile().put(placeCard); //place card
+
+    }
+
+    /*
+    *This method places the players card - which will always be a non wild card
+    */
+    public boolean placeNotWildCard(Card placeCard) {
+
+        if (placeCard.getType() == currentGameState.getDiscardPile().getCardAt(0).getType()
+                || placeCard.getColor() == currentGameState.getCurrentColor()) {
+
+            if (placeCard.getType() == Type.ZERO || placeCard.getType() == Type.ONE ||
+                    placeCard.getType() == Type.TWO || placeCard.getType() == Type.THREE ||
+                    placeCard.getType() == Type.FOUR || placeCard.getType() == Type.FIVE ||
+                    placeCard.getType() == Type.SIX || placeCard.getType() == Type.SEVEN ||
+                    placeCard.getType() == Type.EIGHT || placeCard.getType() == Type.NINE) { //if the card is a number card
+
+                //place the card
+                placeCardDown(placeCard);
+
+                //change turn
+                this.currentGameState.setTurn(getNextTurn(1));
+
+                return true;
+
+            } else if (placeCard.getType() == Type.SKIP) {
+
+                //add card to discard pile
+                placeCardDown(placeCard);
+
+                //change turn
+                this.currentGameState.setTurn(getNextTurn(2));
+
+                return true;
+
+            } else if (placeCard.getType() == Type.REVERSE) {
+                //change game direction
+                this.currentGameState.setGameDirection(!this.currentGameState.getGameDirection());
+
+                //place card
+                placeCardDown(placeCard);
+
+                if (this.currentGameState.getNumPlayers() == 2)
+                    this.currentGameState.setTurn(getNextTurn(2));
+                else
+                    this.currentGameState.setTurn(getNextTurn(1));
+
+                return true;
+
+            } else if (placeCard.getType() == Type.PLUS2) {
+
+                //place card
+                placeCardDown(placeCard);
+
+                this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+                this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+                this.currentGameState.setTurn(getNextTurn(1));
+
+                return true;
+
+            }
+        }
+        return false;
+    }
 
 }
