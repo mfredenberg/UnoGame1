@@ -19,6 +19,8 @@ import java.util.Random;
 
 public class Deck implements Serializable {
 
+    private static final long serialVersionUID = 417201801L;
+
     //holds the deck of cards
     private ArrayList<Card> deck = new ArrayList<Card>();
 

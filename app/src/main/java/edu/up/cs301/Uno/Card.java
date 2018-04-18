@@ -16,6 +16,8 @@ import java.io.Serializable;
 
 public class Card implements Serializable {
 
+    private static final long serialVersionUID = 417201801L;
+
     //description variables for the card
     private Color color; //1-9: numbers, 10: skip, 11: reverse,
     //12: draw2, 13: wild, 14: wild draw 4

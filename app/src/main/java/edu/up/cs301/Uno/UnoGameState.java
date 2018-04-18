@@ -1,6 +1,7 @@
 package edu.up.cs301.Uno;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import edu.up.cs301.game.infoMsg.GameState;
@@ -18,8 +19,10 @@ import edu.up.cs301.game.infoMsg.GameState;
  * @author Mason Fredenberg
  */
 
-public class UnoGameState extends GameState {
+public class UnoGameState extends GameState implements Serializable {
 
+
+    private static final long serialVersionUID = 417201801L;
 
     //one master array list that holds all the player hands
     private ArrayList<ArrayList<Card>> playerHands;
