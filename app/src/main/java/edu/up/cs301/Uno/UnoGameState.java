@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import edu.up.cs301.game.infoMsg.GameState;
 
 /**
- * Created by fredenbe20 on 2/25/2018.
+ * Created by Mason Fredenberg on 2/25/2018.
  * <p>
  * The UnoGameState class holds all info on the
  * current game state

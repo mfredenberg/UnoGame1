@@ -10,7 +10,10 @@ import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.infoMsg.GameInfo;
 
 /**
- * Created by fredenbe20 on 4/15/2018.
+ * Created by Mason Fredenberg on 4/15/2018.
+ *
+ * This class houses the actions and algorithm for the
+ * games smart computer player.
  *
  * @author Chris Fishback
  * @author Stelios Popoutsakis

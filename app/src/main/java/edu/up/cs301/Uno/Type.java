@@ -3,7 +3,9 @@ package edu.up.cs301.Uno;
 import java.io.Serializable;
 
 /**
- * Created by steli on 3/27/2018.
+ * Created by Stelios Popoutsakis on 3/27/2018.
+ *
+ * This class creates the enumerators for the type of cards
  *
  * @author Chris Fishback
  * @author Stelios Popoutsakis

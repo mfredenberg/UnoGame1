@@ -13,15 +13,18 @@ import edu.up.cs301.game.LocalGame;
 import edu.up.cs301.game.actionMsg.GameAction;
 
 /**
- * Created by fredenbe20 on 3/27/2018.
+ * Created by Mason Fredenberg on 3/27/2018.
+ *
+ * The local game class houses all necessary actions and rules
+ * for uno to work
  *
  * @author Chris Fishback
  * @author Stelios Popoutsakis
  * @author Alli Jacobs
  * @author Mason Fredenberg
- *         <p>
- *         The local game class houses all necessary actions and rules
- *         for uno to work
+ *
+ * The local game class houses all necessary actions and rules
+ * for uno to work
  */
 
 public class UnoLocalGame extends LocalGame {
@@ -44,9 +47,8 @@ public class UnoLocalGame extends LocalGame {
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
-
-        //Citiation
-        if (ifStart()) {
+        if(ifStart())
+        {
             this.currentGameState.setNumPlayers(this.players.length);
             for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
                 for (int j = 0; j < 7; j++) {
@@ -76,7 +78,7 @@ public class UnoLocalGame extends LocalGame {
     /*
     * method checks if it's the players turn
     *
-    * @param int
+    * @param playerIdx
     * @return boolean
     */
     @Override
@@ -143,10 +145,11 @@ public class UnoLocalGame extends LocalGame {
             drawCard(playerID);
             return drawCard(playerID);
 
+            }
+            return false;
         }
         return false;
     }
-
 
     /*
     * method checks to see if draw is empty
@@ -165,8 +168,8 @@ public class UnoLocalGame extends LocalGame {
     * will place it if it can, and proceeds to do the events
     * needed based on placed card. ie: draw 2
     *
-    * @param int
-    * @param int
+    * @param playerID
+    * @param cardIndex
     *
     * @return boolean
     */
@@ -216,7 +219,7 @@ public class UnoLocalGame extends LocalGame {
     /*
     * method draws a card for the current player
     *
-    * @param int
+    * @param playerID
     * @return boolean
     */
     private boolean drawCard(int playerID) {
@@ -309,11 +312,11 @@ public class UnoLocalGame extends LocalGame {
     }
 
 
-    //helper methods-------------------------------------------------\\
+    //helper methods--------------------------------------------------------\\
     /*
     *This helper method places the players card onto the discard deck
     *
-    * @param Card
+    * @param placeCard
     */
     public void placeCardDown(Card placeCard) {
 
@@ -327,7 +330,7 @@ public class UnoLocalGame extends LocalGame {
     * This method places the players card - which will always be a non wild card
     *
     * @returns boolean
-    * @param Card
+    * @param placeCard
     */
     public boolean placeNotWildCard(Card placeCard) {
 
@@ -391,7 +394,7 @@ public class UnoLocalGame extends LocalGame {
     public boolean ifStart() {
         for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
             if (!(this.currentGameState.getPlayerHandAt(i).isEmpty()))
-                return false;
+            return false;
         }
         return true;
     }

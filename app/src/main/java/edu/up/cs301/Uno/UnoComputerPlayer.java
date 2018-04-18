@@ -10,8 +10,10 @@ import android.util.Log;
 
 
 /**
+ * Created by Mason Fredenberg on 4/15/2018.
  *
- * Created by fredenbe20 on 4/15/2018.
+ * This class houses the automation of play for
+ * the dumb computer player.
  *
  * @author Chris Fishback
  * @author Stelios Popoutsakis

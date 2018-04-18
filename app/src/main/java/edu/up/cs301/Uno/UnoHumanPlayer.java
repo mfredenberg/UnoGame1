@@ -22,7 +22,9 @@ import edu.up.cs301.game.infoMsg.GameInfo;
 
 
 /**
- * Created by fredenbe20 on 3/27/2018.
+ * Created by Mason Fredenberg on 3/27/2018.
+ *
+ * This class sets up the GUI for the human player
  *
  * @author Chris Fishback
  * @author Stelios Popoutsakis
