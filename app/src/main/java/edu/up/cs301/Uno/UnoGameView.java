@@ -314,7 +314,8 @@ public class UnoGameView extends SurfaceView {
     }
 
     public void drawCPUHands(Canvas canvas) {
-        int height = 50;
+        int height = 70;
+        int drawHandTextWidth = 20;
         for (int i = 0; i < this.handstoDraw.size(); i++) {
             if (i == this.currPlayerID) continue;
             int j = 0;
@@ -324,9 +325,12 @@ public class UnoGameView extends SurfaceView {
                 j+=5;
             }
             Paint cpuText = new Paint();
-            cpuText.setTextSize(30);
-            canvas.drawText("Player's " + i + " Number of Cards: " + this.handstoDraw.get(i).size()
-            , 20,height-50, cpuText);
+            cpuText.setTextSize(40);
+            int playerNum = i + 1;
+            canvas.drawText("Player's " + playerNum + " Number of Cards: " + this.handstoDraw.get(i).size()
+            ,drawHandTextWidth,40, cpuText);
+
+            drawHandTextWidth+=550;
             height+=CARD_HEIGHT+20;
 
         }
