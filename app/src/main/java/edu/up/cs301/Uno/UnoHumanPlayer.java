@@ -23,7 +23,13 @@ import edu.up.cs301.game.infoMsg.GameInfo;
 
 /**
  * Created by fredenbe20 on 3/27/2018.
+ *
+ * @author Chris Fishback
+ * @author Stelios Popoutsakis
+ * @author Alli Jacobs
+ * @author Mason Fredenberg
  */
+
 
 public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListener,
         View.OnTouchListener {
