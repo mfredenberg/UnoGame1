@@ -26,7 +26,7 @@ public class UnoLocalGame extends LocalGame {
     *Ctor called at begining of game that initializes the game state to a new game
      */
     public UnoLocalGame(int numPlayers) {
-        this.currentGameState = new UnoGameState(numPlayers);
+        this.currentGameState = new UnoGameState(4);
     }
 
     /*
@@ -72,6 +72,7 @@ public class UnoLocalGame extends LocalGame {
     */
     @Override
     protected boolean makeMove(GameAction action) {
+        if(checkIfGameOver() == null) return false;
         GamePlayer p = action.getPlayer();
         int playerID = -1;
         if (p instanceof UnoHumanPlayer) {
