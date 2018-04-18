@@ -14,14 +14,18 @@ import edu.up.cs301.game.actionMsg.GameAction;
 
 /**
  * Created by fredenbe20 on 3/27/2018.
+ *
+ * Edited by Stelios Popoutsakis, Alli Jacobs,
+ * Chris Fishback and Mason Fredenberg
+ *
+ * The local game class houses all necessary actions and rules
+ * for uno to work
  */
 
 public class UnoLocalGame extends LocalGame {
 
-
     private UnoGameState currentGameState; // current state
     private boolean gameOver = false;// true if game is over
-
 
     /*
     *Ctor called at begining of game that initializes the game state to a new game
@@ -32,6 +36,8 @@ public class UnoLocalGame extends LocalGame {
 
     /*
     * method sends the new state of the game to the current player
+    *
+    * @param GamePlayer
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
@@ -56,6 +62,9 @@ public class UnoLocalGame extends LocalGame {
 
     /*
     * method checks if it's the players turn
+    *
+    * @param int
+    * @return boolean
     */
     @Override
     protected boolean canMove(int playerIdx) {
@@ -64,6 +73,8 @@ public class UnoLocalGame extends LocalGame {
 
     /*
     * method checks if the game is over
+    *
+    * @return String
     */
     @Override
     protected String checkIfGameOver() {
@@ -77,6 +88,9 @@ public class UnoLocalGame extends LocalGame {
 
     /*
     * method checks which action to take
+    *
+    * @param GameAction
+    * @return boolean
     */
     @Override
     protected boolean makeMove(GameAction action) {
@@ -123,11 +137,10 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    * checks to see if the card selected by the player can
-    * place it onto discard pile and places it
+    * method checks to see if draw is empty
+    *
+    * @return boolean
     */
-
-    //checks to see if draw is empty
     public boolean isDrawEmpty() {
         if (currentGameState.getDrawPile().getDeckSize() == 0) {
             return true;
@@ -135,6 +148,16 @@ public class UnoLocalGame extends LocalGame {
         return false;
     }
 
+    /*
+    * method checks to see if card selected can be placed,
+    * will place it if it can, and proceeds to do the events
+    * needed based on placed card. ie: draw 2
+    *
+    * @param int
+    * @param int
+    *
+    * @return boolean
+    */
     public boolean placeCard(int playerID, int cardIndex) {
 
         //find the card that is being placed
@@ -179,7 +202,10 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    * draws a card for the current player
+    * method draws a card for the current player
+    *
+    * @param int
+    * @return boolean
     */
     private boolean drawCard(int playerID) {
 
@@ -200,7 +226,10 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    * skips turn and draws a card for current player
+    * method skips turn and draws a card for current player
+    *
+    * @param int
+    * @return boolean
     */
     public boolean skipTurn(int playerID) {
         boolean draw = drawCard(playerID);
@@ -217,21 +246,24 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    * quits system
+    * method quits system
     */
     public void quit() {
         System.exit(0);
     }
 
     /*
-    * checks if the player has uno
+    * method checks if the player has uno
+    *
+    * @return boolean
+    * @param int
     */
     public boolean hasUno(int playerID) {
         this.currentGameState.setHasUno(playerID);
         return this.currentGameState.hasUno(playerID);
     }
 
-    //getters and setters
+    //getters and setters---------------------------------------------\\
     public UnoGameState getCurrentGameState() {
         return currentGameState;
     }
@@ -264,8 +296,10 @@ public class UnoLocalGame extends LocalGame {
         return false;
     }
 
+
+    //helper methods-------------------------------------------------\\
     /*
-    *This method places the players card onto the discard deck
+    *This helper method places the players card onto the discard deck
     *
     * @param Card
     */
