@@ -102,7 +102,7 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
                 for (int i = 0; i < playableCards.size(); i++) {
                     if (this.playableCards.get(i) == null) continue;
                     if (playableCards.get(i).getType() != Type.WILD
-                            || playableCards.get(i).getType() != Type.WILDDRAW4) {
+                            && playableCards.get(i).getType() != Type.WILDDRAW4) {
                         this.game.sendAction(new PlaceCardAction(this, i));
                         return;
 

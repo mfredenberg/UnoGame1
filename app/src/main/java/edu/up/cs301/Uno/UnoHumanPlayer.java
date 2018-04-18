@@ -105,6 +105,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
             this.hands.clear();
+            this.unoSurface.setCurrentColor(state.getCurrentColor());
             for (int i = 0; i < state.getNumPlayers(); i++) {
                 this.hands.add(state.getPlayerHandAt(i));
             }

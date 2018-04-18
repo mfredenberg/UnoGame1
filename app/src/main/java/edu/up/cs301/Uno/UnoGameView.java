@@ -31,7 +31,7 @@ public class UnoGameView extends SurfaceView {
     private int currPlayerID = 0;
     private HashMap<String, Bitmap> cardPics;
     private ArrayList<RectF> handToSelect = new ArrayList<RectF>(); //holds the Rect objects surrounding each card, letting them be selectable
-
+    private Color currentColor;
     int width;
 
     public UnoGameView(Context context) {
@@ -62,7 +62,7 @@ public class UnoGameView extends SurfaceView {
         if (this.handstoDraw != null) {
             drawCPUHands(canvas);
             double heightMul = .62;
-            drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 150);
+            drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 200);
             width = 0;
             for (int i = 0; i < this.handstoDraw.get(this.currPlayerID).size(); i++) {
                 if (i == 9) {
@@ -328,10 +328,17 @@ public class UnoGameView extends SurfaceView {
             int playerNum = i + 1;
             canvas.drawText("Player's " + playerNum + " Number of Cards: " + this.handstoDraw.get(i).size()
                     , drawHandTextWidth, 40, cpuText);
+            canvas.drawText("Current Color is " + this.currentColor, getWidth() / 2 - 150,getHeight()/2 -150 + CARD_HEIGHT
+                    ,cpuText);
 
             drawHandTextWidth += 550;
             height += CARD_HEIGHT + 20;
 
         }
+    }
+
+    public void setCurrentColor(Color color)
+    {
+        this.currentColor = color;
     }
 }
