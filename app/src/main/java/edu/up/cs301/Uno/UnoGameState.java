@@ -53,7 +53,7 @@ public class UnoGameState extends GameState implements Serializable {
     /*
     * regular constructor
     */
-    public UnoGameState(int numPlayers) {
+    public UnoGameState() {
         // creating array of hands and makeing the decks
         this.playerHands = new ArrayList<ArrayList<Card>>();
         this.hasUno = new ArrayList<Boolean>();
@@ -62,7 +62,7 @@ public class UnoGameState extends GameState implements Serializable {
         this.drawPile.add108();
 
         // adding 7 cards to each player, and adding false to the hasUno ArrayList
-        for (int i = 0; i < numPlayers; i++) {
+        for (int i = 0; i < 4; i++) {
             this.playerHands.add(new ArrayList<Card>());
             this.hasUno.add(false);
             for (int j = 0; j < 7; j++) {

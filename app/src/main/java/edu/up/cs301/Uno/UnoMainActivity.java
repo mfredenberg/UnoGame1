@@ -17,8 +17,8 @@ import static edu.up.cs301.game.R.id.skipTurnButton;
 public class UnoMainActivity extends GameMainActivity {
 
     // the port number that this game will use when playing over the network
-    private static final int PORT_NUMBER = 15234;
-    private int numPlayers;
+    private static final int PORT_NUMBER = 4498;
+
 
 
     // copied from pig lab
@@ -49,7 +49,6 @@ public class UnoMainActivity extends GameMainActivity {
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
-        this.numPlayers = 2;
         return defaultConfig;
 
 
@@ -57,7 +56,7 @@ public class UnoMainActivity extends GameMainActivity {
 
     @Override
     public LocalGame createLocalGame() {
-        return new UnoLocalGame(this.numPlayers);
+        return new UnoLocalGame();
     }
 
 }
