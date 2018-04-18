@@ -11,9 +11,9 @@ import edu.up.cs301.game.infoMsg.GameState;
  * <p>
  * The UnoGameState class holds all info on the
  * current game state
- *
+ * <p>
  * The class also has getters and setters to change the state of the game
- *
+ * <p>
  * A copy ctor can be made based on a playerID,
  * This in turn makes all the other hands null
  *
@@ -27,7 +27,7 @@ public class UnoGameState extends GameState implements Serializable {
 
 
     //serial number for serializable
-    private static final long serialVersionUID = 417201801L;
+    private static final long serialVersionUID = 417201802L;
 
     //one master array list that holds all the player hands
     private ArrayList<ArrayList<Card>> playerHands;
@@ -65,10 +65,10 @@ public class UnoGameState extends GameState implements Serializable {
         for (int i = 0; i < 4; i++) {
             this.playerHands.add(new ArrayList<Card>());
             this.hasUno.add(false);
-            for (int j = 0; j < 7; j++) {
-                this.playerHands.get(i).add(this.drawPile.take());
-
-            }
+//            for (int j = 0; j < 7; j++) {
+//                this.playerHands.get(i).add(this.drawPile.take());
+//
+//            }
         }
 
 
@@ -82,8 +82,8 @@ public class UnoGameState extends GameState implements Serializable {
         this.discardPile.put(drawPile.take());
 
 
-       // if the top card is wild, take another till it isn't
-        while(this.discardPile.getTopCard().getType() == Type.WILD ||
+        // if the top card is wild, take another till it isn't
+        while (this.discardPile.getTopCard().getType() == Type.WILD ||
                 this.discardPile.getTopCard().getType() == Type.WILDDRAW4) {
             this.discardPile.put(this.drawPile.take());
         }
@@ -177,6 +177,14 @@ public class UnoGameState extends GameState implements Serializable {
     public int getNumPlayers() {
         return this.playerHands.size();
     }
+
+    public void setNumPlayers(int players) {
+        while (players < getNumPlayers()) {
+            this.playerHands.remove(this.playerHands.size() - 1);
+            this.hasUno.remove(this.playerHands.size() - 1);
+        }
+    }
+
 
     public ArrayList<Card> getPlayerHandAt(int index) {
         return this.playerHands.get(index);
