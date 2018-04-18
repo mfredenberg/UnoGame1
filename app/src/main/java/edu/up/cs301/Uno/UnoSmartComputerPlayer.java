@@ -57,11 +57,19 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
                     else nextPlayer--;
                 }
 
+                if (isPlayableCardsNull()) {
+                    this.game.sendAction(new SkipTurnAction(this));
+                    return;
+
+                }
+
                 //will play a wild draw 4 if it has one and the other player is below 3 cards
-                if (state.getPlayerHandSize(nextPlayer) < 3) {
+                else if (state.getPlayerHandSize(nextPlayer) < 3) {
                     for (int i = 0; i < playableCards.size(); i++) {
+                        if (playableCards.get(i) == null) continue;
                         if (playableCards.get(i).getType() == Type.WILDDRAW4) {
                             this.game.sendAction(new PlaceCardAction(this, i));
+                            return;
                         }
                     }
                     //will play a skip, plus 2, or reverse if they have less than 5 cards
@@ -72,6 +80,7 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
                                 || playableCards.get(i).getType() == Type.PLUS2
                                 || playableCards.get(i).getType() == Type.REVERSE) {
                             this.game.sendAction(new PlaceCardAction(this, i));
+                            return;
                         }
                     }
                     //will play the first available number card (if there is one) if the next player has 5 or more cards
@@ -84,33 +93,40 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
                                 && playableCards.get(i).getType() != Type.WILD
                                 && playableCards.get(i).getType() != Type.WILDDRAW4) {
                             this.game.sendAction(new PlaceCardAction(this, i));
-                        }
-                    }
-                    //will play a wild if it has no playable cards
-                } else if (onlyHasWild()) {
-                    for (int i = 0; i < playableCards.size(); i++) {
-                        if (playableCards.get(i) == null) continue;
-                        if (playableCards.get(i).getType() == Type.WILD
-                                || playableCards.get(i).getType() == Type.WILDDRAW4) {
-                            this.game.sendAction(new PlaceCardAction(this, i));
-                            this.game.sendAction(new ColorAction(this, this.mostOfColor(state.getCurrentPlayerHand())));
-                        }
-                    }
-                    //skips turn if it can't play
-                } else if (isPlayableCardsNull()) {
-                    this.game.sendAction(new SkipTurnAction(this));
-                    //if none of these conditions are met, it will play the first card that matches
-                } else {
-                    for (int i = 0; i < playableCards.size(); i++) {
-                        if (playableCards.get(i).getColor() == state.getCurrentColor()
-                                || playableCards.get(i).getType() == state.getDiscardPile().getTopCard().getType()) {
-                            this.game.sendAction(new PlaceCardAction(this, i));
+                            return;
                         }
                     }
                 }
+                //if none of these conditions are met, it will play the first card that matches thats not a wild
+                for (int i = 0; i < playableCards.size(); i++) {
+                    if (this.playableCards.get(i) == null) continue;
+                    if (playableCards.get(i).getType() != Type.WILD
+                            || playableCards.get(i).getType() != Type.WILDDRAW4) {
+                        {
+                            this.game.sendAction(new PlaceCardAction(this, i));
+                            return;
+                        }
+                    }
+                }
+
+
+                //will play a wild if its is the only card it can play
+                    for (int i = 0; i < playableCards.size(); i++) {
+                    if (playableCards.get(i) == null) continue;
+                    if (playableCards.get(i).getType() == Type.WILD
+                            || playableCards.get(i).getType() == Type.WILDDRAW4) {
+                        this.game.sendAction(new PlaceCardAction(this, i));
+                        this.game.sendAction(new ColorAction(this, this.mostOfColor(state.getCurrentPlayerHand())));
+                        return;
+                    }
+                }
+
             }
+
         }
+
     }
+
 
     /*
     Checks to see if the computer has any playable cards in their hand

@@ -130,7 +130,7 @@ public class UnoGameState extends GameState implements Serializable {
         }
 
         //copying color
-        this.currentColor = discardPile.getCardAt(0).getColor();
+        this.currentColor = masterGameState.getCurrentColor();
 
         //copying gameDirection
         this.gameDirection = masterGameState.gameDirection;
