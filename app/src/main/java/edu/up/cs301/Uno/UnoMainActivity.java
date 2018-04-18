@@ -14,6 +14,15 @@ import static edu.up.cs301.game.R.id.hasUnoButton;
 import static edu.up.cs301.game.R.id.quitButton;
 import static edu.up.cs301.game.R.id.skipTurnButton;
 
+/**
+ * Created by fredenbe20 on 4/15/2018.
+ *
+ * @author Chris Fishback
+ * @author Stelios Popoutsakis
+ * @author Alli Jacobs
+ * @author Mason Fredenberg
+ */
+
 public class UnoMainActivity extends GameMainActivity {
 
     // the port number that this game will use when playing over the network

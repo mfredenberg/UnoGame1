@@ -10,7 +10,13 @@ import android.util.Log;
 
 
 /**
- * Created by fredenbe20 on 3/27/2018.
+ *
+ * Created by fredenbe20 on 4/15/2018.
+ *
+ * @author Chris Fishback
+ * @author Stelios Popoutsakis
+ * @author Alli Jacobs
+ * @author Mason Fredenberg
  */
 
 public class UnoComputerPlayer extends GameComputerPlayer {
