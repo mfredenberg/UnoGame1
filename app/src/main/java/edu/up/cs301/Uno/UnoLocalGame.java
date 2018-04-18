@@ -266,6 +266,8 @@ public class UnoLocalGame extends LocalGame {
 
     /*
     *This method places the players card onto the discard deck
+    *
+    * @param Card
     */
     public void placeCardDown(Card placeCard)
     {
@@ -276,7 +278,11 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    *This method places the players card - which will always be a non wild card
+    * helper method for place card
+    * This method places the players card - which will always be a non wild card
+    *
+    * @returns boolean
+    * @param Card
     */
     public boolean placeNotWildCard(Card placeCard) {
 
