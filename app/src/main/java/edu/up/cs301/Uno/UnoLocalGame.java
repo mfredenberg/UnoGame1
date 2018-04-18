@@ -77,7 +77,7 @@ public class UnoLocalGame extends LocalGame {
     /*
     * method checks if it's the players turn
     *
-    * @param int
+    * @param playerIdx
     * @return boolean
     */
     @Override
@@ -103,7 +103,7 @@ public class UnoLocalGame extends LocalGame {
     /*
     * method checks which action to take
     *
-    * @param GameAction
+    * @param action
     * @return boolean
     */
     @Override
@@ -167,8 +167,8 @@ public class UnoLocalGame extends LocalGame {
     * will place it if it can, and proceeds to do the events
     * needed based on placed card. ie: draw 2
     *
-    * @param int
-    * @param int
+    * @param playerID
+    * @param cardIndex
     *
     * @return boolean
     */
@@ -218,7 +218,7 @@ public class UnoLocalGame extends LocalGame {
     /*
     * method draws a card for the current player
     *
-    * @param int
+    * @param playerID
     * @return boolean
     */
     private boolean drawCard(int playerID) {
@@ -242,7 +242,7 @@ public class UnoLocalGame extends LocalGame {
     /*
     * method skips turn and draws a card for current player
     *
-    * @param int
+    * @param playerID
     * @return boolean
     */
     public boolean skipTurn(int playerID) {
@@ -270,7 +270,7 @@ public class UnoLocalGame extends LocalGame {
     * method checks if the player has uno
     *
     * @return boolean
-    * @param int
+    * @param playerID
     */
     public boolean hasUno(int playerID) {
         this.currentGameState.setHasUno(playerID);
@@ -311,11 +311,11 @@ public class UnoLocalGame extends LocalGame {
     }
 
 
-    //helper methods-------------------------------------------------\\
+    //helper methods--------------------------------------------------------\\
     /*
     *This helper method places the players card onto the discard deck
     *
-    * @param Card
+    * @param placeCard
     */
     public void placeCardDown(Card placeCard) {
 
@@ -329,7 +329,7 @@ public class UnoLocalGame extends LocalGame {
     * This method places the players card - which will always be a non wild card
     *
     * @returns boolean
-    * @param Card
+    * @param placeCard
     */
     public boolean placeNotWildCard(Card placeCard) {
 
