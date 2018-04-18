@@ -136,10 +136,8 @@ public class UnoLocalGame extends LocalGame {
                     //Get new color from user
                     //this.currentGameState.setCurrentColor(card.getColor());
 
-                    //placethecard
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
-
+                    //place the card
+                    placeCardDown(toPlace);
 
                     didPlace = true;
 
@@ -151,14 +149,11 @@ public class UnoLocalGame extends LocalGame {
 
                     //have the next player up draw 4 cards
 
-                    //placecard
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
-                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
-                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
-                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
-                    this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+                    //place card
+                    placeCardDown(toPlace);
 
+                    for(int i = 0; i < 4; i++)
+                        this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
 
                     return true;
                 }
@@ -175,8 +170,9 @@ public class UnoLocalGame extends LocalGame {
                         toPlace.getType() == Type.EIGHT || toPlace.getType() == Type.NINE) {
 
                     //placethecard
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
+                    placeCardDown(toPlace);
+
+                    //change turn
                     this.currentGameState.setTurn(getNextTurn(1));
 
                     didPlace = true;
@@ -184,9 +180,11 @@ public class UnoLocalGame extends LocalGame {
                 } else if (toPlace.getType() == Type.SKIP) {
 
                     //add card to discard pile
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
+                    placeCardDown(toPlace);
+
+                    //change turn
                     this.currentGameState.setTurn(getNextTurn(2));
+
                     didPlace = true;
 
                 } else if (toPlace.getType() == Type.REVERSE) {
@@ -194,8 +192,8 @@ public class UnoLocalGame extends LocalGame {
                     this.currentGameState.setGameDirection(!this.currentGameState.getGameDirection());
 
                     //place card
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
+                    placeCardDown(toPlace);
+
                     if (this.currentGameState.getNumPlayers() == 2)
                         this.currentGameState.setTurn(getNextTurn(2));
                     else
@@ -206,8 +204,8 @@ public class UnoLocalGame extends LocalGame {
                 } else if (toPlace.getType() == Type.PLUS2) {
 
                     //place card
-                    this.currentGameState.getCurrentPlayerHand().remove(toPlace); //remove card from players hand
-                    this.currentGameState.getDiscardPile().put(toPlace); //place card
+                    placeCardDown(toPlace);
+
                     this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
                     this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
                     this.currentGameState.setTurn(getNextTurn(1));
@@ -283,6 +281,7 @@ public class UnoLocalGame extends LocalGame {
 
     public int getNextTurn(int numTurns) {
         int turn = this.currentGameState.getTurn();
+
         while (numTurns != 0) {
             if (this.currentGameState.getGameDirection()) {
                 turn += 1;
@@ -293,6 +292,7 @@ public class UnoLocalGame extends LocalGame {
             }
             numTurns--;
         }
+
         return turn;
 
 
@@ -307,5 +307,12 @@ public class UnoLocalGame extends LocalGame {
         return false;
     }
 
+    public void placeCardDown(Card placeCard)
+    {
+
+        this.currentGameState.getCurrentPlayerHand().remove(placeCard); //remove card from players hand
+        this.currentGameState.getDiscardPile().put(placeCard); //place card
+
+    }
 
 }
