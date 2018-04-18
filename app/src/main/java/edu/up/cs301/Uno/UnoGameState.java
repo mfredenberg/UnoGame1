@@ -27,7 +27,7 @@ public class UnoGameState extends GameState implements Serializable {
 
 
     //serial number for serializable
-    private static final long serialVersionUID = 417201801L;
+    private static final long serialVersionUID = 417201802L;
 
     //one master array list that holds all the player hands
     private ArrayList<ArrayList<Card>> playerHands;
