@@ -62,7 +62,8 @@ public class UnoLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         if (this.currentGameState.getCurrentPlayerHand().size() == 0) {
-            return "Player " + this.currentGameState.getTurn() + 1 + " has won";
+            int playerId = this.currentGameState.getTurn();
+            return this.playerNames[playerId] + " has won";
         }
         return null;
     }
@@ -72,7 +73,7 @@ public class UnoLocalGame extends LocalGame {
     */
     @Override
     protected boolean makeMove(GameAction action) {
-        if(checkIfGameOver() == null) return false;
+        if(checkIfGameOver() != null) return false;
         GamePlayer p = action.getPlayer();
         int playerID = -1;
         if (p instanceof UnoHumanPlayer) {
