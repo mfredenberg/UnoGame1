@@ -141,9 +141,9 @@ public class UnoLocalGame extends LocalGame {
         }
 
         //actions
-        if (action instanceof Quit) {
-            quit();
-        } else if (action instanceof SkipTurnAction) {
+//        if (action instanceof Quit) {
+//            quit();
+         if (action instanceof SkipTurnAction) {
             return skipTurn(playerID);
         } else if (action instanceof HasUnoAction) {
             return hasUno(playerID);
@@ -276,9 +276,9 @@ public class UnoLocalGame extends LocalGame {
     * method quits system
     */
 
-    public void quit() {
-        System.exit(0);
-    }
+//    public void quit() {
+//        System.exit(0);
+//    }
 
     /*
     * method checks if the player has uno

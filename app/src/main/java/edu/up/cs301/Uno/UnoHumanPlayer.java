@@ -131,7 +131,14 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void onClick(View view) {
         if (!this.wildSelect) {
             if (view.getId() == R.id.quitButton) {
-                this.game.sendAction(new Quit(this));
+               Thread thread = new Thread(){
+                   @Override
+                   public void run()
+                   {
+                       System.exit(0);
+                   }
+               };
+               thread.start();
             } else if (view.getId() == R.id.hasUnoButton) {
                 this.game.sendAction(new HasUnoAction(this));
                 this.PressedUno = true;
