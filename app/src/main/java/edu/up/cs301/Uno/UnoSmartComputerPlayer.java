@@ -30,6 +30,12 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
         playableCards = new ArrayList<Card>();
     }
 
+     /*
+    * decides what action to take based on info
+    *
+    * @param GameInfo info
+    * @return void
+    */
     protected void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;

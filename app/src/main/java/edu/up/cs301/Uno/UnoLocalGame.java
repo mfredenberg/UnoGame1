@@ -49,6 +49,15 @@ public class UnoLocalGame extends LocalGame {
     protected void sendUpdatedStateTo(GamePlayer p) {
         if(ifStart())
         {
+            /**
+             External Citation
+             Date: April 18 2018
+             Problem: Couldn't figure out how to initialize array to correctly
+             reflect thee number of players in the game
+             Resource:
+             Nux
+             Solution: I used what nux said and set the number of players outside the local game constructor
+             */
             // sets numplayers to correct length
             this.currentGameState.setNumPlayers(this.players.length);
 

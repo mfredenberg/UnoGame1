@@ -11,9 +11,10 @@ import android.util.Log;
 
 /**
  * Created by Mason Fredenberg on 4/15/2018.
- *
+ * <p>
  * This class houses the automation of play for
- * the dumb computer player.
+ * the dumb computer player. dumb CPU player just plays the first card possible
+ * otherwise it skips
  *
  * @author Chris Fishback
  * @author Stelios Popoutsakis
@@ -29,6 +30,13 @@ public class UnoComputerPlayer extends GameComputerPlayer {
 
     }
 
+
+    /*
+    * decides what action to take based on info
+    *
+    * @param GameInfo info
+    * @return void
+    */
     @Override
     protected void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
@@ -44,6 +52,8 @@ public class UnoComputerPlayer extends GameComputerPlayer {
                         Log.i("Computer Player: ", "Computer Placed the Card: " + gameState.getCurrentPlayerHand().get(0).getColor()
                                 + gameState.getCurrentPlayerHand().get(0).getType() + "----------------------------------------------------------//");
                         this.game.sendAction(new PlaceCardAction(this, i));
+
+                        //if wild, needs to change color, defaults to red
                         if (gameState.getCurrentPlayerHand().get(i).getType() == Type.WILD
                                 || gameState.getCurrentPlayerHand().get(i).getType() == Type.WILDDRAW4) {
                             this.game.sendAction(new ColorAction(this, Color.RED));
@@ -55,14 +65,14 @@ public class UnoComputerPlayer extends GameComputerPlayer {
 
                     }
                 }
-                //if the loop wasn't force ended (no card was played)
-
+                //if it didn't place, skip
                 if (!didPlace) this.game.sendAction(new SkipTurnAction(this));
 
             }
         }
     }
 
+    //getter for playerID
     public int getPlayerID() {
         return this.playerNum;
     }
