@@ -107,7 +107,7 @@ public class UnoLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
             if (this.currentGameState.getPlayerHandAt(i).size() == 0) {
-                int playerId = i + 1;
+                int playerId = i;
                 return this.playerNames[playerId] + " has won";
             }
         }
