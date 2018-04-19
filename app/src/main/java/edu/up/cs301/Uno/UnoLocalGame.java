@@ -14,7 +14,7 @@ import edu.up.cs301.game.actionMsg.GameAction;
 
 /**
  * Created by Mason Fredenberg on 3/27/2018.
- *
+ * <p>
  * The local game class houses all necessary actions and rules
  * for uno to work
  *
@@ -22,9 +22,9 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * @author Stelios Popoutsakis
  * @author Alli Jacobs
  * @author Mason Fredenberg
- *
- * The local game class houses all necessary actions and rules
- * for uno to work
+ *         <p>
+ *         The local game class houses all necessary actions and rules
+ *         for uno to work
  */
 
 public class UnoLocalGame extends LocalGame {
@@ -47,8 +47,7 @@ public class UnoLocalGame extends LocalGame {
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
-        if(ifStart())
-        {
+        if (ifStart()) {
             /**
              External Citation
              Date: April 18 2018
@@ -158,9 +157,9 @@ public class UnoLocalGame extends LocalGame {
             drawCard(playerID);
             return drawCard(playerID);
 
-            }
-            return false;
         }
+        return false;
+    }
 
 
     /*
@@ -209,7 +208,7 @@ public class UnoLocalGame extends LocalGame {
                     placeCardDown(toPlace);
 
                     for (int i = 0; i < 4; i++)
-                        this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+                        drawCard(getNextTurn(1));
 
                     isPlaced = true;
                 }
@@ -235,22 +234,18 @@ public class UnoLocalGame extends LocalGame {
     * @return boolean
     */
     private boolean drawCard(int playerID) {
-
-        if (canMove(playerID)) { //make sure it's the players turn
-            //checks if draw is empty, if so refills-
-            if (this.isDrawEmpty()) {
-                currentGameState.getDrawPile().drawEmpty(currentGameState.getDiscardPile());
-                currentGameState.getDrawPile().suffle();
-            }
-
-            //take a card from the draw pile and put it on the players hand
-            this.currentGameState.getPlayerHandAt(playerID).add(this.currentGameState.getDrawPile().take());
-
-            return true;
+        //checks if draw is empty, if so refills-
+        if (this.isDrawEmpty()) {
+            currentGameState.getDrawPile().drawEmpty(currentGameState.getDiscardPile());
+            currentGameState.getDrawPile().suffle();
         }
-        return false;
 
+        //take a card from the draw pile and put it on the players hand
+        this.currentGameState.getPlayerHandAt(playerID).add(this.currentGameState.getDrawPile().take());
+
+        return true;
     }
+
 
     /*
     * method skips turn and draws a card for current player
@@ -259,14 +254,19 @@ public class UnoLocalGame extends LocalGame {
     * @return boolean
     */
     public boolean skipTurn(int playerID) {
-        boolean draw = drawCard(playerID);
+        if (canMove(playerID)) { //make sure it's the players turn
+            {
+                // if greater than 18, puts card in the beginning so you cna actually ss the new card
+                if (this.currentGameState.getCurrentPlayerHand().size() > 18) {
+                    this.currentGameState.getPlayerHandAt(playerID).add(0, this.currentGameState.getDrawPile().take());
+                } else {
+                    drawCard(playerID);
+                }
+                //make it the next turn
+                this.currentGameState.setTurn(getNextTurn(1));
 
-        if (draw) { //if card is drawable
-
-            //make it the next turn
-            this.currentGameState.setTurn(getNextTurn(1));
-
-            return true;
+                return true;
+            }
         }
         return false;
 
@@ -275,6 +275,7 @@ public class UnoLocalGame extends LocalGame {
     /*
     * method quits system
     */
+
     public void quit() {
         System.exit(0);
     }
@@ -392,8 +393,8 @@ public class UnoLocalGame extends LocalGame {
                 //place card
                 placeCardDown(placeCard);
 
-                this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
-                this.currentGameState.getPlayerHandAt(getNextTurn(1)).add(this.currentGameState.getDrawPile().take());
+                drawCard(getNextTurn(1));
+                drawCard(getNextTurn(1));
                 this.currentGameState.setTurn(getNextTurn(1));
 
                 return true;
@@ -413,7 +414,7 @@ public class UnoLocalGame extends LocalGame {
     public boolean ifStart() {
         for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
             if (!(this.currentGameState.getPlayerHandAt(i).isEmpty()))
-            return false;
+                return false;
         }
         return true;
     }

@@ -335,7 +335,7 @@ public class UnoGameView extends SurfaceView {
             int playerNum = i + 1;
             canvas.drawText("Player's " + playerNum + " Number of Cards: " + this.handstoDraw.get(i).size()
                     , drawHandTextWidth, 40, cpuText);
-            canvas.drawText("Current Color is " + this.currentColor, getWidth() / 2 - 150,getHeight()/2 -150 + CARD_HEIGHT
+            canvas.drawText("Current Color is " + this.currentColor, getWidth() / 2 - 200,getHeight()/2 -150 + CARD_HEIGHT
                     ,cpuText);
 
             drawHandTextWidth += 550;
