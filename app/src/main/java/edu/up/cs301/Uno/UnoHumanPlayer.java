@@ -165,30 +165,24 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 }
             }
 
-        } else
+        } else if(view.getId() != R.id.skipTurnButton && view.getId() != R.id.play_card_button
+                &&view.getId() != R.id.hasUnoButton)
 
         {
-
+            this.game.sendAction(new PlaceCardAction(this,
+                    unoSurface.getCardIndex()));
             if (view.getId() == R.id.red_wild_button) {
                 this.game.sendAction(new ColorAction(this,
                         edu.up.cs301.Uno.Color.RED));
-                this.game.sendAction(new PlaceCardAction(this,
-                        unoSurface.getCardIndex()));
             } else if (view.getId() == R.id.green_wild_button) {
                 this.game.sendAction(new ColorAction(this,
                         edu.up.cs301.Uno.Color.GREEN));
-                this.game.sendAction(new PlaceCardAction(this,
-                        unoSurface.getCardIndex()));
             } else if (view.getId() == R.id.yellow_wild_button) {
                 this.game.sendAction(new ColorAction(this,
                         edu.up.cs301.Uno.Color.YELLOW));
-                this.game.sendAction(new PlaceCardAction(this,
-                        unoSurface.getCardIndex()));
             } else if (view.getId() == R.id.blue_wild_button) {
                 this.game.sendAction(new ColorAction(this,
                         edu.up.cs301.Uno.Color.BLUE));
-                this.game.sendAction(new PlaceCardAction(this,
-                        unoSurface.getCardIndex()));
             }
             redButton.setVisibility(View.INVISIBLE);
             greenButton.setVisibility(View.INVISIBLE);
