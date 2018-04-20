@@ -148,8 +148,20 @@ public class UnoLocalGame extends LocalGame {
             UnoSmartComputerPlayer cpuSmart = (UnoSmartComputerPlayer) p;
             hasUno(cpuSmart.getPlayerID());
             playerID = cpuSmart.getPlayerID();
-
         }
+        else if(p instanceof ProxyPlayer)
+        {
+            ProxyPlayer proxy = (ProxyPlayer)p;
+            int i = 0;
+            while(i < this.players.length)
+            {
+                if(this.players[i] == proxy) break;
+                i++;
+            }
+            playerID = i;
+            hasUno(i);
+        }
+
 
         //actions
 //        if (action instanceof Quit) {

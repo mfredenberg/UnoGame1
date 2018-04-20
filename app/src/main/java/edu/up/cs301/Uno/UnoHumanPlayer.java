@@ -16,8 +16,10 @@ import edu.up.cs301.Uno.actionMsg.HasUnoAction;
 import edu.up.cs301.Uno.actionMsg.PlaceCardAction;
 import edu.up.cs301.Uno.actionMsg.Quit;
 import edu.up.cs301.Uno.actionMsg.SkipTurnAction;
+import edu.up.cs301.game.Game;
 import edu.up.cs301.game.GameHumanPlayer;
 import edu.up.cs301.game.GameMainActivity;
+import edu.up.cs301.game.ProxyGame;
 import edu.up.cs301.game.R;
 import edu.up.cs301.game.infoMsg.GameInfo;
 
@@ -131,6 +133,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     * method listens to the users button clicks and responds accordingly
     */
     public void onClick(View view) {
+
         if (!this.wildSelect) {
             if (view.getId() == R.id.quitButton) {
                Thread thread = new Thread(){
