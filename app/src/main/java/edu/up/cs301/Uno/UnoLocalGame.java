@@ -69,7 +69,11 @@ public class UnoLocalGame extends LocalGame {
             }
         }
 
-        if (p instanceof UnoHumanPlayer) {
+        if (p instanceof ProxyPlayer) {
+            UnoHumanPlayer humanProxy = (UnoHumanPlayer) p;
+            UnoGameState copy = new UnoGameState(this.currentGameState, humanProxy.getPlayerID());
+            humanProxy.sendInfo(copy);
+        } else if (p instanceof UnoHumanPlayer) {
             UnoHumanPlayer human = (UnoHumanPlayer) p;
             UnoGameState copy = new UnoGameState(this.currentGameState, human.getPlayerID());
             human.sendInfo(copy);
@@ -84,13 +88,6 @@ public class UnoLocalGame extends LocalGame {
             cpuSmart.sendInfo(copy);
 
         }
-        else if(p instanceof ProxyPlayer)
-        {
-            ProxyPlayer player = (ProxyPlayer)p;
-            UnoGameState copy = new UnoGameState(this.currentGameState, 1);
-            player.sendInfo(copy);
-        }
-
 
 
     }
@@ -151,7 +148,7 @@ public class UnoLocalGame extends LocalGame {
         //actions
 //        if (action instanceof Quit) {
 //            quit();
-         if (action instanceof SkipTurnAction) {
+        if (action instanceof SkipTurnAction) {
             return skipTurn(playerID);
         } else if (action instanceof HasUnoAction) {
             return hasUno(playerID);
@@ -227,9 +224,9 @@ public class UnoLocalGame extends LocalGame {
             }
 
             //change the color of the game
-            if(this.currentGameState.getDiscardPile().getTopCard().getType() != Type.WILDDRAW4
+            if (this.currentGameState.getDiscardPile().getTopCard().getType() != Type.WILDDRAW4
                     && this.currentGameState.getDiscardPile().getTopCard().getType() != Type.WILD)
-            currentGameState.setCurrentColor(currentGameState.getDiscardPile().getTopCard().getColor());
+                currentGameState.setCurrentColor(currentGameState.getDiscardPile().getTopCard().getColor());
         }
 
         //if the card doesn't match any other card so it cannot be played
