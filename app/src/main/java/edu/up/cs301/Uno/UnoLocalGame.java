@@ -70,8 +70,14 @@ public class UnoLocalGame extends LocalGame {
         }
 
         if (p instanceof ProxyPlayer) {
-            UnoHumanPlayer humanProxy = (UnoHumanPlayer) p;
-            UnoGameState copy = new UnoGameState(this.currentGameState, humanProxy.getPlayerID());
+            ProxyPlayer humanProxy = (ProxyPlayer) p;
+            int i = 0;
+            while(i < this.players.length)
+            {
+                if(this.players[i] == humanProxy) break;
+                i++;
+            }
+            UnoGameState copy = new UnoGameState(this.currentGameState, i);
             humanProxy.sendInfo(copy);
         } else if (p instanceof UnoHumanPlayer) {
             UnoHumanPlayer human = (UnoHumanPlayer) p;
