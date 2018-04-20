@@ -10,6 +10,7 @@ import edu.up.cs301.Uno.actionMsg.Quit;
 import edu.up.cs301.Uno.actionMsg.SkipTurnAction;
 import edu.up.cs301.game.GamePlayer;
 import edu.up.cs301.game.LocalGame;
+import edu.up.cs301.game.ProxyPlayer;
 import edu.up.cs301.game.actionMsg.GameAction;
 
 /**
@@ -83,6 +84,13 @@ public class UnoLocalGame extends LocalGame {
             cpuSmart.sendInfo(copy);
 
         }
+        else if(p instanceof ProxyPlayer)
+        {
+            ProxyPlayer player = (ProxyPlayer)p;
+            UnoGameState copy = new UnoGameState(this.currentGameState, 1);
+            player.sendInfo(copy);
+        }
+
 
 
     }

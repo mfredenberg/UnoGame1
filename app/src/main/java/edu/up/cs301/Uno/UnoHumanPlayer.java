@@ -2,6 +2,7 @@ package edu.up.cs301.Uno;
 
 import android.graphics.*;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -110,6 +111,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     */
     @Override
     public void receiveInfo(GameInfo info) {
+        Log.i("this runs","a");
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
             this.hands.clear();
