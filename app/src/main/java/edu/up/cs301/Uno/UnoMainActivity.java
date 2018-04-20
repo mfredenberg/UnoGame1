@@ -14,6 +14,24 @@ import static edu.up.cs301.game.R.id.hasUnoButton;
 import static edu.up.cs301.game.R.id.quitButton;
 import static edu.up.cs301.game.R.id.skipTurnButton;
 
+
+
+/**
+*<--------------------Header------------------>
+* We have everything working in our game but network play.
+ * We are sorry but we are having some trouble getting that to work.
+ * Next time we will try to schedule an appointment with Nux earlier to try to get it done before the deadline
+ * Other features we added to this update....
+ * Selecting a card actually works haha:)
+ * rules are implemented
+ * Bug free, (For now)
+ * Can pick between 2-4 players
+ * 2 cpu players(smart and dumber)
+ *
+*
+ * */
+
+
 /**
  * Created by Mason Fredenberg on 4/15/2018.
  *
