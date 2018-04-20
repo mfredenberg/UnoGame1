@@ -9,7 +9,7 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * Created by steli on 4/3/2018.
  */
 
-public class Quit extends GameAction implements Serializable {
+public class Quit extends GameAction  {
     private static final long serialVersionUID = 124123213L;
     /**
      * constructor for GameAction

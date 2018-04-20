@@ -11,7 +11,7 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * Created by jacobsa20 on 4/11/2018.
  */
 
-public class ColorAction extends GameAction implements Serializable {
+public class ColorAction extends GameAction {
     private static final long serialVersionUID = 78474844L;
     /**
      * constructor for GameAction

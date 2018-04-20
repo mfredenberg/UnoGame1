@@ -9,7 +9,7 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * Created by papoutsa20 on 4/15/2018.
  */
 
-public class FalseUno extends GameAction implements Serializable {
+public class FalseUno extends GameAction  {
     private static final long serialVersionUID = 423444324L;
     /**
      * constructor for GameAction

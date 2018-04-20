@@ -11,7 +11,7 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * Created by fredenbe20 on 3/27/2018.
  */
 
-public class PlaceCardAction extends GameAction implements Serializable {
+public class PlaceCardAction extends GameAction {
     private static final long serialVersionUID = 21323123L;
     private int cardIndex;
     private Color newColor = null;

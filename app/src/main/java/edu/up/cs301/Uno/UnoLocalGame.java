@@ -219,6 +219,8 @@ public class UnoLocalGame extends LocalGame {
             }
 
             //change the color of the game
+            if(this.currentGameState.getDiscardPile().getTopCard().getType() != Type.WILDDRAW4
+                    && this.currentGameState.getDiscardPile().getTopCard().getType() != Type.WILD)
             currentGameState.setCurrentColor(currentGameState.getDiscardPile().getTopCard().getColor());
         }
 
