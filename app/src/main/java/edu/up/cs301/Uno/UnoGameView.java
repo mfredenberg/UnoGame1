@@ -69,7 +69,7 @@ public class UnoGameView extends SurfaceView {
     public void onDraw(Canvas canvas) {
         if (this.handstoDraw != null) {
             drawCPUHands(canvas);
-            double heightMul = .62;
+            double heightMul = .64;
             drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 200);
             width = 0;
             for (int i = 0; i < this.handstoDraw.get(this.currPlayerID).size(); i++) {
@@ -257,7 +257,7 @@ public class UnoGameView extends SurfaceView {
             this.isSelected.add(i, false);
             if (i == 9) width = 0;
             if (i < 9) {
-                this.handToSelect.add(new RectF(width, (int) (getHeight() * .62), width + CARD_WIDTH, (int) (getHeight() * .62)
+                this.handToSelect.add(new RectF(width, (int) (getHeight() * .64), width + CARD_WIDTH, (int) (getHeight() * .62)
                         + CARD_HEIGHT));
                 width += 195;
             } else if (i < 18) {
@@ -323,20 +323,23 @@ public class UnoGameView extends SurfaceView {
     }
 
     public void drawCPUHands(Canvas canvas) {
-        int height = 90;
-        int drawHandTextWidth = 30;
+        int height = 10;
         for (int i = 0; i < this.handstoDraw.size(); i++) {
             if (i == this.currPlayerID) continue;
             int j = 0;
+            int cpuCardCount=0;
             for (Card c : this.handstoDraw.get(i)) {
+                if(cpuCardCount == 40) break;
                 drawCard(canvas, null, 10 + 5 * j, height);
                 j += 5;
+                cpuCardCount++;
             }
             Paint cpuText = new Paint();
             cpuText.setTextSize(40);
             if (this.handstoDraw.size() == 1) cpuText.setColor(android.graphics.Color.RED);
-            canvas.drawText(this.names.get(i) + " Has " + this.handstoDraw.get(i).size() + " Cards in their Hand"
-                    , drawHandTextWidth, 40, cpuText);
+            canvas.drawText(this.names.get(i) + " Has " +
+                            this.handstoDraw.get(i).size() + " Cards in their Hand"
+                    , 10, height + CARD_HEIGHT+40, cpuText);
             Paint currentColor = new Paint();
 
             // lets us know what color the top card is and updates the "current color circle"
@@ -358,8 +361,7 @@ public class UnoGameView extends SurfaceView {
 
             }
             canvas.drawCircle(getWidth() / 2,getHeight() / 2 - 220,10,currentColor);
-            drawHandTextWidth += 550;
-            height += CARD_HEIGHT + 20;
+            height += CARD_HEIGHT + 50;
 
         }
     }
