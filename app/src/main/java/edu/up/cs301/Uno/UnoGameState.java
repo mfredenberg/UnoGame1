@@ -50,6 +50,9 @@ public class UnoGameState extends GameState implements Serializable {
     private Deck discardPile;
 
 
+    private ArrayList<String> names;
+
+
     /*
     * Ctor
     */
@@ -60,6 +63,7 @@ public class UnoGameState extends GameState implements Serializable {
         this.drawPile = new Deck();
         this.discardPile = new Deck();
         this.drawPile.add108();
+        this.names = new ArrayList<String>();
 
         // adding 7 cards to each player, and adding false to the hasUno ArrayList
         for (int i = 0; i < 4; i++) {
@@ -101,8 +105,12 @@ public class UnoGameState extends GameState implements Serializable {
 
         this.playerHands = new ArrayList<ArrayList<Card>>();
         this.hasUno = new ArrayList<Boolean>();
+        this.names = new ArrayList<String>();
+        int nameIndex = 0;
         for (boolean hasUnoBool : masterGameState.hasUno) {
             this.hasUno.add(hasUnoBool);
+            this.names.add(masterGameState.getNames().get(nameIndex));
+            nameIndex++;
         }
 
         // telling the game state whose turn it is
@@ -119,7 +127,6 @@ public class UnoGameState extends GameState implements Serializable {
                 this.playerHands.get(i).add(null);
             }
         }
-
         // copying the current players hand
 
         int i = 0;
@@ -212,6 +219,10 @@ Appropriate Getters and setters for the Uno game state.
 
     public boolean getGameDirection() {
         return gameDirection;
+    }
+
+    public ArrayList<String> getNames() {
+        return names;
     }
 
 }

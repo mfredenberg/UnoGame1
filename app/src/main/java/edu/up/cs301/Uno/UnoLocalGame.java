@@ -63,6 +63,7 @@ public class UnoLocalGame extends LocalGame {
 
             // draws cards for players
             for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {
+                this.currentGameState.getNames().add(this.playerNames[i]);
                 for (int j = 0; j < 7; j++) {
                     this.currentGameState.getPlayerHandAt(i).add(this.currentGameState.getDrawPile().take());
                 }

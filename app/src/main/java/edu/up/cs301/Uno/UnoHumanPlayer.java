@@ -26,7 +26,7 @@ import edu.up.cs301.game.infoMsg.GameInfo;
 
 /**
  * Created by Mason Fredenberg on 3/27/2018.
- *
+ * <p>
  * This class sets up the GUI for the human player
  *
  * @author Chris Fishback
@@ -53,6 +53,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Button blueButton;
     private Button playCardButton;
     private ArrayList<ArrayList<Card>> hands = new ArrayList<ArrayList<Card>>();
+    private ArrayList<String> names = new ArrayList<String>();
     private boolean wildSelect = false;
     private boolean PressedUno = false;
 
@@ -113,15 +114,15 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     */
     @Override
     public void receiveInfo(GameInfo info) {
-        Log.i("this runs","a");
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
+            this.names = state.getNames();
             this.hands.clear();
             this.unoSurface.setCurrentColor(state.getCurrentColor());
             for (int i = 0; i < state.getNumPlayers(); i++) {
                 this.hands.add(state.getPlayerHandAt(i));
             }
-            this.unoSurface.setHand(this.hands, this.playerNum);
+            this.unoSurface.setHand(this.hands, this.playerNum, this.names, state.getCurrentColor());
             this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
             this.unoSurface.invalidate();
 
@@ -136,14 +137,13 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
         if (!this.wildSelect) {
             if (view.getId() == R.id.quitButton) {
-               Thread thread = new Thread(){
-                   @Override
-                   public void run()
-                   {
-                       System.exit(0);
-                   }
-               };
-               thread.start();
+                Thread thread = new Thread() {
+                    @Override
+                    public void run() {
+                        System.exit(0);
+                    }
+                };
+                thread.start();
             } else if (view.getId() == R.id.hasUnoButton) {
                 this.game.sendAction(new HasUnoAction(this));
                 this.PressedUno = true;
@@ -170,8 +170,8 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 }
             }
 
-        } else if(view.getId() != R.id.skipTurnButton && view.getId() != R.id.play_card_button
-                &&view.getId() != R.id.hasUnoButton)
+        } else if (view.getId() != R.id.skipTurnButton && view.getId() != R.id.play_card_button
+                && view.getId() != R.id.hasUnoButton)
 
         {
             this.game.sendAction(new PlaceCardAction(this,
@@ -214,13 +214,19 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
         int index;
-        if (view.getId() == R.id.unoSurface && motionEvent.getAction() == motionEvent.ACTION_DOWN && !this.wildSelect) {
+        if (view.getId() == R.id.unoSurface && motionEvent.getAction()
+                == motionEvent.ACTION_DOWN && !this.wildSelect) {
 
             //checks if the spot touched is a card, if it is card is selected
             index = unoSurface.checkSelectedCard((int) motionEvent.getX(), (int) motionEvent.getY());
             if (index != -1) {
                 this.unoSurface.invalidate();
             }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+            }
+
 
         }
         return true;

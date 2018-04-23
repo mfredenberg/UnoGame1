@@ -39,7 +39,8 @@ public class UnoGameView extends SurfaceView {
     private HashMap<String, Bitmap> cardPics;
     private ArrayList<RectF> handToSelect = new ArrayList<RectF>(); //holds the Rect objects surrounding each card, letting them be selectable
     private Color currentColor;
-    int width;
+    private int width;
+    private ArrayList<String> names;
 
     public UnoGameView(Context context) {
         super(context);
@@ -244,9 +245,11 @@ public class UnoGameView extends SurfaceView {
     }
 
     //syncs all three ArrayLists so the index's are aligned
-    public void setHand(ArrayList<ArrayList<Card>> hands, int playerID) {
+    public void setHand(ArrayList<ArrayList<Card>> hands, int playerID, ArrayList<String> names, Color currentColor) {
         this.handstoDraw = hands;
+        this.currentColor = currentColor;
         this.currPlayerID = playerID;
+        this.names = names;
         this.isSelected.clear();
         this.handToSelect.clear();
         width = 0;
@@ -332,12 +335,29 @@ public class UnoGameView extends SurfaceView {
             Paint cpuText = new Paint();
             cpuText.setTextSize(40);
             if (this.handstoDraw.size() == 1) cpuText.setColor(android.graphics.Color.RED);
-            int playerNum = i + 1;
-            canvas.drawText("Player's " + playerNum + " Number of Cards: " + this.handstoDraw.get(i).size()
+            canvas.drawText(this.names.get(i) + " Has " + this.handstoDraw.get(i).size() + " Cards in their Hand"
                     , drawHandTextWidth, 40, cpuText);
-            canvas.drawText("Current Color is " + this.currentColor, getWidth() / 2 - 200,getHeight()/2 -150 + CARD_HEIGHT
-                    ,cpuText);
+            Paint currentColor = new Paint();
 
+            // lets us know what color the top card is and updates the "current color circle"
+            //to reflect that color.
+            switch (this.currentColor)
+            {
+                case BLUE:
+                    currentColor.setColor(android.graphics.Color.BLUE);
+                    break;
+                case RED:
+                    currentColor.setColor(android.graphics.Color.RED);
+                    break;
+                case GREEN:
+                    currentColor.setColor(android.graphics.Color.GREEN);
+                    break;
+                case YELLOW:
+                    currentColor.setColor(android.graphics.Color.YELLOW);
+                    break;
+
+            }
+            canvas.drawCircle(getWidth() / 2,getHeight() / 2 - 220,10,currentColor);
             drawHandTextWidth += 550;
             height += CARD_HEIGHT + 20;
 
