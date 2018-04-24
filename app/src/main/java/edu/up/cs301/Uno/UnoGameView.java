@@ -19,7 +19,7 @@ import edu.up.cs301.game.R;
 
 /**
  * Created by Mason Fredenberg on 4/15/2018.
- *
+ * <p>
  * This class sets up the view for the GUI.
  *
  * @author Chris Fishback
@@ -41,6 +41,7 @@ public class UnoGameView extends SurfaceView {
     private Color currentColor;
     private int width;
     private ArrayList<String> names;
+    private int currentDot = 0;
 
     public UnoGameView(Context context) {
         super(context);
@@ -68,10 +69,13 @@ public class UnoGameView extends SurfaceView {
     @Override
     public void onDraw(Canvas canvas) {
         if (this.handstoDraw != null) {
+
             drawCPUHands(canvas);
+
             double heightMul = .64;
             drawCard(canvas, this.topCard, getWidth() / 2 - 121, getHeight() / 2 - 200);
             width = 0;
+
             for (int i = 0; i < this.handstoDraw.get(this.currPlayerID).size(); i++) {
                 if (i == 9) {
                     width = 0;
@@ -324,28 +328,34 @@ public class UnoGameView extends SurfaceView {
 
     public void drawCPUHands(Canvas canvas) {
         int height = 10;
+        int circleXPos = 0;
+        Paint currentColor = new Paint();
+
         for (int i = 0; i < this.handstoDraw.size(); i++) {
             if (i == this.currPlayerID) continue;
             int j = 0;
-            int cpuCardCount=0;
+            int cpuCardCount = 0;
             for (Card c : this.handstoDraw.get(i)) {
-                if(cpuCardCount == 40) break;
+                if (cpuCardCount == 40) break;
                 drawCard(canvas, null, 10 + 5 * j, height);
                 j += 5;
+
+                //save x,y positions for the color circle
+                circleXPos = (10 + 5 *j) + CARD_WIDTH + 20;
+
                 cpuCardCount++;
             }
+            //tell the GUI how many cards the player has
             Paint cpuText = new Paint();
             cpuText.setTextSize(40);
             if (this.handstoDraw.size() == 1) cpuText.setColor(android.graphics.Color.RED);
             canvas.drawText(this.names.get(i) + " Has " +
                             this.handstoDraw.get(i).size() + " Cards in their Hand"
-                    , 10, height + CARD_HEIGHT+40, cpuText);
-            Paint currentColor = new Paint();
+                    , 10, height + CARD_HEIGHT + 40, cpuText);
 
             // lets us know what color the top card is and updates the "current color circle"
             //to reflect that color.
-            switch (this.currentColor)
-            {
+            switch (this.currentColor) {
                 case BLUE:
                     currentColor.setColor(android.graphics.Color.BLUE);
                     break;
@@ -360,14 +370,28 @@ public class UnoGameView extends SurfaceView {
                     break;
 
             }
-            canvas.drawCircle(getWidth() / 2,getHeight() / 2 - 220,10,currentColor);
+
             height += CARD_HEIGHT + 50;
+
+        }
+
+        if (this.currentDot == 0) //if it is the user
+            canvas.drawCircle(getWidth() / 2, getHeight() / 2 - 220, 10, currentColor);
+        else if (this.currentDot == 1) {
+            canvas.drawCircle(circleXPos, (float)(getHeight() / 10), 10, currentColor);
+        } else if(this.currentDot == 2) {
+            canvas.drawCircle(circleXPos, (float)(getHeight() / 3.3), 10, currentColor);
+        } else if(this.currentDot == 3) {
+            canvas.drawCircle(circleXPos, (float)(getHeight() / 2), 10, currentColor);
 
         }
     }
 
-    public void setCurrentColor(Color color)
-    {
+    public void setCurrentColor(Color color) {
         this.currentColor = color;
+    }
+
+    public void setCurrentDot(int initDotPlayer) {
+        this.currentDot = initDotPlayer;
     }
 }

@@ -23,9 +23,7 @@ import edu.up.cs301.game.actionMsg.GameAction;
  * @author Stelios Popoutsakis
  * @author Alli Jacobs
  * @author Mason Fredenberg
- *         <p>
- *         The local game class houses all necessary actions and rules
- *         for uno to work
+ *
  */
 
 public class UnoLocalGame extends LocalGame {

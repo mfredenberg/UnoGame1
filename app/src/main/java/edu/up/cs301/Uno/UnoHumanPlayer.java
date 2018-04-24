@@ -102,6 +102,8 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
 
         this.playerName.setText(this.playerName.getText() + "\n" + this.name);
+
+
     }
 
     @Override
@@ -114,6 +116,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     */
     @Override
     public void receiveInfo(GameInfo info) {
+
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
             this.names = state.getNames();
@@ -124,6 +127,9 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             }
             this.unoSurface.setHand(this.hands, this.playerNum, this.names, state.getCurrentColor());
             this.unoSurface.setTopCard(state.getDiscardPile().getTopCard());
+
+            this.unoSurface.setCurrentDot(((UnoGameState) info).getTurn());
+
             this.unoSurface.invalidate();
 
         }
