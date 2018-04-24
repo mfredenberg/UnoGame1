@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @author Mason Fredenberg
  */
 
-
+//enumerator for the type of the cards
 public enum Type implements Serializable {
     ZERO,
     ONE,

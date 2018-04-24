@@ -34,15 +34,19 @@ public class UnoGameView extends SurfaceView {
     private static final int CARD_HEIGHT = 366;//constant for card height
     private ArrayList<ArrayList<Card>> handstoDraw; // All players hand to draw
     private ArrayList<Boolean> isSelected = new ArrayList<Boolean>();
-    private Card topCard;
+    private Card topCard; //card at the top of discard
     private int currPlayerID = 0;
-    private HashMap<String, Bitmap> cardPics;
+    private HashMap<String, Bitmap> cardPics; //hastable of card bitmaps
     private ArrayList<RectF> handToSelect = new ArrayList<RectF>(); //holds the Rect objects surrounding each card, letting them be selectable
-    private Color currentColor;
-    private int width;
+    private Color currentColor;//current color of play
+    private int width;//variable used for the distance between cards drawn
     private ArrayList<String> names;
-    private int currentDot = 0;
+    private int currentDot = 0; //variable to hold where the "whose turn" dot
 
+
+    /*
+    *Constructors required by extending SurfaceView
+     */
     public UnoGameView(Context context) {
         super(context);
         startUp();
@@ -58,6 +62,10 @@ public class UnoGameView extends SurfaceView {
         startUp();
     }
 
+    /*
+    *method called when any of the three constructors is called to initialize card bitmaps and
+    * ensure it will draw
+     */
     private void startUp() {
         setWillNotDraw(false);
         this.cardPics = new HashMap<String, Bitmap>();
@@ -66,6 +74,10 @@ public class UnoGameView extends SurfaceView {
 
     }
 
+    /*
+     * method draws the screen
+     * @param canvas
+     */
     @Override
     public void onDraw(Canvas canvas) {
         if (this.handstoDraw != null) {
@@ -102,6 +114,17 @@ public class UnoGameView extends SurfaceView {
 
     }
 
+    /*
+     * method draws the correct card based on color and type in the fiven location
+     *
+     * @param canvas
+     * @param toDraw
+     *          Card object of card being drawn
+     * @param x
+     *          x coordinate of where it will be drawn
+     * @param y
+     *          y coordinate of where it will be drawn
+     */
     public void drawCard(Canvas canvas, Card toDraw, int x, int y) {
         Bitmap card;
         if (toDraw == null) {
@@ -118,7 +141,9 @@ public class UnoGameView extends SurfaceView {
         }
     }
 
-
+    /*
+     * Initializes hashtable of bitmaps for cards based on their type and color
+     */
     public void initHash() {
 
         //red cards----------------------------------------------------------------------\\
@@ -248,7 +273,17 @@ public class UnoGameView extends SurfaceView {
 
     }
 
-    //syncs all three ArrayLists so the index's are aligned
+    /*
+     * method initializes and syncs all three ArrayLists so the index's are aligned
+     * @param hands
+     *          arrayList holding each player's hand
+     * @param playerID
+     *          currect player's number ID
+     * @param names
+     *          arrayList that holds all the player names
+     * @param currentColor
+     *          current playable color
+     */
     public void setHand(ArrayList<ArrayList<Card>> hands, int playerID, ArrayList<String> names, Color currentColor) {
         this.handstoDraw = hands;
         this.currentColor = currentColor;
@@ -273,20 +308,16 @@ public class UnoGameView extends SurfaceView {
         }
     }
 
-
-    public void setTopCard(Card topCard) {
-        this.topCard = topCard;
-    }
-
-    public Card getTopCard() {
-        return this.topCard;
-    }
-
-    public ArrayList<Card> getHumanplayerHand() {
-        return this.handstoDraw.get(this.currPlayerID);
-
-    }
-
+    /*
+     * method checks the card at the given position as selected
+     * @param x
+     *          x coordinate of where the screen was touched
+     * @param y
+     *          y coordinate of where the screen was touched
+     * @return
+     *          the index of the card that was selected
+     *          -1 if no card was selected
+     */
     public int checkSelectedCard(int x, int y) {
         for (int i = 0; i < handToSelect.size(); i++) {
             if (handToSelect.get(i).contains(x, y)) {
@@ -297,6 +328,12 @@ public class UnoGameView extends SurfaceView {
         return -1;
     }
 
+    /*
+     * method changes the value of the boolean at the given index to be true rather than false
+     * marking it as selected
+     * @param index
+     *          the index of the card selected according to where the player touched the screen
+     */
     public void selectCard(int index) {
         if (isSelected.get(index)) {
             isSelected.set(index, false);
@@ -306,6 +343,12 @@ public class UnoGameView extends SurfaceView {
         isSelected.set(index, true);
     }
 
+    /*
+     * method returns the index of the selected card
+     * @return
+     *          the number of the index in the ArrayList where the selected card is
+     *          if there is no selected card, -1 is returned
+     */
     public int getCardIndex() {
         for (int i = 0; i < isSelected.size(); i++) {
             if (isSelected.get(i)) {
@@ -315,7 +358,11 @@ public class UnoGameView extends SurfaceView {
         return -1;
     }
 
-
+    /*
+     * method checks if a card is selected
+     * @return
+     *          true if there is a selected card; false if no selected card
+     */
     public boolean checkIsASelection() {
 
         for (int i = 0; i < isSelected.size(); i++) {
@@ -326,6 +373,10 @@ public class UnoGameView extends SurfaceView {
         return false;
     }
 
+    /*
+     * method draws the other players' hands
+     * @param canvas
+     */
     public void drawCPUHands(Canvas canvas) {
         int height = 10;
         int circleXPos = 0;
@@ -341,7 +392,7 @@ public class UnoGameView extends SurfaceView {
                 j += 5;
 
                 //save x,y positions for the color circle
-                circleXPos = (10 + 5 *j) + CARD_WIDTH + 20;
+                circleXPos = (10 + 5 * j) + CARD_WIDTH + 20;
 
                 cpuCardCount++;
             }
@@ -378,13 +429,29 @@ public class UnoGameView extends SurfaceView {
         if (this.currentDot == 0) //if it is the user
             canvas.drawCircle(getWidth() / 2, getHeight() / 2 - 220, 10, currentColor);
         else if (this.currentDot == 1) {
-            canvas.drawCircle(circleXPos, (float)(getHeight() / 10), 10, currentColor);
-        } else if(this.currentDot == 2) {
-            canvas.drawCircle(circleXPos, (float)(getHeight() / 3.3), 10, currentColor);
-        } else if(this.currentDot == 3) {
-            canvas.drawCircle(circleXPos, (float)(getHeight() / 2), 10, currentColor);
+            canvas.drawCircle(circleXPos, (float) (getHeight() / 10), 10, currentColor);
+        } else if (this.currentDot == 2) {
+            canvas.drawCircle(circleXPos, (float) (getHeight() / 3.3), 10, currentColor);
+        } else if (this.currentDot == 3) {
+            canvas.drawCircle(circleXPos, (float) (getHeight() / 2), 10, currentColor);
 
         }
+    }
+
+
+    /*
+     * Appropriate getters and setters
+     */
+    public void setTopCard(Card topCard) {
+        this.topCard = topCard;
+    }
+
+    public Card getTopCard() {
+        return this.topCard;
+    }
+
+    public ArrayList<Card> getHumanplayerHand() {
+        return this.handstoDraw.get(this.currPlayerID);
     }
 
     public void setCurrentColor(Color color) {
@@ -394,4 +461,5 @@ public class UnoGameView extends SurfaceView {
     public void setCurrentDot(int initDotPlayer) {
         this.currentDot = initDotPlayer;
     }
+
 }

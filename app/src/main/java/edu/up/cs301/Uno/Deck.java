@@ -73,7 +73,12 @@ public class Deck implements Serializable {
             deck.add(index, card);
         }
     }
-    //takes cards out of the Deck passed in and adds them to this deck
+    /*
+    *takes cards out of the Deck passed in and adds them to this deck
+    * (used for moving discard cards to draw pile when draw pile is depleted)
+    * @param discard
+    *           the deck passed in to be emptied
+    */
     public void drawEmpty(Deck discard){
         for(int i = discard.getDeckSize() - 1; i > 1; i--){
             this.put(discard.getCardAt(i));

@@ -32,7 +32,7 @@ public class UnoLocalGame extends LocalGame {
 
 
     /*
-    *Ctor called at beginning of game that initializes the game state to a new game
+     *Constructor called at beginning of game that initializes the game state to a new game
      */
     public UnoLocalGame() {
         super();
@@ -40,9 +40,10 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    * method sends the new state of the game to the current player
-    *
-    * @param GamePlayer
+     * method sends the new state of the game to the current player
+     *
+     * @param p
+     *          the gameplayer the update is being sent to
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
@@ -101,7 +102,9 @@ public class UnoLocalGame extends LocalGame {
     * method checks if it's the players turn
     *
     * @param playerIdx
+    *           numerical representation of player
     * @return boolean
+    *           true if the can move, false if they can't
     */
     @Override
     protected boolean canMove(int playerIdx) {
@@ -112,6 +115,7 @@ public class UnoLocalGame extends LocalGame {
     * method checks if the game is over
     *
     * @return String
+    *           message declaring the player who won
     */
     @Override
     protected String checkIfGameOver() {
@@ -129,8 +133,10 @@ public class UnoLocalGame extends LocalGame {
     /*
     * method checks which action to take
     *
-    * @param GameAction
+    * @param action
+    *           the action sent by the current player
     * @return boolean
+    *           returns true if action is real and is carried out, false if something went wrong
     */
     @Override
     protected boolean makeMove(GameAction action) {
@@ -165,8 +171,6 @@ public class UnoLocalGame extends LocalGame {
 
 
         //actions
-//        if (action instanceof Quit) {
-//            quit();
         if (action instanceof SkipTurnAction) {
             return skipTurn(playerID);
         } else if (action instanceof HasUnoAction) {
@@ -190,6 +194,8 @@ public class UnoLocalGame extends LocalGame {
     * method checks to see if draw is empty
     *
     * @return boolean
+    *           true if draw is empty
+    *           false if not
     */
     public boolean isDrawEmpty() {
         if (currentGameState.getDrawPile().getDeckSize() == 0) {
@@ -204,9 +210,11 @@ public class UnoLocalGame extends LocalGame {
     * needed based on placed card. ie: draw 2
     *
     * @param playerID
+    *           the player attempting to play
     * @param cardIndex
-    *
+    *           index of card selected to play
     * @return boolean
+    *           true if completed, false if not
     */
     public boolean placeCard(int playerID, int cardIndex) {
 
@@ -257,7 +265,9 @@ public class UnoLocalGame extends LocalGame {
     * method draws a card for the current player
     *
     * @param playerID
+    *           player attempting to draw card
     * @return boolean
+    *           true if completed, false if something went wrong
     */
     private boolean drawCard(int playerID) {
         //checks if draw is empty, if so refills-
@@ -276,8 +286,10 @@ public class UnoLocalGame extends LocalGame {
     /*
     * method skips turn and draws a card for current player
     *
-    * @param int
+    * @param playerID
+    *           player attempting to skip turn
     * @return boolean
+    *           true if completed, false if something went wrong
     */
     public boolean skipTurn(int playerID) {
         if (canMove(playerID)) { //make sure it's the players turn
@@ -299,18 +311,12 @@ public class UnoLocalGame extends LocalGame {
     }
 
     /*
-    * method quits system
-    */
-
-//    public void quit() {
-//        System.exit(0);
-//    }
-
-    /*
     * method checks if the player has uno
-    *
-    * @return boolean
     * @param int
+    *           player being checked for uno
+    * @return boolean
+    *           true if they have 1 card
+    *           false if they have any other number
     */
     public boolean hasUno(int playerID) {
         this.currentGameState.setHasUno(playerID);
@@ -356,6 +362,7 @@ public class UnoLocalGame extends LocalGame {
     *This helper method places the players card onto the discard deck
     *
     * @param placeCard
+    *           card to be played down
     */
     public void placeCardDown(Card placeCard) {
 
@@ -367,9 +374,11 @@ public class UnoLocalGame extends LocalGame {
     /*
     * helper method for place card
     * This method places the players card - which will always be a non wild card
-    *
-    * @returns boolean
     * @param placeCard
+    *           card to be placed
+    * @returns boolean
+    *           true if action is carried out
+    *           false if not
     */
     public boolean placeNotWildCard(Card placeCard) {
 
@@ -433,9 +442,9 @@ public class UnoLocalGame extends LocalGame {
 
     /*
    * method that checks if all the arrayLists are empty, which means it is the start of the game
-   *
    * @returns boolean
-   * @param none
+   *            true if it is the start of the game
+   *            false if not
    */
     public boolean ifStart() {
         for (int i = 0; i < this.currentGameState.getNumPlayers(); i++) {

@@ -14,8 +14,8 @@ import edu.up.cs301.game.infoMsg.GameState;
  * <p>
  * The class also has getters and setters to change the state of the game
  * <p>
- * A copy ctor can be made based on a playerID,
- * This in turn makes all the other hands null
+ * A deep copy can be made based on a playerID,
+ * This in turn makes all the other hands null for that player
  *
  * @author Stelios Papoutsakis
  * @author Chris Fishback
@@ -38,7 +38,7 @@ public class UnoGameState extends GameState implements Serializable {
     //current turn, starting at 0
     private int turn;
 
-    // color of the center card
+    // color of the center card(top of discard)
     private Color currentColor;
 
 
@@ -49,12 +49,12 @@ public class UnoGameState extends GameState implements Serializable {
     private Deck drawPile;
     private Deck discardPile;
 
-
+    //list of player names
     private ArrayList<String> names;
 
 
     /*
-    * Ctor
+    * Constructor
     */
     public UnoGameState() {
         // creating array of hands and makeing the decks
@@ -98,7 +98,7 @@ public class UnoGameState extends GameState implements Serializable {
     }
 
     /*
-    * Ctor is used to make a deep copy of the game state based on a playerID
+    * Constructor is used to make a deep copy of the game state based on a playerID
     */
     public UnoGameState(UnoGameState masterGameState, int playerID) {
 

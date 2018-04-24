@@ -34,7 +34,7 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
     * decides what action to take based on info
     *
     * @param GameInfo info
-    * @return void
+    *           gamestate sent by localgame
     */
     protected void receiveInfo(GameInfo info) {
         if (info instanceof UnoGameState) {
@@ -143,7 +143,10 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
 
 
     /*
-    Checks to see if the computer has any playable cards in their hand
+     * Checks to see if the computer has any playable cards in their hand
+     * @return
+     *          true if there are no playable cards
+     *          false if there is at least one playable card
      */
     public boolean isPlayableCardsNull() {
         int cardsPlayable = 0;
@@ -161,7 +164,10 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
     }
 
     /*
-    checks to see if the only playable card in the computers hand is a wild
+     * checks to see if the only playable card in the computers hand is a wild
+     * @return
+     *          true if the player only has wild cards as playable cards
+     *          false if any other type of card can be played
      */
     public boolean onlyHasWild() {
         boolean hasWild = false;
@@ -188,6 +194,16 @@ public class UnoSmartComputerPlayer extends GameComputerPlayer {
         return false;
     }
 
+    /*
+     * method determines which color the computer has the most of in its hand
+     * @param hand
+     *          arraylsit of cards that is the player's hand
+     * @return
+     *          RED if they have more red cards
+     *          GREEN if they have more green cards
+     *          BLUE if they have more blue cards
+     *          YELLOW if they have more yellow cards
+     */
     public Color mostOfColor(ArrayList<Card> hand) {
         int red = 0;
         int green = 0;
