@@ -1,5 +1,6 @@
 package edu.up.cs301.Uno;
 
+import android.content.res.Configuration;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -51,6 +52,11 @@ public class UnoMainActivity extends GameMainActivity {
 
 
 
+
+
+
+
+
     // copied from pig lab
     @Override
     public GameConfig createDefaultConfig() {
@@ -88,5 +94,6 @@ public class UnoMainActivity extends GameMainActivity {
     public LocalGame createLocalGame() {
         return new UnoLocalGame();
     }
+
 
 }

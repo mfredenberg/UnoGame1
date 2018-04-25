@@ -99,6 +99,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.greenButton.setOnClickListener(this);
         this.yellowButton.setOnClickListener(this);
         this.blueButton.setOnClickListener(this);
+        this.unoSurface.setBackgroundColor(Color.rgb(204,228,255));
 
 
         this.playerName.setText(this.playerName.getText() + "\n" + this.name);

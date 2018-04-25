@@ -392,7 +392,8 @@ public class UnoGameView extends SurfaceView {
                 j += 5;
 
                 //save x,y positions for the color circle
-                circleXPos = (10 + 5 * j) + CARD_WIDTH + 20;
+                if (i == this.currentDot)
+                    circleXPos = (10 + 5 * j);
 
                 cpuCardCount++;
             }
@@ -426,6 +427,7 @@ public class UnoGameView extends SurfaceView {
 
         }
 
+        circleXPos += CARD_WIDTH + 20;
         if (this.currentDot == 0) //if it is the user
             canvas.drawCircle(getWidth() / 2, getHeight() / 2 - 220, 10, currentColor);
         else if (this.currentDot == 1) {
