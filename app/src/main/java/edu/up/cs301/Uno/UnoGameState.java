@@ -209,7 +209,7 @@ Appropriate Getters and setters for the Uno game state.
     }
 
     public void setHasUno(int playerID) {
-        this.hasUno.set(playerID, this.getPlayerHandAt(playerID).size() == 1);
+        this.hasUno.set(playerID, this.getPlayerHandAt(playerID).size()-1 == 1);
     }
 
 

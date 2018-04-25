@@ -158,7 +158,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.game.sendAction(new SkipTurnAction(this));
             } else if (view.getId() == R.id.play_card_button) {
                 if (unoSurface.checkIsASelection()) {
-                    if (this.hands.get(this.playerNum).size() == 1 && !this.PressedUno) {
+                    if (this.hands.get(this.playerNum).size() == 2 && !this.PressedUno) {
                         this.game.sendAction(new FalseUno(this));
                         this.PressedUno = false;
                     }
