@@ -208,8 +208,19 @@ Appropriate Getters and setters for the Uno game state.
         return this.hasUno.get(playerID);
     }
 
+    public void setUno(int playerID, boolean uno) {
+        this.hasUno.set(playerID, uno);
+    }
+
+
+    /*
+    Method that sets a boolean to see if the player will have an uno if they play a card
+     @return void
+     @Param int playerID
+     */
+
     public void setHasUno(int playerID) {
-        this.hasUno.set(playerID, this.getPlayerHandAt(playerID).size()-1 == 1);
+        this.hasUno.set(playerID, this.getPlayerHandAt(playerID).size() - 1 == 1);
     }
 
 

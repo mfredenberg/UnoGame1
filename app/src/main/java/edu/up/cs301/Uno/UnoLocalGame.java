@@ -170,11 +170,15 @@ public class UnoLocalGame extends LocalGame {
         }
 
 
+
+
+        this.currentGameState.setUno(playerID,false);
         //actions
         if (action instanceof SkipTurnAction) {
             return skipTurn(playerID);
         } else if (action instanceof HasUnoAction) {
-            return hasUno(playerID);
+            hasUno(playerID);
+            return true;
         } else if (action instanceof PlaceCardAction) {
             PlaceCardAction place = (PlaceCardAction) action;
             return placeCard(playerID, place.getCardIndex());

@@ -55,7 +55,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private ArrayList<ArrayList<Card>> hands = new ArrayList<ArrayList<Card>>();
     private ArrayList<String> names = new ArrayList<String>();
     private boolean wildSelect = false;
-    private boolean PressedUno = false;
+    private boolean hasUno = false;
 
 
     /*
@@ -99,7 +99,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.greenButton.setOnClickListener(this);
         this.yellowButton.setOnClickListener(this);
         this.blueButton.setOnClickListener(this);
-        this.unoSurface.setBackgroundColor(Color.rgb(204,228,255));
+        this.unoSurface.setBackgroundColor(Color.rgb(204, 228, 255));
 
 
         this.playerName.setText(this.playerName.getText() + "\n" + this.name);
@@ -120,6 +120,7 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
         if (info instanceof UnoGameState) {
             UnoGameState state = (UnoGameState) info;
+            this.hasUno = state.hasUno(this.playerNum);
             this.names = state.getNames();
             this.hands.clear();
             this.unoSurface.setCurrentColor(state.getCurrentColor());
@@ -153,14 +154,15 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 thread.start();
             } else if (view.getId() == R.id.hasUnoButton) {
                 this.game.sendAction(new HasUnoAction(this));
-                this.PressedUno = true;
             } else if (view.getId() == R.id.skipTurnButton) {
                 this.game.sendAction(new SkipTurnAction(this));
             } else if (view.getId() == R.id.play_card_button) {
                 if (unoSurface.checkIsASelection()) {
-                    if (this.hands.get(this.playerNum).size() == 2 && !this.PressedUno) {
+                    if (this.hands.get(this.playerNum).size() == 2 && !this.hasUno
+                            && !(this.hands.get(this.playerNum).get(unoSurface.getCardIndex()).getType() == Type.WILD
+                            || this.hands.get(this.playerNum).get(unoSurface.getCardIndex()).getType() == Type.WILDDRAW4))
+                    {
                         this.game.sendAction(new FalseUno(this));
-                        this.PressedUno = false;
                     }
                     if (!(this.hands.get(this.playerNum).get(unoSurface.getCardIndex()).getType() == Type.WILD
                             || this.hands.get(this.playerNum).get(unoSurface.getCardIndex()).getType() == Type.WILDDRAW4))
@@ -181,6 +183,9 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 && view.getId() != R.id.hasUnoButton)
 
         {
+            if (this.hands.get(this.playerNum).size() == 2 && !this.hasUno)
+                this.game.sendAction(new FalseUno(this));
+
             this.game.sendAction(new PlaceCardAction(this,
                     unoSurface.getCardIndex()));
             if (view.getId() == R.id.red_wild_button) {
