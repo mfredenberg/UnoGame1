@@ -375,6 +375,7 @@ public class UnoGameView extends SurfaceView {
 
     /*
      * method draws the other players' hands
+     *
      * @param canvas
      */
     public void drawCPUHands(Canvas canvas) {
@@ -386,17 +387,19 @@ public class UnoGameView extends SurfaceView {
             if (i == this.currPlayerID) continue;
             int j = 0;
             int cpuCardCount = 0;
+
             for (Card c : this.handstoDraw.get(i)) {
                 if (cpuCardCount == 40) break;
                 drawCard(canvas, null, 10 + 5 * j, height);
                 j += 5;
 
-                //save x,y positions for the color circle
+                //save x position for the color circle
                 if (i == this.currentDot)
                     circleXPos = (10 + 5 * j);
 
                 cpuCardCount++;
             }
+
             //tell the GUI how many cards the player has
             Paint cpuText = new Paint();
             cpuText.setTextSize(40);
@@ -423,21 +426,18 @@ public class UnoGameView extends SurfaceView {
 
             }
 
+            if(this.currentDot == i)
+            {
+                circleXPos += CARD_WIDTH + 20;
+                canvas.drawCircle(circleXPos, (float) (height + CARD_HEIGHT/2), 10, currentColor);
+            }
             height += CARD_HEIGHT + 50;
 
         }
 
-        circleXPos += CARD_WIDTH + 20;
-        if (this.currentDot == 0) //if it is the user
-            canvas.drawCircle(getWidth() / 2, getHeight() / 2 - 220, 10, currentColor);
-        else if (this.currentDot == 1) {
-            canvas.drawCircle(circleXPos, (float) (getHeight() / 10), 10, currentColor);
-        } else if (this.currentDot == 2) {
-            canvas.drawCircle(circleXPos, (float) (getHeight() / 3.3), 10, currentColor);
-        } else if (this.currentDot == 3) {
-            canvas.drawCircle(circleXPos, (float) (getHeight() / 2), 10, currentColor);
 
-        }
+        if (this.currentDot == this.currPlayerID) //if it is the user
+           canvas.drawCircle(getWidth() / 2, getHeight() / 2 - 220, 10, currentColor);
     }
 
 
