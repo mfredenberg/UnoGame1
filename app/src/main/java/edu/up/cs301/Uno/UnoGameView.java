@@ -426,13 +426,19 @@ public class UnoGameView extends SurfaceView {
 
             }
 
+            //place the dot based on who's turn it is and how many cards they have
             if(this.currentDot == i)
             {
 
+                //extend the dot based on card width
                 circleXPos += CARD_WIDTH + 20;
+
+                //draw the dot
                 canvas.drawCircle(circleXPos, (float) (height + CARD_HEIGHT/2), 10, currentColor);
 
             }
+
+            //extend the dot based on card width
             height += CARD_HEIGHT + 50;
 
 
