@@ -264,9 +264,7 @@ public class UnoGameView extends SurfaceView {
         this.cardPics.put("" + Type.WILD, wild);
         Bitmap wildDrawFour = BitmapFactory.decodeResource(getResources(), R.drawable.wild_draw_four);
         this.cardPics.put("" + Type.WILDDRAW4, wildDrawFour);
-        //null card
-        // Bitmap nullCard = BitmapFactory.decodeResource(getResources(), R.drawable.nullcard);
-        // this.cardPics.put(""+ Type.WILD, nullCard);
+
         //cover card
         Bitmap coverCard = BitmapFactory.decodeResource(getResources(), R.drawable.uno_cover_card);
         this.cardPics.put("cover", coverCard);
