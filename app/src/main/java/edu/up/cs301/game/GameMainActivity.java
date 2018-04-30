@@ -178,6 +178,7 @@ View.OnClickListener {
 				MessageBox.popUpMessage(msg, this);
 			}
 		}
+		//plays song
 		MediaPlayer ourSong = MediaPlayer.create(this, R.raw.liftyourself);
 		ourSong.start();
 
