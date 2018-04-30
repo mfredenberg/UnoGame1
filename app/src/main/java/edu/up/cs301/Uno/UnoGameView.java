@@ -264,9 +264,7 @@ public class UnoGameView extends SurfaceView {
         this.cardPics.put("" + Type.WILD, wild);
         Bitmap wildDrawFour = BitmapFactory.decodeResource(getResources(), R.drawable.wild_draw_four);
         this.cardPics.put("" + Type.WILDDRAW4, wildDrawFour);
-        //null card
-        // Bitmap nullCard = BitmapFactory.decodeResource(getResources(), R.drawable.nullcard);
-        // this.cardPics.put(""+ Type.WILD, nullCard);
+
         //cover card
         Bitmap coverCard = BitmapFactory.decodeResource(getResources(), R.drawable.uno_cover_card);
         this.cardPics.put("cover", coverCard);
@@ -426,13 +424,19 @@ public class UnoGameView extends SurfaceView {
 
             }
 
+            //place the dot based on who's turn it is and how many cards they have
             if(this.currentDot == i)
             {
 
+                //extend the dot based on card width
                 circleXPos += CARD_WIDTH + 20;
+
+                //draw the dot
                 canvas.drawCircle(circleXPos, (float) (height + CARD_HEIGHT/2), 10, currentColor);
 
             }
+
+            //extend the dot based on card width
             height += CARD_HEIGHT + 50;
 
 
