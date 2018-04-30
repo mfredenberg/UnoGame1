@@ -89,6 +89,13 @@ public class UnoLocalGameTest {
     public void hasUno() throws Exception {
         UnoLocalGame local = new UnoLocalGame();
         UnoGameState gameState = local.getCurrentGameState();
+        assertFalse(local.hasUno(gameState.getTurn()));
+        gameState.getCurrentPlayerHand().add(new Card(Color.BLUE,Type.EIGHT));
+        gameState.getCurrentPlayerHand().add(new Card(Color.BLUE,Type.EIGHT));
+        assertTrue(local.hasUno(gameState.getTurn()));
+        gameState.getCurrentPlayerHand().add(new Card(Color.BLUE,Type.EIGHT));
+        assertFalse(local.hasUno(gameState.getTurn()));
+        assertFalse(local.hasUno(local.getNextTurn(1)));
 
     }
 

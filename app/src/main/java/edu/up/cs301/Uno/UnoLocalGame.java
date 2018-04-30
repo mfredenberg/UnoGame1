@@ -324,6 +324,7 @@ public class UnoLocalGame extends LocalGame {
     }
 
     //getters and setters---------------------------------------------\\
+    //NOTE!!! This is only here for JUnit Testing
     public UnoGameState getCurrentGameState() {
         return currentGameState;
     }
