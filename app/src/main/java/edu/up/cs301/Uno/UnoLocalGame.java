@@ -172,6 +172,7 @@ public class UnoLocalGame extends LocalGame {
 
 
 
+        // sets uno to false always because the player has to do that with the button
         this.currentGameState.setUno(playerID,false);
         //actions
         if (action instanceof SkipTurnAction) {

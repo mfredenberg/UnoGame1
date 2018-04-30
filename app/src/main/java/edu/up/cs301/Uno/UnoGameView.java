@@ -388,7 +388,9 @@ public class UnoGameView extends SurfaceView {
             int cpuCardCount = 0;
 
             for (Card c : this.handstoDraw.get(i)) {
-                if (cpuCardCount == 40) break;
+                // this statement is here because we only have room to draw 18 cards on the gui, the rest will not
+                //be drawn but still in the players hand
+                if (cpuCardCount == 18) break;
                 drawCard(canvas, null, 10 + 5 * j, height);
                 j += 5;
 
