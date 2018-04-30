@@ -159,8 +159,10 @@ public class UnoHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             } else if (view.getId() == R.id.play_card_button) {
                 if (unoSurface.checkIsASelection()) {
                     if (this.hands.get(this.playerNum).size() == 2 && !this.hasUno
-                            && !(this.hands.get(this.playerNum).get(unoSurface.getCardIndex()).getType() == Type.WILD
-                            || this.hands.get(this.playerNum).get(unoSurface.getCardIndex()).getType() == Type.WILDDRAW4))
+                            && !(this.hands.get(this.playerNum).get(unoSurface.getCardIndex()).getType()
+                            == Type.WILD
+                            || this.hands.get(this.playerNum).get(unoSurface.getCardIndex()).getType()
+                            == Type.WILDDRAW4))
                     {
                         this.game.sendAction(new FalseUno(this));
                     }
