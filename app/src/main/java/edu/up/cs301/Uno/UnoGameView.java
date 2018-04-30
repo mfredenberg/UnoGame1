@@ -428,10 +428,13 @@ public class UnoGameView extends SurfaceView {
 
             if(this.currentDot == i)
             {
+
                 circleXPos += CARD_WIDTH + 20;
                 canvas.drawCircle(circleXPos, (float) (height + CARD_HEIGHT/2), 10, currentColor);
+
             }
             height += CARD_HEIGHT + 50;
+
 
         }
 
