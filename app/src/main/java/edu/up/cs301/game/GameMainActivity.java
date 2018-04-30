@@ -137,7 +137,14 @@ View.OnClickListener {
 	 * onCreate
 	 * 
 	 * "main" for the game framework
+	 *
+	 * EXTERNAL CITATION:
+	 * Date: 4/30/2018
+	 * Problem: wanted to add music to the game
+	 * Solution: https://www.youtube.com/watch?v=-zGS_zrL0rY helped
+	 * us solve the problem. Song title: Lift yourself by Kanye
 	 */
+
 	@Override
 	public final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
