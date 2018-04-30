@@ -290,6 +290,7 @@ public class UnoGameView extends SurfaceView {
         this.isSelected.clear();
         this.handToSelect.clear();
         width = 0;
+
         for (int i = 0; i < this.handstoDraw.get(playerID).size(); i++) {
             this.isSelected.add(i, false);
             if (i == 9) width = 0;
