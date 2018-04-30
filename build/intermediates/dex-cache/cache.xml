@@ -3,21 +3,30 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\steli\uno\UnoGame1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\AndroidSDK\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
+        <dex dex="C:\Users\jacobsa20\StudioProjects1\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-v4-18.0.0_bf6372499ab7d9c7586f81e3c8610d4c63b58b3f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jacobsa20\StudioProjects1\UnoGame1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="602f673c22e4c8ee777542f0f08dfff15398b5c1">
+        <dex dex="C:\Users\jacobsa20\StudioProjects1\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_c116021b25c76e5757060f8525393f9086dc777e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jacobsa20\StudioProjects1\UnoGame1\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="C:\Users\steli\uno\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_cf02fad2cc3f7f06c80664d82747fa8d854f5ec5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\steli\uno\UnoGame1\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e3a1ca3d50c2356186228289db10827a477d9e5c">
-        <dex dex="C:\Users\steli\uno\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_7f0423cf88933a8f3e9de7e0bedd167ff3135137\classes.dex" />
+        <dex dex="C:\Users\jacobsa20\StudioProjects1\UnoGame1\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_e3335c62484b53d1df7498b07e21f33d7088e9d3\classes.dex" />
     </item>
 
 </items>

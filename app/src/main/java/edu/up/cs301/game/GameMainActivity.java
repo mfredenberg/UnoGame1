@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -177,6 +178,8 @@ View.OnClickListener {
 				MessageBox.popUpMessage(msg, this);
 			}
 		}
+		MediaPlayer ourSong = MediaPlayer.create(this, R.raw.liftyourself);
+		ourSong.start();
 
 	}// onCreate
 
