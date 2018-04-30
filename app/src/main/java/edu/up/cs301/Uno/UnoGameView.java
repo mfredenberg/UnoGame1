@@ -456,14 +456,6 @@ public class UnoGameView extends SurfaceView {
         this.topCard = topCard;
     }
 
-    public Card getTopCard() {
-        return this.topCard;
-    }
-
-    public ArrayList<Card> getHumanplayerHand() {
-        return this.handstoDraw.get(this.currPlayerID);
-    }
-
     public void setCurrentColor(Color color) {
         this.currentColor = color;
     }
