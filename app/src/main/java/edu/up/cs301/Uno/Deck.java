@@ -69,7 +69,7 @@ public class Deck implements Serializable {
             int index = rand.nextInt(108);
             Card card = deck.get(index);
             deck.remove(index);
-            index = rand.nextInt(108);
+            index = rand.nextInt(this.deck.size());
             deck.add(index, card);
         }
     }
