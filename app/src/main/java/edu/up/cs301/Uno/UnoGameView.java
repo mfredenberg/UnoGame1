@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -404,6 +405,14 @@ public class UnoGameView extends SurfaceView {
             //tell the GUI how many cards the player has
             Paint cpuText = new Paint();
             cpuText.setTextSize(40);
+            /**
+             External Citation
+             Date: 5/1/2018
+             Problem: didn't know how to bold text
+             Resource: https://stackoverflow.com/questions/17926522/how-do-i-draw-bold-text-on-a-bitmap
+             Solution: I used code from this post
+             **/
+            cpuText.setTypeface(Typeface.create(Typeface.DEFAULT,Typeface.BOLD_ITALIC));
             if (this.handstoDraw.size() == 1) cpuText.setColor(android.graphics.Color.RED);
             canvas.drawText(this.names.get(i) + " Has " +
                             this.handstoDraw.get(i).size() + " Cards in their Hand"
